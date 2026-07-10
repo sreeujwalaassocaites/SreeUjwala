@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Poppins", sans-serif;
+
+  /* Brand Theme Colors */
+  --color-primary-blue: #1E88E5;
+  --color-dark-blue: #0B4F9F;
+  --color-light-blue: #42A5F5;
+  --color-section-bg: #F7FAFC;
+  --color-card-bg: #FFFFFF;
+  --color-text-dark: #0F172A;
+  --color-text-gray: #64748B;
+  --color-success-green: #22C55E;
+  --color-border-color: #E2E8F0;
+
+  /* Custom Borders */
+  --radius-btn: 12px;
+  --radius-card: 16px;
+
+  /* Elevation Shadows */
+  --shadow-premium: 0 10px 30px rgba(11, 79, 159, 0.05);
+  --shadow-premium-hover: 0 20px 40px rgba(11, 79, 159, 0.12);
+}
+
+:root {
+  --background: #FFFFFF;
+  --foreground: #0F172A;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden;
+}
+
+/* Custom keyframes/animations that Tailwind v4 can leverage */
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50% { opacity: 0.25; transform: scale(1.05); }
+}
+
+@keyframes scroll-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 8s infinite ease-in-out;
+}
+
+.animate-scroll-marquee {
+  display: flex;
+  width: max-content;
+  animation: scroll-marquee 40s linear infinite;
+}
+
+.animate-scroll-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Smooth scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F7FAFC;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
