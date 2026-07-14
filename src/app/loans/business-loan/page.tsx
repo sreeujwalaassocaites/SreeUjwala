@@ -191,17 +191,17 @@ const businessLoanConfig: ProductConfig = {
     }
   ],
   interestRatesTable: [
-    { name: "Bajaj Finance", isNbfc: true, rate: "7.15 - 20%" },
-    { name: "Bank of Baroda", rate: "7.2 - 9%" },
-    { name: "Punjab National Bank", rate: "7.25 - 12%" },
-    { name: "State Bank of India", rate: "7.25 - 9%" },
-    { name: "ICICI Bank", rate: "7.5 - 9%" },
-    { name: "Tata Capital", isNbfc: true, rate: "7.5 - 10.75%" },
-    { name: "HDFC Bank", rate: "7.75 - 13.2%" },
-    { name: "IDFC FIRST Bank", rate: "7.75 - 10.5%" },
-    { name: "Axis Bank", rate: "7.99 - 9%" },
-    { name: "Canara Bank", rate: "8.40 - 11.25%" },
-    { name: "LIC HFL", isNbfc: true, rate: "8.45 - 10.75%" }
+    { name: "HDFC Bank", rate: "10.75 - 22.5%" },
+    { name: "IDFC FIRST Bank", rate: "12.99 - 20%" },
+    { name: "Tata Capital", isNbfc: true, rate: "13 - 24%" },
+    { name: "ICICI Bank", rate: "13.25 - 20%" },
+    { name: "Axis Bank", rate: "14 - 20%" },
+    { name: "Bajaj Finance", isNbfc: true, rate: "14 - 23%" },
+    { name: "Canara Bank", rate: "14 - 19%" },
+    { name: "State Bank of India", rate: "15 - 22%" },
+    { name: "Bank of Baroda", rate: "15.5 - 24%" },
+    { name: "Punjab National Bank", rate: "16 - 20%" },
+    { name: "LIC HFL", isNbfc: true, rate: "20 - 29%" }
   ]
 };
 
