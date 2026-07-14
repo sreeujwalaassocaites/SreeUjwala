@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingActions from "@/components/FloatingActions";
+import ScrollToTop from "@/components/ScrollToTop";
 
 export const metadata: Metadata = {
   title: "EAZYKREDIT - Get the Right Loan with India's Trusted Banking Experts",
@@ -38,6 +39,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col font-sans bg-white text-text-dark">
         {/* Navigation Header */}
         <Header />
+        <ScrollToTop />
 
         {/* Main Content Page Wrapper */}
         <main className="flex-grow pt-[105px]">

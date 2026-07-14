@@ -267,16 +267,14 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
   const tabRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({});
   const tabContainerRef = useRef<HTMLDivElement>(null);
 
-  // When a tab is clicked, switch view and scroll slightly to center the view
+  // When a tab is clicked, switch view and always scroll to show content from the top
   const handleTabClick = (id: string) => {
     setActiveSection(id);
     
-    // Smooth scroll the viewport so that the sticky tab bar sits at the top
+    // Always scroll to just below the sticky tab bar so content is visible from the start
     if (tabContainerRef.current) {
-      const rect = tabContainerRef.current.getBoundingClientRect();
-      const offset = 80; // Offset for main header height
-      const targetY = rect.top + window.scrollY - offset;
-      
+      const offset = 72;
+      const targetY = tabContainerRef.current.offsetTop - offset;
       window.scrollTo({
         top: targetY,
         behavior: "smooth"

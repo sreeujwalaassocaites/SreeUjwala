@@ -6,10 +6,10 @@ import LoanPageTemplate, { ProductConfig } from "@/components/loans/LoanPageTemp
 const businessLoanConfig: ProductConfig = {
   loanType: "Business Loan",
   heroDescription: "Power your business growth with our collateral-free business loans. Ideal for MSMEs and established businesses needing quick capital for expansion, inventory, or working capital. EAZYKREDIT offers a seamless digital process, competitive interest rates, and flexible repayment options.",
-  interestRateText: "15.00% p.a.",
+  interestRateText: "10.75% p.a.",
   maxRepaymentTenure: "36 Months",
   heroFeatures: [
-    "Interest rates starting at 15% p.a.",
+    "Interest rates starting at 10.75% p.a.",
     "Loan amount ₹10 Lakhs - ₹10 Crore",
     "Flexible tenure up to 36 months (extendable to 5 years)",
     "Processing fees up to 2% of loan amount"
@@ -41,7 +41,7 @@ const businessLoanConfig: ProductConfig = {
     }
   ],
   keyFeaturesList: [
-    "Interest Rates : 15% p.a. onwards",
+    "Interest Rates : 10.75% p.a. onwards",
     "Loan Amounts : ₹10 Lakhs - ₹10 Crore",
     "Tenure : up to 36 months (some lenders offer repayment period till 5 years)",
     "Processing Fees : up to 2% of loan amount (may vary across lenders)"
@@ -191,17 +191,47 @@ const businessLoanConfig: ProductConfig = {
     }
   ],
   interestRatesTable: [
-    { name: "Bajaj Finance", isNbfc: true, rate: "7.15 - 20%" },
-    { name: "Bank of Baroda", rate: "7.2 - 9%" },
-    { name: "Punjab National Bank", rate: "7.25 - 12%" },
-    { name: "State Bank of India", rate: "7.25 - 9%" },
-    { name: "ICICI Bank", rate: "7.5 - 9%" },
-    { name: "Tata Capital", isNbfc: true, rate: "7.5 - 10.75%" },
-    { name: "HDFC Bank", rate: "7.75 - 13.2%" },
-    { name: "IDFC FIRST Bank", rate: "7.75 - 10.5%" },
-    { name: "Axis Bank", rate: "7.99 - 9%" },
-    { name: "Canara Bank", rate: "8.40 - 11.25%" },
-    { name: "LIC HFL", isNbfc: true, rate: "8.45 - 10.75%" }
+    { name: "HDFC Bank", rate: "10.75 - 22.5%" },
+    { name: "IDFC FIRST Bank", rate: "12.99 - 20%" },
+    { name: "Ambit Finvest", isNbfc: true, rate: "13 - 36%" },
+    { name: "IndusInd Bank", rate: "13 - 22%" },
+    { name: "Tata Capital", isNbfc: true, rate: "13 - 24%" },
+    { name: "ICICI Bank", rate: "13.25 - 20%" },
+    { name: "Aditya Birla", isNbfc: true, rate: "14 - 25%" },
+    { name: "Axis Bank", rate: "14 - 20%" },
+    { name: "Bajaj Finance", isNbfc: true, rate: "14 - 23%" },
+    { name: "Hero FinCorp", isNbfc: true, rate: "14 - 30%" },
+    { name: "Kotak Mahindra Bank", rate: "14 - 19%" },
+    { name: "Standard Chartered Bank", rate: "14 - 18%" },
+    { name: "Poonawalla Fincorp", isNbfc: true, rate: "15 - 22%" },
+    { name: "Unity Small Finance Bank", rate: "15.5 - 24%" },
+    { name: "Deutsche Bank", rate: "16 - 19%" },
+    { name: "IIFL", isNbfc: true, rate: "16 - 32%" },
+    { name: "L&T Finance", isNbfc: true, rate: "16 - 20%" },
+    { name: "Piramal", isNbfc: true, rate: "16 - 25%" },
+    { name: "SMFG India Credit", isNbfc: true, rate: "16 - 26%" },
+    { name: "Yes Bank", rate: "16 - 20%" },
+    { name: "Chola", isNbfc: true, rate: "17 - 20%" },
+    { name: "Godrej Capital", isNbfc: true, rate: "17 - 20%" },
+    { name: "NeoGrowth", isNbfc: true, rate: "17 - 24%" },
+    { name: "Avanse", isNbfc: true, rate: "18 - 20%" },
+    { name: "Clix Capital", isNbfc: true, rate: "18 - 21%" },
+    { name: "Edelweiss Finance", isNbfc: true, rate: "18 - 24%" },
+    { name: "Ftcash", isNbfc: true, rate: "18 - 32%" },
+    { name: "Indifi", isNbfc: true, rate: "18 - 55%" },
+    { name: "LendingKart", isNbfc: true, rate: "18 - 32%" },
+    { name: "Mangal Credit And Fincorp", isNbfc: true, rate: "18 - 22%" },
+    { name: "Niyogin Fintech", isNbfc: true, rate: "18 - 22%" },
+    { name: "Shriram Finance", isNbfc: true, rate: "18 - 24%" },
+    { name: "SMC Finance", isNbfc: true, rate: "18 - 24%" },
+    { name: "UGRO Capital", isNbfc: true, rate: "18 - 24%" },
+    { name: "Ashv Finance – Intellecash", isNbfc: true, rate: "19 - 25%" },
+    { name: "Axis Finance", isNbfc: true, rate: "19 - 22%" },
+    { name: "Credit Saison India", isNbfc: true, rate: "19 - 20%" },
+    { name: "Protium Finance", isNbfc: true, rate: "19 - 24%" },
+    { name: "FedFina", isNbfc: true, rate: "20 - 29%" },
+    { name: "Dhanvarsha", isNbfc: true, rate: "24 - 32%" },
+    { name: "FinTree", isNbfc: true, rate: "24 - 32%" }
   ]
 };
 
