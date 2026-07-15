@@ -211,7 +211,6 @@ const homeLoanConfig: ProductConfig = {
   ],
   overviewTitle: "Housing Finance",
   overviewHeading: "Own Your Home With Confidence",
-  overviewTitle: "Housing Finance",
   overviewParagraphs: [
     {
       text: "Owning a home is one of life's most significant milestones — and the right financial partner makes all the difference. At EAZYKREDIT, we simplify the home loan journey by connecting you with India's leading banks and housing finance companies. Whether you are a first-time buyer, upgrading to a larger space, or constructing your own house, we ensure you get the most suitable loan at the lowest available rate."
