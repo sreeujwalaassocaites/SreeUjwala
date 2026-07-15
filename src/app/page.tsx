@@ -22,7 +22,7 @@ const loanProducts = [
     title: "Personal Loans",
     desc: "For Salaried Individuals to Secure Right Financing Solutions",
     slug: "personal-loan",
-    image: "/assets/loans/personal_loan.jpeg",
+    image: "/assets/loans/PP.png",
   },
   {
     title: "Loan Against Property (LAP)",

@@ -46,7 +46,7 @@ const personalLoanConfig: ProductConfig = {
     "Repayment Tenure : Up to 5 years; select lenders extend up to 8 years",
     "Processing Fees : 0.5% to 4% of the sanctioned loan amount"
   ],
-  illustrationImage: "/assets/loans/personal_loan.jpeg",
+  illustrationImage: "/assets/loans/PP.png",
   eligibilityList: [
     {
       label: "Age Requirement",
