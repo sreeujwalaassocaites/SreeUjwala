@@ -10,84 +10,37 @@ const loanProducts = [
     title: "Home Loans",
     desc: "Make Your Dream Home a Reality",
     slug: "home-loan",
-    icon: (
-      <svg viewBox="0 0 64 64" className="w-14 h-14">
-        <polygon points="32,8 58,30 52,30 52,56 12,56 12,30 6,30" fill="#1E88E5" opacity="0.15" />
-        <polygon points="32,8 58,30 52,30 52,56 12,56 12,30 6,30" fill="none" stroke="#0B4F9F" strokeWidth="2.5" />
-        <rect x="24" y="36" width="16" height="20" rx="2" fill="#1E88E5" opacity="0.5" />
-        <circle cx="48" cy="18" r="8" fill="#E3F2FD" stroke="#1E88E5" strokeWidth="2" />
-        <path d="M44 18 L47 21 L52 15" stroke="#0B4F9F" strokeWidth="2" strokeLinecap="round" fill="none" />
-      </svg>
-    ),
+    image: "/assets/loans/home-loan-feature.png",
   },
   {
     title: "Business Loans",
     desc: "Empowering Businesses to Grow & Expand",
     slug: "business-loan",
-    icon: (
-      <svg viewBox="0 0 64 64" className="w-14 h-14">
-        <rect x="8" y="28" width="48" height="28" rx="4" fill="#1E88E5" opacity="0.12" stroke="#0B4F9F" strokeWidth="2" />
-        <rect x="22" y="18" width="20" height="10" rx="3" fill="#E3F2FD" stroke="#1E88E5" strokeWidth="2" />
-        <path d="M16 44 L24 34 L32 38 L40 28 L48 32" stroke="#0B4F9F" strokeWidth="2.5" strokeLinecap="round" fill="none" />
-        <circle cx="48" cy="32" r="3" fill="#1E88E5" />
-      </svg>
-    ),
+    image: "/assets/loans/business loan.jpeg",
   },
   {
     title: "Personal Loans",
     desc: "For Salaried Individuals to Secure Right Financing Solutions",
     slug: "personal-loan",
-    icon: (
-      <svg viewBox="0 0 64 64" className="w-14 h-14">
-        <rect x="10" y="14" width="44" height="32" rx="6" fill="#1E88E5" opacity="0.12" stroke="#0B4F9F" strokeWidth="2" />
-        <rect x="10" y="22" width="44" height="8" fill="#0B4F9F" opacity="0.2" />
-        <rect x="16" y="34" width="12" height="4" rx="2" fill="#1E88E5" opacity="0.6" />
-        <rect x="32" y="34" width="16" height="4" rx="2" fill="#1E88E5" opacity="0.4" />
-        <circle cx="50" cy="46" r="10" fill="#E3F2FD" stroke="#1E88E5" strokeWidth="2" />
-        <path d="M50 42 L50 50 M46 46 L54 46" stroke="#0B4F9F" strokeWidth="2" strokeLinecap="round" />
-      </svg>
-    ),
+    image: "/assets/loans/personal_loan.jpeg",
   },
   {
     title: "Loan Against Property (LAP)",
     desc: "Unlock the Value of Your Property for Business or Personal Needs",
     slug: "loan-against-property",
-    icon: (
-      <svg viewBox="0 0 64 64" className="w-14 h-14">
-        <polygon points="20,10 50,32 44,32 44,54 8,54 8,32 2,32" fill="#1E88E5" opacity="0.12" stroke="#0B4F9F" strokeWidth="2" />
-        <rect x="14" y="38" width="12" height="16" rx="2" fill="#1E88E5" opacity="0.4" />
-        <circle cx="48" cy="20" r="12" fill="#E3F2FD" stroke="#1E88E5" strokeWidth="2" />
-        <text x="48" y="25" textAnchor="middle" fontSize="14" fill="#0B4F9F" fontWeight="bold">₹</text>
-      </svg>
-    ),
+    image: "/assets/loans/loan_against property.png",
   },
   {
     title: "Education Loans",
     desc: "Finance Higher Studies in India & Overseas",
     slug: "education-loan",
-    icon: (
-      <svg viewBox="0 0 64 64" className="w-14 h-14">
-        <path d="M32 10 L58 22 L32 34 L6 22 Z" fill="#1E88E5" opacity="0.12" stroke="#0B4F9F" strokeWidth="2.5" />
-        <path d="M14 26 L14 42 C14 48, 50 48, 50 42 L50 26" fill="none" stroke="#0B4F9F" strokeWidth="2.5" strokeLinecap="round" />
-        <path d="M48 22 L48 38" stroke="#0B4F9F" strokeWidth="2" strokeLinecap="round" fill="none" />
-        <circle cx="48" cy="38" r="2.5" fill="#1E88E5" />
-      </svg>
-    ),
+    image: "/assets/loans/edu_loan.png",
   },
   {
     title: "Used Car Loans",
     desc: "Finance Certified Pre-Owned Vehicles for Personal or Business Use",
     slug: "used-car-loan",
-    icon: (
-      <svg viewBox="0 0 64 64" className="w-14 h-14">
-        <rect x="8" y="28" width="48" height="18" rx="6" fill="#0B4F9F" opacity="0.1" stroke="#0B4F9F" strokeWidth="2" />
-        <path d="M14 28 L20 16 L44 16 L50 28 Z" fill="#E3F2FD" stroke="#1E88E5" strokeWidth="2" />
-        <circle cx="20" cy="46" r="7" fill="#E3F2FD" stroke="#1E88E5" strokeWidth="2" />
-        <circle cx="44" cy="46" r="7" fill="#E3F2FD" stroke="#1E88E5" strokeWidth="2" />
-        <circle cx="48" cy="16" r="10" fill="#E3F2FD" stroke="#1E88E5" strokeWidth="2" />
-        <path d="M44 16 L47 19 L52 13" stroke="#0B4F9F" strokeWidth="2" strokeLinecap="round" fill="none" />
-      </svg>
-    ),
+    image: "/assets/loans/used-car-loan-feature.png",
   },
 ];
 
@@ -179,8 +132,14 @@ export default function Home() {
                 href={`/loans/${product.slug}`}
                 className="bg-white rounded-2xl border border-[#DBEAFE] shadow-sm hover:shadow-md hover:border-[#1E88E5] transition-all duration-300 p-6 flex flex-col items-center text-center gap-3 group"
               >
-                <div className="w-20 h-20 rounded-2xl bg-[#EFF6FF] flex items-center justify-center group-hover:bg-[#DBEAFE] transition-colors">
-                  {product.icon}
+                <div className="w-20 h-20 rounded-2xl overflow-hidden shrink-0 border border-[#EFF6FF] relative">
+                  <Image
+                    src={product.image}
+                    alt={product.title}
+                    fill
+                    sizes="80px"
+                    className="object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
                 </div>
                 <h3 className="font-bold text-[#0B4F9F] text-base leading-snug">{product.title}</h3>
                 <p className="text-[#64748B] text-xs leading-relaxed">{product.desc}</p>
