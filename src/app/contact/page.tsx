@@ -102,8 +102,8 @@ export default function Contact() {
                   </div>
                   <div className="flex flex-col gap-0.5 text-sm">
                     <h4 className="font-bold text-dark-blue">Corporate Email</h4>
-                    <a href="mailto:info@eazykredit.com" className="text-text-gray hover:text-primary-blue font-semibold">
-                      info@eazykredit.com
+                    <a href="mailto:info@eazykredit.in" className="text-text-gray hover:text-primary-blue font-semibold">
+                      info@eazykredit.in
                     </a>
                   </div>
                 </div>

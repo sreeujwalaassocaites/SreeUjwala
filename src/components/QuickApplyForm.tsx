@@ -12,8 +12,6 @@ const schema = zod.object({
   mobileNumber: zod.string().regex(/^[6-9]\d{9}$/, "Enter a valid 10-digit Indian mobile number"),
   email: zod.string().email("Enter a valid email address"),
   city: zod.string().min(2, "Enter your city"),
-  monthlyIncome: zod.number().min(1000, "Monthly Income must be at least ₹1,000"),
-  loanAmount: zod.number().min(10000, "Loan Amount must be at least ₹10,000")
 });
 
 type QuickFormData = zod.infer<typeof schema>;
@@ -33,8 +31,6 @@ export default function QuickApplyForm({ loanType }: QuickApplyFormProps) {
       mobileNumber: "",
       email: "",
       city: "",
-      monthlyIncome: undefined,
-      loanAmount: undefined
     }
   });
 
@@ -42,7 +38,7 @@ export default function QuickApplyForm({ loanType }: QuickApplyFormProps) {
     setIsSubmitting(true);
 
     const whatsappBase = "https://wa.me/919885011157";
-    const waText = `Hello EAZYKREDIT,\n\nI would like to apply for a loan.\nLoan Type: ${loanType}\nName: ${data.fullName}\nCity: ${data.city}\n\nPlease assist me.`;
+    const waText = `Hello EAZYKREDIT,\n\nI would like to apply for a loan.\nLoan Type: ${loanType}\nName: ${data.fullName}\nMobile: ${data.mobileNumber}\nEmail: ${data.email}\nCity: ${data.city}\n\nPlease assist me.`;
     const fullWaUrl = `${whatsappBase}?text=${encodeURIComponent(waText)}`;
 
     setTimeout(() => {
@@ -72,10 +68,10 @@ export default function QuickApplyForm({ loanType }: QuickApplyFormProps) {
             {/* Name */}
             <div className="flex flex-col gap-1.5">
               <label className="text-xs font-bold text-text-dark">Full Name *</label>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 placeholder="Enter full name"
-                className={`w-full px-3.5 py-2.5 rounded-btn border text-xs outline-none transition-all ${
+                className={`w-full px-3.5 py-2.5 rounded-btn border text-xs text-gray-900 bg-white outline-none transition-all ${
                   errors.fullName ? "border-red-500" : "border-border-color focus:border-primary-blue"
                 }`}
                 {...register("fullName")}
@@ -90,10 +86,10 @@ export default function QuickApplyForm({ loanType }: QuickApplyFormProps) {
             {/* Mobile */}
             <div className="flex flex-col gap-1.5">
               <label className="text-xs font-bold text-text-dark">Mobile Number *</label>
-              <input 
-                type="tel" 
+              <input
+                type="tel"
                 placeholder="10-digit number"
-                className={`w-full px-3.5 py-2.5 rounded-btn border text-xs outline-none transition-all ${
+                className={`w-full px-3.5 py-2.5 rounded-btn border text-xs text-gray-900 bg-white outline-none transition-all ${
                   errors.mobileNumber ? "border-red-500" : "border-border-color focus:border-primary-blue"
                 }`}
                 {...register("mobileNumber")}
@@ -108,10 +104,10 @@ export default function QuickApplyForm({ loanType }: QuickApplyFormProps) {
             {/* Email */}
             <div className="flex flex-col gap-1.5">
               <label className="text-xs font-bold text-text-dark">Email *</label>
-              <input 
-                type="email" 
+              <input
+                type="email"
                 placeholder="email@example.com"
-                className={`w-full px-3.5 py-2.5 rounded-btn border text-xs outline-none transition-all ${
+                className={`w-full px-3.5 py-2.5 rounded-btn border text-xs text-gray-900 bg-white outline-none transition-all ${
                   errors.email ? "border-red-500" : "border-border-color focus:border-primary-blue"
                 }`}
                 {...register("email")}
@@ -126,10 +122,10 @@ export default function QuickApplyForm({ loanType }: QuickApplyFormProps) {
             {/* City */}
             <div className="flex flex-col gap-1.5">
               <label className="text-xs font-bold text-text-dark">City *</label>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 placeholder="Residential city"
-                className={`w-full px-3.5 py-2.5 rounded-btn border text-xs outline-none transition-all ${
+                className={`w-full px-3.5 py-2.5 rounded-btn border text-xs text-gray-900 bg-white outline-none transition-all ${
                   errors.city ? "border-red-500" : "border-border-color focus:border-primary-blue"
                 }`}
                 {...register("city")}
@@ -137,42 +133,6 @@ export default function QuickApplyForm({ loanType }: QuickApplyFormProps) {
               {errors.city && (
                 <span className="text-red-500 text-[10px] font-bold flex items-center gap-1">
                   <AlertCircle className="w-3 h-3" /> {errors.city.message}
-                </span>
-              )}
-            </div>
-
-            {/* Income */}
-            <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-bold text-text-dark">Monthly Net Income *</label>
-              <input 
-                type="number" 
-                placeholder="In Rupees"
-                className={`w-full px-3.5 py-2.5 rounded-btn border text-xs outline-none transition-all ${
-                  errors.monthlyIncome ? "border-red-500" : "border-border-color focus:border-primary-blue"
-                }`}
-                {...register("monthlyIncome", { valueAsNumber: true })}
-              />
-              {errors.monthlyIncome && (
-                <span className="text-red-500 text-[10px] font-bold flex items-center gap-1">
-                  <AlertCircle className="w-3 h-3" /> {errors.monthlyIncome.message}
-                </span>
-              )}
-            </div>
-
-            {/* Loan Amount */}
-            <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-bold text-text-dark">Loan Amount *</label>
-              <input 
-                type="number" 
-                placeholder="In Rupees"
-                className={`w-full px-3.5 py-2.5 rounded-btn border text-xs outline-none transition-all ${
-                  errors.loanAmount ? "border-red-500" : "border-border-color focus:border-primary-blue"
-                }`}
-                {...register("loanAmount", { valueAsNumber: true })}
-              />
-              {errors.loanAmount && (
-                <span className="text-red-500 text-[10px] font-bold flex items-center gap-1">
-                  <AlertCircle className="w-3 h-3" /> {errors.loanAmount.message}
                 </span>
               )}
             </div>
@@ -188,7 +148,7 @@ export default function QuickApplyForm({ loanType }: QuickApplyFormProps) {
                   Submitting...
                 </>
               ) : (
-                "Apply"
+                "Apply Now"
               )}
             </button>
           </motion.form>

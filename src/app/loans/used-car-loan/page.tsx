@@ -5,14 +5,14 @@ import LoanPageTemplate, { ProductConfig } from "@/components/loans/LoanPageTemp
 
 const usedCarLoanConfig: ProductConfig = {
   loanType: "Used Car Loan",
-  heroDescription: "Reduce your monthly financial commitments by refinancing your existing car loan at competitive interest rates. Save on EMIs and access additional liquidity for your personal needs, all while keeping your car.",
+  heroDescription: "Already own a car but paying too much on your existing loan? EAZYKREDIT helps you refinance at a lower rate, reduce your monthly EMI, and free up cash — all through a fully digital, hassle-free process.",
   interestRateText: "12.00% p.a.",
   maxRepaymentTenure: "5 Years",
   heroFeatures: [
-    "Competitive rates starting at 12% p.a.",
-    "Finance up to 90% of car market value (up to 100% with select lenders)",
-    "Flexible repayment tenure up to 5 years",
-    "Processing fees from 0.5% - 2% onwards"
+    "Interest rates from 12% p.a.",
+    "Finance up to 90% of vehicle value",
+    "Repayment tenure up to 5 years",
+    "Processing fees from 0.5% to 2%"
   ],
   whyChooseUsFeatures: [
     {
@@ -41,10 +41,10 @@ const usedCarLoanConfig: ProductConfig = {
     }
   ],
   keyFeaturesList: [
-    "Interest Rates : 12.00% p.a. onwards",
-    "Loan Amounts : 80% to 90% of car’s on-road price (some lenders may offer up to 100%)",
-    "Tenure : up to 5 years (some lenders offer repayment period till 7 years)",
-    "Processing Fees : 0.5% onwards of loan amount (may vary across lenders)"
+    "Interest Rates : From 12.00% p.a. — competitive rates for pre-owned vehicle financing",
+    "Loan Coverage : 80%–90% of the vehicle's on-road price; up to 100% with select lenders",
+    "Repayment Tenure : Up to 5 years; select lenders extend up to 7 years",
+    "Processing Fees : 0.5% onwards of the sanctioned loan amount"
   ],
   illustrationImage: "/assets/loans/used-car-loan-feature.png",
   eligibilityList: [
@@ -72,7 +72,7 @@ const usedCarLoanConfig: ProductConfig = {
   documentsSalaried: [
     "Individual KYC (Photo, Pan Card, Aadhar Card)",
     "Current Residence Address Proof (Utility Bill)",
-    "Latest 3 month’s Salary Slip",
+    "Latest 3 month's Salary Slip",
     "6 month bank statement (Reflecting the salary credited)",
     "Company ID Card / Offer Letter / Visiting Card",
     "Car Quotation provided by the dealer / Existing loan statement"
@@ -86,11 +86,11 @@ const usedCarLoanConfig: ProductConfig = {
     "Car Quotation provided by the dealer / Existing loan statement"
   ],
   timelineSteps: [
-    { title: "Apply Online", desc: "Submit basic personal and income parameters on our secure loan refinancing portal." },
-    { title: "Document Verification", desc: "Upload clear digital copies of your KYC, existing loan statement, and bank statements." },
-    { title: "Eligibility Check", desc: "Our banking matching algorithms compare rates from 25+ lenders." },
-    { title: "Loan Approval", desc: "Receive the formal sanction letter containing approved terms from your chosen bank." },
-    { title: "Disbursement", desc: "The loan amount is direct-credited to settle the old loan." }
+    { title: "Submit Application", desc: "Provide your income and existing loan details on our secure digital portal." },
+    { title: "Upload Documents", desc: "Share KYC, existing loan statement, and bank statements digitally — no branch visit needed." },
+    { title: "Lender Matching", desc: "We compare refinancing offers from 25+ banks and NBFCs to find your best rate." },
+    { title: "Sanction Letter", desc: "Receive the official approval with confirmed loan amount, rate, and new tenure." },
+    { title: "Disbursement", desc: "Funds are credited directly to settle your existing loan balance." }
   ],
   calcMinAmount: 100000,
   calcMaxAmount: 5000000,
@@ -100,9 +100,9 @@ const usedCarLoanConfig: ProductConfig = {
   calcDefaultTenure: 3,
   calcDefaultRate: 12,
   benefitsGrid: [
-    { title: "No Hidden Charges", desc: "Total clarity across validation processes, administrative fees, and loan metrics." },
-    { title: "Flexible Repayments", desc: "Structured repayment slabs designed comfortably over 1 to 5 years." },
-    { title: "Balance Transfer", desc: "Switch high-interest rate existing auto loans to low-rate lenders with zero hassle." }
+    { title: "Zero Hidden Fees", desc: "All charges are disclosed upfront — complete transparency at every step." },
+    { title: "Flexible Repayment", desc: "Choose a tenure between 1 and 5 years to suit your monthly budget." },
+    { title: "Lower EMI Immediately", desc: "Refinancing to a lower rate reduces your monthly outflow from day one." }
   ],
   testimonials: [
     {
@@ -114,36 +114,36 @@ const usedCarLoanConfig: ProductConfig = {
   ],
   faqs: [
     {
-      q: "What's the purpose of refinancing a car loan?",
-      a: "Refinancing replaces your existing high-interest car loan with a new loan from another lender offering lower interest rates, reducing your monthly EMIs and overall borrowing costs."
+      q: "What is the purpose of refinancing a car loan?",
+      a: "Refinancing replaces your existing high-interest car loan with a new loan from another lender offering lower rates, reducing your monthly EMIs and total borrowing cost."
     },
     {
-      q: "What's the waiting period for car loan refinancing?",
-      a: "Lenders typically require you to make regular repayments on your original car loan for at least 6 to 12 months before considering a refinancing transfer request."
+      q: "What is the waiting period before I can refinance my car loan?",
+      a: "Lenders typically require at least 6 to 12 months of regular repayments on your original loan before considering a refinancing request."
     },
     {
-      q: "Is there a limit to the number of times car loans can be refinanced?",
-      a: "While there is no legal limit, frequent refinancing might incur prepayment fees from old lenders and processing charges from new lenders. It is recommended to refinance only when rate differentials are significant."
+      q: "Is there a limit to how many times I can refinance my car loan?",
+      a: "There is no legal limit, but frequent refinancing may incur prepayment fees from the old lender and processing charges from the new one. Refinance only when the rate difference is significant."
     },
     {
-      q: "Can I approach my existing lender to refinance my car loan?",
-      a: "Yes. You can request your current lender to renegotiate terms or lower your rate, but transferring the loan balance to another lender often yields the most competitive market interest rates."
+      q: "Can I approach my existing lender to refinance?",
+      a: "Yes, but transferring the balance to a new lender typically yields more competitive rates than renegotiating with your current bank."
     },
     {
-      q: "Does my credit score impact the terms of my refinanced loan?",
-      a: "Absolutely. A credit score of 750 or above demonstrates high creditworthiness, allowing you to qualify for the lowest rates and best repayment terms."
+      q: "Does my credit score affect the refinanced loan terms?",
+      a: "Absolutely. A score of 750 or above demonstrates strong creditworthiness, helping you qualify for the lowest rates and best repayment terms."
     },
     {
       q: "If I've already refinanced my home loan, can I still refinance my car loan?",
-      a: "Yes. Refinancing your home loan does not restrict you from refinancing your car loan, provided your monthly debt service ratios (FOIR) remain healthy."
+      a: "Yes. Refinancing your home loan does not restrict car loan refinancing, provided your monthly debt obligations (FOIR) remain within healthy limits."
     },
     {
-      q: "Will the refinanced loan feature a fixed or variable interest rate?",
-      a: "Refinanced car loans typically feature a fixed interest rate, ensuring your monthly EMI payments remain predictable and constant throughout the tenure."
+      q: "Will the refinanced loan have a fixed or variable interest rate?",
+      a: "Refinanced car loans typically carry a fixed interest rate, keeping your monthly EMI predictable throughout the tenure."
     },
     {
-      q: "Does the age of the car influence refinancing feasibility?",
-      a: "Yes. Lenders generally prefer cars that are less than 8 to 10 years old at the end of the refinanced loan tenure. Physical vehicle inspections are conducted to verify market valuation."
+      q: "Does the age of the car affect refinancing eligibility?",
+      a: "Yes. Lenders generally prefer cars less than 8 to 10 years old at the end of the refinanced tenure. A physical inspection is conducted to verify the vehicle's current market value."
     }
   ],
   relatedProducts: [
@@ -152,39 +152,21 @@ const usedCarLoanConfig: ProductConfig = {
   ],
   blogs: [],
   overviewTitle: "Used Car Loan",
-  overviewHeading: "Fulfill Your Used Car Loan Dream",
+  overviewHeading: "Refinance Smarter, Pay Less Every Month",
   overviewParagraphs: [
     {
-      text: "A Used Car Loan / Car Refinancing Loan allows you to transfer your existing car loan to another lender offering better interest rates and improved repayment terms. If you feel your current EMI is high or the loan terms are not suitable anymore, refinancing can help reduce your financial burden and improve cash flow."
+      text: "A used car loan or car refinancing facility allows you to transfer your existing auto loan to a lender offering better rates and improved repayment terms. If your current EMI feels too high or your loan terms no longer suit your financial situation, refinancing can meaningfully reduce your monthly burden and improve your overall cash flow. At EAZYKREDIT, we make this transition simple by comparing offers from leading banks and NBFCs on your behalf."
     },
     {
-      text: "At EAZYKREDIT, we help you refinance your car loan with competitive options from leading banks and NBFCs. Whether your goal is to lower your EMI, reduce interest rates, or adjust your tenure, we make the refinancing process simple and hassle-free."
-    },
-    {
-      heading: "Why Choose EAZYKREDIT for the Used Car Loan?",
-      text: "At EAZYKREDIT, we carefully analyze your existing car loan and compare multiple lender offers to ensure you receive the most beneficial refinancing option. Our focus is on reducing your financial burden by securing lower interest rates and better repayment terms tailored to your profile."
-    },
-    {
-      text: "Our experienced team manages the complete process — from eligibility check and documentation to loan closure and transfer. With transparent guidance, faster coordination with lenders, and dedicated support, EAZYKREDIT ensures a smooth and stress-free refinancing experience."
+      heading: "Why Choose EAZYKREDIT?",
+      text: "We carefully analyze your existing loan structure and compare multiple lender offers to identify the most beneficial refinancing option for your profile. Our team manages the entire process — from eligibility assessment and documentation to loan closure and transfer — so you don't have to deal with the complexity. With transparent guidance, faster lender coordination, and dedicated support at every step, EAZYKREDIT ensures a smooth and stress-free refinancing experience."
     }
   ],
   serviceBenefits: [
-    {
-      title: "Transparent Terms and Conditions",
-      desc: "We believe in maintaining transparency in our services. Our process comes with clear terms and conditions, ensuring that you have a comprehensive understanding of the loan details."
-    },
-    {
-      title: "Minimal Documentation",
-      desc: "EAZYKREDIT keeps the documentation process hassle-free. We require minimal paperwork, ensuring a smooth and efficient loan approval process."
-    },
-    {
-      title: "Expert Assistance",
-      desc: "Our team of experts is available to assist you throughout the Loan Against Car process. They will guide you through the application, answering any questions you may have and ensuring a seamless borrowing experience."
-    },
-    {
-      title: "Flexible Repayment Options",
-      desc: "We understand that each borrower has unique financial needs. With EAZYKREDIT, you can choose from flexible repayment options that suit your capabilities and make loan repayment more manageable."
-    }
+    { title: "Transparent Terms & Conditions", desc: "" },
+    { title: "Minimal Documentation", desc: "" },
+    { title: "Expert Advisor Support", desc: "" },
+    { title: "Flexible Repayment Options", desc: "" }
   ],
   interestRatesTable: [
     { name: "Punjab National Bank", rate: "9.8% onwards" },

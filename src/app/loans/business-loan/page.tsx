@@ -5,13 +5,13 @@ import LoanPageTemplate, { ProductConfig } from "@/components/loans/LoanPageTemp
 
 const businessLoanConfig: ProductConfig = {
   loanType: "Business Loan",
-  heroDescription: "Power your business growth with our collateral-free business loans. Ideal for MSMEs and established businesses needing quick capital for expansion, inventory, or working capital. EAZYKREDIT offers a seamless digital process, competitive interest rates, and flexible repayment options.",
+  heroDescription: "Whether you are scaling operations, managing working capital, or investing in new equipment, EAZYKREDIT connects your business with the right lender — fast. Get collateral-free funding with competitive rates and a fully digital application process.",
   interestRateText: "15.00% p.a.",
   maxRepaymentTenure: "36 Months",
   heroFeatures: [
-    "Interest rates starting at 15% p.a.",
-    "Loan amount ₹10 Lakhs - ₹10 Crore",
-    "Flexible tenure up to 36 months (extendable to 5 years)",
+    "Interest rates from 15% p.a.",
+    "Loan amounts from ₹10 Lakhs to ₹10 Crore",
+    "Repayment tenure up to 36 months (extendable to 5 years)",
     "Processing fees up to 2% of loan amount"
   ],
   whyChooseUsFeatures: [
@@ -41,10 +41,10 @@ const businessLoanConfig: ProductConfig = {
     }
   ],
   keyFeaturesList: [
-    "Interest Rates : 15% p.a. onwards",
-    "Loan Amounts : ₹10 Lakhs - ₹10 Crore",
-    "Tenure : up to 36 months (some lenders offer repayment period till 5 years)",
-    "Processing Fees : up to 2% of loan amount (may vary across lenders)"
+    "Interest Rates : From 15% p.a. — benchmarked against your credit profile",
+    "Loan Amounts : ₹10 Lakhs to ₹10 Crore based on business turnover and eligibility",
+    "Repayment Tenure : Up to 36 months; select lenders extend up to 5 years",
+    "Processing Fees : Up to 2% of the sanctioned loan amount"
   ],
   illustrationImage: "/assets/loans/business-loan-feature.png",
   eligibilityList: [
@@ -90,11 +90,11 @@ const businessLoanConfig: ProductConfig = {
     "Form 32 and Form 20B (if required)"
   ],
   timelineSteps: [
-    { title: "Apply Online", desc: "Submit basic personal and income parameters on our secure loan advisor portal." },
-    { title: "Document Verification", desc: "Upload clear digital copies of your KYC, business registration, and bank statements." },
-    { title: "Eligibility Check", desc: "Our banking matching algorithms compare rates from 25+ lenders." },
-    { title: "Loan Approval", desc: "Receive the formal sanction letter containing approved terms from your chosen bank." },
-    { title: "Disbursement", desc: "The loan amount is direct-credited to your business account." }
+    { title: "Submit Application", desc: "Provide your business and income details on our secure digital portal in minutes." },
+    { title: "Upload Documents", desc: "Share KYC, business registration, and bank statements digitally without visiting a branch." },
+    { title: "Lender Matching", desc: "We compare offers from 25+ banks and NBFCs to identify the best rate for your profile." },
+    { title: "Sanction Letter", desc: "Receive the official approval with confirmed loan amount, interest rate, and tenure." },
+    { title: "Disbursement", desc: "Funds are credited directly to your registered business account." }
   ],
   calcMinAmount: 1000000,
   calcMaxAmount: 100000000,
@@ -104,11 +104,11 @@ const businessLoanConfig: ProductConfig = {
   calcDefaultTenure: 3,
   calcDefaultRate: 15,
   benefitsGrid: [
-    { title: "No Collateral Required", desc: "Unsecured business financing up to ₹75 Lakhs." },
-    { title: "Quick Sanction Time", desc: "Fast digital audit allows approvals within 48 hours." },
-    { title: "Flexible Repayment", desc: "Easy EMI programs structured over tenures of 12 to 60 months." },
-    { title: "Tax Deductions", desc: "Reclaimed interest paid on commercial business loans as tax-exempt deductions." },
-    { title: "Minimal Credit Score Bias", desc: "Access secondary NBFC lenders if prime banking CIBIL thresholds are not met." }
+    { title: "No Collateral Needed", desc: "Unsecured funding up to ₹75 Lakhs — no property or asset pledge required." },
+    { title: "Rapid Sanction", desc: "Digital audit trails enable approvals within 48 hours for eligible profiles." },
+    { title: "Flexible Repayment", desc: "Structured EMI plans across tenures of 12 to 60 months to match your cash flow." },
+    { title: "Tax-Deductible Interest", desc: "Interest paid on business loans qualifies as a deductible business expense." },
+    { title: "NBFC Access", desc: "We connect you with specialized NBFCs if prime bank CIBIL thresholds are not met." }
   ],
   testimonials: [
     {
@@ -154,40 +154,40 @@ const businessLoanConfig: ProductConfig = {
   ],
   blogs: [],
   overviewTitle: "Unsecured Business Loan",
-  overviewHeading: "Fulfill Your Corporate Ambitions",
+  overviewHeading: "Capital That Moves as Fast as Your Business",
   overviewParagraphs: [
     {
-      text: "In the journey of every business, securing funds is vital for growth and success. However, obtaining loans, especially unsecured business loans, can often feel like an insurmountable challenge. But fear not, because EAZYKREDIT Business Loan is here to support you. With our online business loan services, you can easily apply for a business loan, eliminating the hassle of visiting a bank in person."
+      text: "Every growing business reaches a point where the right capital at the right time makes all the difference. Whether you need funds to expand your operations, purchase inventory, upgrade equipment, or manage seasonal cash flow gaps, EAZYKREDIT's business loan advisory service connects you with the most suitable lender — quickly and without unnecessary complexity. We work with MSMEs, proprietorships, partnerships, and private limited companies across all sectors."
     },
     {
-      heading: "Why Choose EAZYKREDIT for the Business Loan?",
-      text: "With our instant business loan facility, you can receive quick approvals and disbursements, ensuring that you have access to the capital you need without delays. Whether you require a loan for a new business, expansion, office renovation, or equipment purchases, we have you covered. EAZYKREDIT is recognized as one of the best advisors for business loans in India, coordinating the best unsecured business loans to support your growth. We believe in your vision and want to be your trusted partner on your entrepreneurial journey. So, whether you are starting a new business and need a startup loan or looking to take your existing one to new heights, apply for a business loan with EAZYKREDIT today. Experience a seamless borrowing experience with attractive benefits."
+      heading: "Why Choose EAZYKREDIT?",
+      text: "We understand that no two businesses are alike. Our advisors evaluate your turnover, credit profile, and funding requirement to match you with the lender offering the best combination of rate, tenure, and eligibility. With access to 25+ banking and NBFC partners, a fully digital process, and dedicated relationship managers, EAZYKREDIT ensures your business gets the capital it needs — without delays, hidden charges, or unnecessary back-and-forth."
     }
   ],
   serviceBenefits: [
     {
-      title: "Unsecured Business Loan",
-      desc: "EAZYKREDIT offers unsecured business loans, eliminating the need for collateral and providing you with the funds you need without additional burden."
+      title: "Collateral-Free Funding",
+      desc: ""
     },
     {
-      title: "Online Application",
-      desc: "With our user-friendly online platform, you can conveniently apply for a business loan from anywhere, saving you time and effort."
+      title: "100% Online Application",
+      desc: ""
     },
     {
-      title: "Quick Approval and Disbursement",
-      desc: "We understand the urgency of your business needs. Our streamlined process ensures quick approval and disbursal of funds, allowing you to address your financial requirements promptly."
+      title: "Approval Within 48 Hours",
+      desc: ""
     },
     {
       title: "Competitive Interest Rates",
-      desc: "EAZYKREDIT provides business loans with competitive interest rates, ensuring affordable repayments and helping you optimize your business cash flow."
+      desc: ""
     },
     {
       title: "Flexible Loan Amounts",
-      desc: "Whether you require a small loan for your startup or a larger amount for business expansion, our business loan options offer flexibility in loan amounts to suit your specific needs."
+      desc: ""
     },
     {
-      title: "Business Loan Eligibility",
-      desc: "We have designed our business loan eligibility criteria to be inclusive, enabling both small businesses and startups to access the funds they require."
+      title: "MSME & Startup Friendly",
+      desc: ""
     }
   ],
   interestRatesTable: [
@@ -197,7 +197,7 @@ const businessLoanConfig: ProductConfig = {
     { name: "ICICI Bank", rate: "13.25 - 20%" },
     { name: "Axis Bank", rate: "14 - 20%" },
     { name: "Bajaj Finance", isNbfc: true, rate: "14 - 23%" },
-    { name: "Canara Bank", rate: "14 - 19%" },
+    { name: "Aditya Birla Capital", isNbfc: true, rate: "15 - 22%" },
     { name: "State Bank of India", rate: "15 - 22%" },
     { name: "Bank of Baroda", rate: "15.5 - 24%" },
     { name: "Punjab National Bank", rate: "16 - 20%" },

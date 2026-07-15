@@ -5,14 +5,14 @@ import LoanPageTemplate, { ProductConfig } from "@/components/loans/LoanPageTemp
 
 const personalLoanConfig: ProductConfig = {
   loanType: "Personal Loan",
-  heroDescription: "Fulfill your urgent financial needs with our instant personal loans. Whether it's a medical emergency, dream vacation, or home renovation, get funds up to ₹75 Lakhs with zero collateral and paperless approval in minutes.",
+  heroDescription: "When life demands quick funds, EAZYKREDIT delivers. Get a collateral-free personal loan with zero asset pledge, minimal paperwork, and same-day approval — whether it's a medical emergency, home renovation, wedding, or travel.",
   interestRateText: "10.25% p.a.",
   maxRepaymentTenure: "5 Years",
   heroFeatures: [
-    "Competitive rates starting 10.25% p.a.",
-    "Loan amount up to ₹75 Lakhs (higher based on income)",
-    "Flexible tenure up to 5 years",
-    "Nominal processing fees 0.5% to 4%"
+    "Interest rates from 10.25% p.a.",
+    "Loan amounts up to ₹75 Lakhs",
+    "Repayment tenure up to 5 years",
+    "Processing fees between 0.5% and 4%"
   ],
   whyChooseUsFeatures: [
     {
@@ -41,10 +41,10 @@ const personalLoanConfig: ProductConfig = {
     }
   ],
   keyFeaturesList: [
-    "Interest Rates : 10.25% p.a. onwards",
-    "Loan Amounts : up to Rs 75 lakh depending on your income; some lenders may offer higher loan amounts",
-    "Tenure : up to 5 years (some lenders offer repayment period till 8 years)",
-    "Processing Fees : 0.5% to 4% of loan amount (may vary across lenders)"
+    "Interest Rates : From 10.25% p.a. — based on your income and credit profile",
+    "Loan Amounts : Up to ₹75 Lakhs; higher amounts available for strong income profiles",
+    "Repayment Tenure : Up to 5 years; select lenders extend up to 8 years",
+    "Processing Fees : 0.5% to 4% of the sanctioned loan amount"
   ],
   illustrationImage: "/assets/loans/personal-loan-feature.png",
   eligibilityList: [
@@ -83,11 +83,11 @@ const personalLoanConfig: ProductConfig = {
     "Occupancy Certificate & Completion Certificate"
   ],
   timelineSteps: [
-    { title: "Apply Online", desc: "Submit basic personal and income parameters on our secure loan advisor portal." },
-    { title: "Document Verification", desc: "Upload clear digital copies of your KYC, salary slips, and bank statements." },
-    { title: "Eligibility Check", desc: "Our banking matching algorithms compare rates from 25+ lenders." },
-    { title: "Loan Approval", desc: "Receive the formal sanction letter containing approved terms from your chosen bank." },
-    { title: "Disbursement", desc: "The loan amount is direct-credited to your bank account." }
+    { title: "Submit Application", desc: "Enter your basic income and personal details on our secure digital portal." },
+    { title: "Upload Documents", desc: "Share KYC, salary slips, and bank statements digitally — no branch visit needed." },
+    { title: "Lender Matching", desc: "We compare offers from 25+ banks and NBFCs to find your best rate and terms." },
+    { title: "Sanction Letter", desc: "Receive the official approval with confirmed loan amount, rate, and repayment schedule." },
+    { title: "Disbursement", desc: "Funds are credited directly to your bank account, usually within 24–48 hours." }
   ],
   calcMinAmount: 50000,
   calcMaxAmount: 7500000,
@@ -97,9 +97,9 @@ const personalLoanConfig: ProductConfig = {
   calcDefaultTenure: 3,
   calcDefaultRate: 10.25,
   benefitsGrid: [
-    { title: "No Hidden Charges", desc: "Total clarity across validation processes, administrative fees, and loan metrics." },
-    { title: "Flexible Repayments", desc: "Structured repayment slabs designed comfortably over 1 to 5 years." },
-    { title: "Balance Transfer", desc: "Switch high-interest rate existing personal loans to low-rate lenders with zero hassle." }
+    { title: "Zero Collateral", desc: "No property, gold, or asset pledge required — purely income-based approval." },
+    { title: "Flexible Repayment", desc: "Choose a tenure between 1 and 5 years to keep your monthly EMI manageable." },
+    { title: "Balance Transfer", desc: "Move your existing high-rate personal loan to a lower-rate lender with ease." }
   ],
   testimonials: [
     {
@@ -173,32 +173,32 @@ const personalLoanConfig: ProductConfig = {
   ],
   blogs: [],
   overviewTitle: "Personal Loan",
-  overviewHeading: "Fulfill Your Urgent Cash Requirements",
+  overviewHeading: "Fast Funds for Every Life Moment",
   overviewParagraphs: [
     {
-      text: "Get an instant personal loan online with EAZYKREDIT to access funds quickly and conveniently. Whether you're planning a trip to your dream destination, renovating your home with modern furnishings, organising your dream wedding, or facing a medical emergency, an online Personal Loan from EAZYKREDIT will always be there to help you fulfill your requirements with competitive interest rates."
+      text: "Life doesn't always follow a plan — and neither should your access to funds. Whether you're dealing with an unexpected medical expense, planning a destination wedding, renovating your home, or consolidating existing debt, a personal loan from EAZYKREDIT gives you instant access to the capital you need without pledging any asset. Our fully digital process means you can apply, get approved, and receive funds — all without stepping into a bank."
     },
     {
-      heading: "Why Choose EAZYKREDIT for the Personal Loan?",
-      text: "We connect you with India's premier lending partners, ensuring you receive the most suitable credit options. Simply compare and select the best personal loan in India based on your specific requirements. By choosing EAZYKREDIT, you experience a completely transparent, digital borrowing process with quick approvals, flexible structures, and dedicated advisor support."
+      heading: "Why Choose EAZYKREDIT?",
+      text: "We compare personal loan offers from India's top banks and NBFCs to ensure you receive the most competitive rate for your income and credit profile. Our advisors guide you through the entire process — from eligibility check to final disbursement — with complete transparency and zero hidden charges. With EAZYKREDIT, you get the right loan at the right rate, without the usual delays or confusion."
     }
   ],
   serviceBenefits: [
     {
-      title: "Quick and Convenient Process",
-      desc: "Applying for an instant personal loan with EAZYKREDIT is a seamless and hassle-free experience. Our online platform allows you to complete the application conveniently from the comfort of your home."
+      title: "100% Collateral-Free",
+      desc: ""
     },
     {
       title: "Competitive Interest Rates",
-      desc: "EAZYKREDIT offers personal loans with highly competitive interest rates, ensuring affordable monthly repayments."
+      desc: ""
     },
     {
       title: "Flexible Loan Amounts",
-      desc: "Gain the flexibility to choose the personal loan amount that suits your requirements, whether a small cash injection or a larger sum."
+      desc: ""
     },
     {
-      title: "Quick Approval and Disbursement",
-      desc: "We value your time. Once your application is approved, the funds are disbursed directly to your account quickly, allowing you to address your financial needs without delay."
+      title: "Same-Day Disbursement",
+      desc: ""
     }
   ],
   interestRatesTable: [
@@ -211,7 +211,7 @@ const personalLoanConfig: ProductConfig = {
     { name: "HDFC Bank", rate: "9.99% - 22.00%" },
     { name: "IDFC FIRST Bank", rate: "9.99% - 24.00%" },
     { name: "Axis Bank", rate: "9.99% - 22.00%" },
-    { name: "Canara Bank", rate: "10.95% - 16.15%" },
+    { name: "Aditya Birla Capital", isNbfc: true, rate: "13.00% - 19.50%" },
     { name: "LIC HFL", isNbfc: true, rate: "10.50% - 15.00%" }
   ]
 };

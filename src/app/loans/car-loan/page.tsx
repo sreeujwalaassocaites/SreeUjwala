@@ -5,14 +5,14 @@ import LoanPageTemplate, { ProductConfig } from "@/components/loans/LoanPageTemp
 
 const carLoanConfig: ProductConfig = {
   loanType: "Car Loan",
-  heroDescription: "Drive home your dream vehicle with EAZYKREDIT's instant car loan options. Enjoy up to 100% funding coverage, competitive interest rates, and flexible repayment tenures for new and pre-owned automobiles.",
+  heroDescription: "Your dream car is closer than you think. EAZYKREDIT compares car loan offers from India's top banks and NBFCs to get you the lowest rate, highest funding, and fastest approval — for both new and pre-owned vehicles.",
   interestRateText: "8.65% p.a.",
   maxRepaymentTenure: "7 Years",
   heroFeatures: [
-    "Competitive rates starting at 8.65% p.a.",
-    "Finance up to 90% of car market value (up to 100% with select lenders)",
-    "Flexible repayment tenure up to 7 years",
-    "Processing fees from 0.5% - 2% onwards"
+    "Interest rates from 8.65% p.a.",
+    "Up to 90%–100% of vehicle value funded",
+    "Repayment tenure up to 7 years",
+    "Processing fees from 0.5% to 2%"
   ],
   whyChooseUsFeatures: [
     {
@@ -41,10 +41,10 @@ const carLoanConfig: ProductConfig = {
     }
   ],
   keyFeaturesList: [
-    "Interest Rates : 8.65% p.a. onwards",
-    "Loan Amounts : 80% to 90% of car’s market value (some lenders may offer up to 100%)",
-    "Tenure : up to 7 years",
-    "Processing Fees : 0.5% - 2% onwards of loan amount (may vary across lenders)"
+    "Interest Rates : From 8.65% p.a. — among the most competitive auto loan rates available",
+    "Loan Coverage : 80%–90% of the vehicle's on-road price; up to 100% with select lenders",
+    "Repayment Tenure : Up to 7 years for maximum EMI flexibility",
+    "Processing Fees : 0.5% to 2% of the sanctioned loan amount"
   ],
   illustrationImage: "/assets/loans/car-loan-feature.png",
   eligibilityList: [
@@ -72,7 +72,7 @@ const carLoanConfig: ProductConfig = {
   documentsSalaried: [
     "Individual KYC (Photo, Pan Card, Aadhar Card)",
     "Current Residence Address Proof (Utility Bill)",
-    "Latest 3 months’ Salary Slip",
+    "Latest 3 months' Salary Slip",
     "6 month bank statement (Reflecting the salary credited)",
     "Company ID Card / Offer Letter / Visiting Card",
     "Car Quotation provided by the dealer"
@@ -86,11 +86,11 @@ const carLoanConfig: ProductConfig = {
     "Car Quotation provided by the dealer"
   ],
   timelineSteps: [
-    { title: "Apply Online", desc: "Submit basic personal and income parameters on our secure loan advisor portal." },
-    { title: "Document Verification", desc: "Upload clear digital copies of your KYC, salary slips, and car quotation." },
-    { title: "Eligibility Check", desc: "Our banking matching algorithms compare rates from 25+ lenders." },
-    { title: "Loan Approval", desc: "Receive the formal sanction letter containing approved terms from your chosen bank." },
-    { title: "Disbursement", desc: "The loan amount is direct-credited to the car dealership." }
+    { title: "Submit Application", desc: "Share your income and vehicle details on our secure digital portal in minutes." },
+    { title: "Upload Documents", desc: "Submit KYC, salary slips, and the dealer quotation digitally — no branch visit required." },
+    { title: "Lender Matching", desc: "We compare offers from 25+ banks and NBFCs to secure the best rate for your profile." },
+    { title: "Sanction Letter", desc: "Receive the official approval with confirmed loan amount, rate, and repayment tenure." },
+    { title: "Disbursement", desc: "Funds are transferred directly to the car dealership upon final verification." }
   ],
   calcMinAmount: 100000,
   calcMaxAmount: 10000000,
@@ -100,9 +100,9 @@ const carLoanConfig: ProductConfig = {
   calcDefaultTenure: 5,
   calcDefaultRate: 8.65,
   benefitsGrid: [
-    { title: "No Hidden Charges", desc: "Total clarity across validation processes, administrative fees, and loan metrics." },
-    { title: "Flexible Repayments", desc: "Structured repayment slabs designed comfortably over 1 to 7 years." },
-    { title: "Balance Transfer", desc: "Switch high-interest rate existing auto loans to low-rate lenders with zero hassle." }
+    { title: "Zero Hidden Fees", desc: "All charges are disclosed upfront — no surprises at any stage." },
+    { title: "Flexible Repayment", desc: "Choose a tenure between 1 and 7 years to keep your EMI comfortable." },
+    { title: "Balance Transfer", desc: "Move your existing high-rate auto loan to a lower-rate lender without hassle." }
   ],
   testimonials: [
     {
@@ -131,23 +131,23 @@ const carLoanConfig: ProductConfig = {
     },
     {
       q: "What will be the EMI cycle for the Car Loan?",
-      a: "The EMI cycle is calculated monthly and is typically auto-debited from your bank account on a fixed date (such as the 1st or 5th of every month) via NACH/ECS."
+      a: "The EMI cycle is calculated monthly and is typically auto-debited from your bank account on a fixed date via NACH/ECS mandate."
     },
     {
       q: "Can I opt for multiple Car Loans?",
-      a: "Yes. You can apply for and hold multiple car loans simultaneously, provided your debt-to-income ratio (FOIR) permits the additional monthly EMI liabilities."
+      a: "Yes. You can hold multiple car loans simultaneously, provided your debt-to-income ratio (FOIR) permits the additional monthly EMI obligations."
     },
     {
       q: "What other collaterals are required for a Car Loan?",
-      a: "No additional collateral is needed. The car itself serves as primary security and is hypothecated in favor of the lender bank until the loan is fully repaid."
+      a: "No additional collateral is needed. The car itself serves as primary security and is hypothecated in favor of the lender until the loan is fully repaid."
     },
     {
       q: "What documents are required to avail a Car Loan?",
-      a: "Basic paperwork includes your KYC (PAN, Aadhaar), income proofs (salary slips, bank statements, or audited ITRs), current address proofs, and the official proforma invoice or quotation from the car dealership."
+      a: "Basic paperwork includes your KYC (PAN, Aadhaar), income proofs (salary slips, bank statements, or ITRs), address proof, and the official quotation from the car dealership."
     },
     {
       q: "Can I get a loan for used cars?",
-      a: "Yes. EAZYKREDIT offers specialized used car loan programs with competitive interest rates and funding options covering up to 85% of the pre-owned vehicle's certified valuation."
+      a: "Yes. EAZYKREDIT offers specialized used car loan programs with competitive rates and funding up to 85% of the pre-owned vehicle's certified valuation."
     }
   ],
   relatedProducts: [
@@ -156,55 +156,25 @@ const carLoanConfig: ProductConfig = {
   ],
   blogs: [],
   overviewTitle: "Car Loan",
-  overviewHeading: "Fulfill Your Automobile Dream",
+  overviewHeading: "Drive Home Your Dream Car Today",
   overviewParagraphs: [
     {
-      text: "Buying your dream car is a major milestone, and choosing the right car loan is just as important as choosing the car itself. While many borrowers look for the lowest interest rate, the best car loan should also offer flexible tenure, quick approvals, and transparent terms. A well-structured car loan ensures that your EMIs remain affordable while helping you drive home your vehicle without financial stress."
+      text: "Buying a car is a significant financial decision, and the loan you choose matters just as much as the vehicle itself. A well-structured car loan should offer a competitive interest rate, flexible tenure, and transparent terms — so your EMIs stay affordable and your ownership experience remains stress-free. At EAZYKREDIT, we compare car loan offers from India's leading banks and NBFCs to find the option that best fits your income, credit profile, and repayment capacity."
     },
     {
-      text: "At EAZYKREDIT, we help you find the most suitable car loan based on your income profile, credit score, and repayment capacity. Whether you are buying a new car or a pre-owned vehicle, we make the financing process simple, fast, and hassle-free."
-    },
-    {
-      heading: "Why Choose EAZYKREDIT for the Car Loan?",
-      text: "At EAZYKREDIT, we don’t just offer a loan — we offer the right loan tailored to your needs. We compare multiple lenders to ensure you get the most suitable interest rate, tenure, and EMI option. Our goal is to match you with the best available car loan solution based on your financial profile and preferences."
-    },
-    {
-      text: "Our dedicated relationship managers guide you through every step, from eligibility check to final disbursal. With transparent processes, faster approvals, and complete support, EAZYKREDIT ensures a seamless car loan journey so you can focus on enjoying your new vehicle without financial worries."
+      heading: "Why Choose EAZYKREDIT?",
+      text: "We don't just process applications — we find the right loan for you. Our advisors evaluate your financial profile and match you with the lender offering the best rate, highest funding, and most suitable tenure. Whether you're buying a brand-new car or a certified pre-owned vehicle, EAZYKREDIT handles everything from eligibility check to final disbursement, ensuring a smooth and transparent experience from start to finish."
     }
   ],
   serviceBenefits: [
-    {
-      title: "Streamlined Loan Processing",
-      desc: "Our car loan application process is designed to be efficient and hassle-free. We strive to make the loan processing experience smooth and straightforward, saving you time and effort."
-    },
-    {
-      title: "Flexible Tenure Policy",
-      desc: "We offer flexible loan tenure options, allowing you to choose a repayment period of up to 7 years. This flexibility ensures that you can comfortably manage your loan payments while enjoying your new car."
-    },
-    {
-      title: "Attractive Interest Rates",
-      desc: "Our goal is to provide you with competitive interest rates on your car loan. We understand the importance of affordability, and we work with multiple banks and NBFCs to secure the best interest rates available for you."
-    },
-    {
-      title: "Multiple Payment Options",
-      desc: "We offer various payment options to suit your convenience. Whether you prefer monthly installments or a customized repayment schedule, we can accommodate your preferences, ensuring a seamless payment experience."
-    },
-    {
-      title: "Collateral-Free Car Loan",
-      desc: "Our car loans are collateral-free, meaning you don’t need to pledge any assets or provide additional security. This simplifies the loan process and allows you to focus on driving your new car with peace of mind."
-    },
-    {
-      title: "Up to 100% Funding for New Cars",
-      desc: "We understand that purchasing a new car can require a substantial investment. That’s why we offer up to 100% funding options for new cars, allowing you to finance the entire cost of your dream vehicle."
-    },
-    {
-      title: "Up to 85% Funding for Used Cars",
-      desc: "If you’re considering a used car, we provide up to 85% funding options. This allows you to secure a significant portion of the car’s value, making it easier for you to own your desired pre-owned vehicle."
-    },
-    {
-      title: "Minimal Documentation",
-      desc: "We believe in keeping the documentation process hassle-free. Our car loan application requires minimal documentation, ensuring a smooth and efficient loan approval process."
-    }
+    { title: "Fast & Paperless Processing", desc: "" },
+    { title: "Flexible Tenure Up to 7 Years", desc: "" },
+    { title: "Lowest Available Rates", desc: "" },
+    { title: "Multiple Repayment Options", desc: "" },
+    { title: "No Additional Collateral", desc: "" },
+    { title: "Up to 100% Funding on New Cars", desc: "" },
+    { title: "Up to 85% Funding on Used Cars", desc: "" },
+    { title: "Minimal Documentation", desc: "" }
   ],
   interestRatesTable: [
     { name: "Bajaj Finance", isNbfc: true, rate: "9.50% - 14.50%" },
@@ -216,7 +186,7 @@ const carLoanConfig: ProductConfig = {
     { name: "HDFC Bank", rate: "8.16% - 9.00%" },
     { name: "IDFC FIRST Bank", rate: "8.50% - 10.25%" },
     { name: "Axis Bank", rate: "8.50% - 10.00%" },
-    { name: "Canara Bank", rate: "7.45% - 14.00%" },
+    { name: "Aditya Birla Capital", isNbfc: true, rate: "9.25% - 15.00%" },
     { name: "LIC HFL", isNbfc: true, rate: "8.75% onwards" }
   ]
 };

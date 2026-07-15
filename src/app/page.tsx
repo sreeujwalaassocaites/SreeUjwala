@@ -110,7 +110,7 @@ const partnerBankLogos = [
   { name: "Bajaj Finance", src: "/assets/banks/bajaj.png" },
   { name: "PNB Housing", src: "/assets/banks/pnb.png" },
   { name: "Tata Capital", src: "/assets/banks/tata.png" },
-  { name: "Canara Bank", src: "/assets/banks/canara.png" },
+  { name: "Aditya Birla Capital", src: "/assets/banks/aditya-birla.png" },
   { name: "IDFC First", src: "/assets/banks/idfc.png" },
   { name: "LIC HFL", src: "/assets/banks/lic.png" },
 ];
@@ -206,7 +206,7 @@ export default function Home() {
                 Financial Decisions.
               </h3>
               <p className="text-[#64748B] text-sm leading-relaxed">
-                We do more than help you get a loan—we help you choose the right loan.
+                Empowering individuals and businesses with expert financial guidance, trusted banking partnerships, and exceptional customer service.
               </p>
             </div>
             {/* Right */}

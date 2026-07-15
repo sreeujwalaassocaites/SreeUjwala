@@ -32,18 +32,6 @@ export default function About() {
 
   return (
     <div className="flex flex-col w-full">
-      {/* Page Hero */}
-      <section className="bg-gradient-to-r from-dark-blue to-primary-blue text-white py-16">
-        <div className="max-w-7xl mx-auto px-6 text-center flex flex-col gap-4">
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">Our Story</h1>
-          <div className="flex justify-center items-center gap-2 text-xs md:text-sm font-semibold text-white/70">
-            <Link href="/" className="hover:text-white transition-colors">Home</Link>
-            <span>/</span>
-            <span className="text-white">About Us</span>
-          </div>
-        </div>
-      </section>
-
       {/* Corporate Story */}
       <section className="relative py-24 overflow-hidden">
         {/* Background image */}
@@ -141,51 +129,6 @@ export default function About() {
         </div>
       </section>
 
-
-      {/* Timeline Milestones */}
-      <section className="py-24 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center max-w-3xl mx-auto mb-16 flex flex-col gap-3">
-            <h2 className="text-3xl md:text-4xl font-bold text-dark-blue relative pb-3 after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-16 after:h-[3px] after:bg-primary-blue">
-              Our Journey Milestones
-            </h2>
-            <p className="text-text-gray font-medium text-sm md:text-base">
-              Tracking EAZYKREDIT's expansion as a trusted financial advisory partner in India.
-            </p>
-          </div>
-
-          <div className="relative pt-8 pb-4">
-            <div className="absolute top-1/2 left-8 right-8 h-[2px] bg-border-color -translate-y-1/2 hidden lg:block" />
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 relative z-10">
-              {[
-                { year: "2011", title: "Founded", desc: "Started in Mumbai with 3 banking referral channels." },
-                { year: "2015", title: "Going Regional", desc: "Expanded DSA activities across Bangalore, Pune and Gujarat." },
-                { year: "2019", title: "Digital Portals", desc: "Launched online eligibility check and document uploads." },
-                { year: "2022", title: "₹1000Cr Disbursed", desc: "Reached the landmark figure in cumulative retail disbursements." },
-                { year: "2026", title: "Pan-India Reach", desc: "Connecting 25+ lenders and assisting 10,000+ borrowers." }
-              ].map((step, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx * 0.08 }}
-                  className="flex flex-col items-center text-center gap-4 bg-white lg:bg-transparent p-6 lg:p-0 rounded-card border border-border-color lg:border-none shadow-sm lg:shadow-none"
-                >
-                  <div className="w-16 h-16 bg-white border-[3px] border-primary-blue rounded-full flex items-center justify-center text-sm font-black text-primary-blue shadow-premium">
-                    {step.year}
-                  </div>
-                  <div className="flex flex-col gap-1.5">
-                    <h4 className="font-bold text-base text-dark-blue">{step.title}</h4>
-                    <p className="text-text-gray text-xs leading-relaxed max-w-[160px] mx-auto">{step.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-dark-blue to-primary-blue text-white text-center">

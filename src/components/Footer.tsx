@@ -44,11 +44,12 @@ export default function Footer() {
             <h4 className="text-white font-bold text-sm mb-4 uppercase tracking-wider">Our Loans</h4>
             <ul className="flex flex-col gap-2 text-sm">
               {[
-                { label: "Home Products", href: "/loans/home-loan" },
-                { label: "Business Loans", href: "/loans/business-loan" },
-                { label: "Loan Agst Property", href: "/loans/loan-against-property" },
-                { label: "L Bar Loans", href: "/loans/car-loan" },
-                { label: "Used Car Loans", href: "/loans/used-car-loan" },
+                { label: "Home Loan", href: "/loans/home-loan" },
+                { label: "Business Loan", href: "/loans/business-loan" },
+                { label: "Personal Loan", href: "/loans/personal-loan" },
+                { label: "Loan Against Property", href: "/loans/loan-against-property" },
+                { label: "Car Loan", href: "/loans/car-loan" },
+                { label: "Used Car Loan", href: "/loans/used-car-loan" },
               ].map((item) => (
                 <li key={item.href}>
                   <Link href={item.href} className="hover:text-white transition-colors">

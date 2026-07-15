@@ -5,14 +5,14 @@ import LoanPageTemplate, { ProductConfig } from "@/components/loans/LoanPageTemp
 
 const homeLoanConfig: ProductConfig = {
   loanType: "Home Loan",
-  heroDescription: "Fulfill your dream of owning a home with our tailor-made housing finance options. EAZYKREDIT offers a seamless digital process, competitive interest rates, and flexible repayment structures designed specifically for both salaried and self-employed applicants.",
+  heroDescription: "Your home is your most important investment. EAZYKREDIT connects you with India's top lenders to secure the most competitive home loan rates, transparent terms, and a fully digital process — so you can focus on finding the perfect home, not the paperwork.",
   interestRateText: "8.40% p.a.",
   maxRepaymentTenure: "30 Years",
   heroFeatures: [
-    "Rates starting from 8.40% p.a.",
-    "Funding up to 90% property value",
-    "Tenure options up to 30 years",
-    "Minimal processing fees starting 0.25%"
+    "Interest rates from 8.40% p.a.",
+    "Up to 90% of property value funded",
+    "Repayment tenure up to 30 years",
+    "Processing fees as low as 0.25%"
   ],
   whyChooseUsFeatures: [
     {
@@ -41,12 +41,12 @@ const homeLoanConfig: ProductConfig = {
     }
   ],
   keyFeaturesList: [
-    "Interest Rates : 7.15% p.a. onwards",
-    "Loan Amounts : up to 85% - 100% of the property value",
-    "Tenure : up to 25 years (some lenders offer repayment period till 30 years)",
-    "Processing Fees : 0.25% to 1% of loan amount (may vary across lenders)",
-    "No Prepayment Penalty : Nil charges on foreclosure or part-payments of floating-rate loans",
-    "Balance Transfer : Seamless shifting of existing high-interest home loans to cheaper lenders"
+    "Interest Rates : Starting from 7.15% p.a. — among the lowest in the market",
+    "Loan Coverage : Up to 85%–100% of the property's registered value",
+    "Repayment Tenure : Up to 25 years; select lenders extend up to 30 years",
+    "Processing Fees : 0.25% to 1% of the sanctioned loan amount",
+    "Zero Prepayment Penalty : No foreclosure charges on floating-rate home loans per RBI norms",
+    "Balance Transfer Facility : Move your existing high-rate home loan to a lower-rate lender seamlessly"
   ],
   illustrationImage: "/assets/loans/home-loan-feature.png",
   eligibilitySalaried: [
@@ -95,11 +95,11 @@ const homeLoanConfig: ProductConfig = {
     "Occupancy Certificate & Completion Certificate"
   ],
   timelineSteps: [
-    { title: "Apply Online", desc: "Submit basic personal and income parameters on our secure loan advisor portal." },
-    { title: "Document Verification", desc: "Upload clear digital copies of your KYC, salary slips, and bank statements." },
-    { title: "Eligibility Check", desc: "Our banking matching algorithms compare rates from 25+ lenders." },
-    { title: "Loan Approval", desc: "Receive the formal sanction letter containing approved terms from your chosen bank." },
-    { title: "Disbursement", desc: "The loan amount is direct-credited to the developer or seller account." }
+    { title: "Submit Application", desc: "Fill in your basic income and property details on our secure digital portal in minutes." },
+    { title: "Upload Documents", desc: "Share KYC, salary slips, and bank statements digitally — no branch visit required." },
+    { title: "Lender Matching", desc: "We compare offers from 25+ banks and NBFCs to find your best-fit rate and terms." },
+    { title: "Sanction Letter", desc: "Receive the official approval letter with confirmed loan amount, rate, and tenure." },
+    { title: "Disbursement", desc: "Funds are transferred directly to the builder or seller upon property verification." }
   ],
   calcMinAmount: 500000,
   calcMaxAmount: 100000000,
@@ -109,12 +109,12 @@ const homeLoanConfig: ProductConfig = {
   calcDefaultTenure: 20,
   calcDefaultRate: 8.5,
   benefitsGrid: [
-    { title: "No Hidden Charges", desc: "Total clarity across validation processes, administrative fees, and loan metrics." },
-    { title: "Flexible Repayments", desc: "Structured repayment slabs designed comfortably over 1 to 30 years." },
-    { title: "Balance Transfer", desc: "Switch high-interest rate existing home loans to low-rate lenders with zero hassle." },
-    { title: "Top-up Loan", desc: "Secure additional emergency cash along with your mortgage home loan." },
-    { title: "Minimal Paperwork", desc: "Quick digital upload with full advisor support to organize paperwork." },
-    { title: "Fast Processing", desc: "Initial approvals in 48 hours for verified profiles." }
+    { title: "Zero Hidden Fees", desc: "Every charge is disclosed upfront — no surprises at any stage of the process." },
+    { title: "Flexible Repayment", desc: "Choose a tenure between 1 and 30 years to keep your EMI within budget." },
+    { title: "Balance Transfer", desc: "Shift your existing home loan to a lower-rate lender without any hassle." },
+    { title: "Top-Up Loan", desc: "Access additional funds on top of your existing home loan when needed." },
+    { title: "Paperless Process", desc: "Upload all documents digitally with full support from our advisory team." },
+    { title: "48-Hour Approvals", desc: "Pre-verified profiles receive initial sanction decisions within 48 hours." }
   ],
   testimonials: [
     {
@@ -210,36 +210,37 @@ const homeLoanConfig: ProductConfig = {
     }
   ],
   overviewTitle: "Housing Finance",
-  overviewHeading: "Fulfill Your Dream of Owning a Home",
+  overviewHeading: "Own Your Home With Confidence",
+  overviewTitle: "Housing Finance",
   overviewParagraphs: [
     {
-      text: "A home is much more than brick and mortar—it is a personal sanctuary of comfort, love, and lasting memories. We understand how crucial finding the perfect home is. At EAZYKREDIT, we are committed to making homeownership attainable for everyone by matching you with the industry's lowest interest rates, helping you secure your dream space with absolute ease."
+      text: "Owning a home is one of life's most significant milestones — and the right financial partner makes all the difference. At EAZYKREDIT, we simplify the home loan journey by connecting you with India's leading banks and housing finance companies. Whether you are a first-time buyer, upgrading to a larger space, or constructing your own house, we ensure you get the most suitable loan at the lowest available rate."
     },
     {
-      heading: "Why Choose EAZYKREDIT for the Home Loan?",
-      text: "By partnering with India's premier public and private banks, we guarantee direct access to top-tier home loan options. We customize our solutions to align with your unique needs—whether you require competitive interest rate slabs, flexible repayment terms, or maximum loan amounts. EAZYKREDIT offers a secure, reliable, and entirely transparent advisory experience to bring your home within reach."
+      heading: "Why Choose EAZYKREDIT?",
+      text: "We go beyond just processing applications. Our advisors analyze your income profile, credit history, and property details to match you with the lender offering the best combination of rate, tenure, and eligibility. With access to 25+ banking partners, a fully digital process, and zero hidden charges, EAZYKREDIT delivers a home loan experience that is fast, transparent, and stress-free from start to finish."
     }
   ],
   serviceBenefits: [
     {
-      title: "Favorable Interest Slabs",
-      desc: "Access competitive interest rates customized to minimize your monthly EMI outflows."
+      title: "Lowest Market Interest Rates",
+      desc: ""
     },
     {
-      title: "Tailored Loan Sizing",
-      desc: "Whether funding a modest apartment or a luxury villa, EAZYKREDIT offers adaptable loan sizes to suit your housing needs."
+      title: "Up to 90% Property Funding",
+      desc: ""
     },
     {
-      title: "Expedited Sanctions",
-      desc: "Time is vital. Our integrated banking portals ensure rapid approvals and smooth disbursements without unnecessary delays."
+      title: "Fast Sanction in 48 Hours",
+      desc: ""
     },
     {
-      title: "Absolute Clarity",
-      desc: "Zero hidden charges, complete transparency of terms, and upfront disclosure of fee structures."
+      title: "Zero Hidden Charges",
+      desc: ""
     },
     {
-      title: "Personal Advisory Desk",
-      desc: "Dedicated financial consultants guide you step-by-step through checking eligibility and compiling documents."
+      title: "Dedicated Loan Advisor",
+      desc: ""
     }
   ],
   interestRatesTable: [
@@ -252,7 +253,7 @@ const homeLoanConfig: ProductConfig = {
     { name: "HDFC Bank", rate: "7.75 - 13.2%" },
     { name: "IDFC FIRST Bank", rate: "7.75 - 10.5%" },
     { name: "Axis Bank", rate: "7.99 - 9%" },
-    { name: "Canara Bank", rate: "8.40 - 11.25%" },
+    { name: "Aditya Birla Capital", isNbfc: true, rate: "8.60 - 11.50%" },
     { name: "LIC HFL", isNbfc: true, rate: "8.45 - 10.75%" }
   ]
 };

@@ -103,10 +103,10 @@ const bankLogos: { [key: string]: React.ReactNode } = {
       className="max-h-8 max-w-[120px] w-auto h-auto object-contain shrink-0" 
     />
   ),
-  "CANARA BANK": (
+  "ADITYA BIRLA CAPITAL": (
     <img 
-      src="/assets/banks/canara.png" 
-      alt="Canara Bank" 
+      src="/assets/banks/aditya-birla.png" 
+      alt="Aditya Birla Capital" 
       className="max-h-8 max-w-[120px] w-auto h-auto object-contain shrink-0" 
     />
   ),
@@ -262,7 +262,6 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
   const tabs = [
     { id: "overview", label: "Overview" },
     { id: "features", label: "Key Features" },
-    { id: "charges", label: "Interest & Charges" },
     { id: "calculator", label: "Calculator" },
     { id: "eligibility", label: "Eligibility Criteria" },
     { id: "documentation", label: "Documentation" },
@@ -495,16 +494,9 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                         </h3>
                         <div className="flex flex-col gap-4">
                           {config.serviceBenefits.map((benefit, i) => (
-                            <div key={i} className="flex gap-3 items-start">
-                              <CheckCircle2 className="w-5 h-5 text-[#22C55E] shrink-0 mt-0.5" />
-                              <div className="flex flex-col gap-0.5">
-                                <span className="font-extrabold text-xs md:text-sm text-dark-blue">
-                                  {benefit.title}
-                                </span>
-                                <span className="text-xs text-text-gray leading-relaxed">
-                                  {benefit.desc}
-                                </span>
-                              </div>
+                            <div key={i} className="flex gap-3 items-center">
+                              <CheckCircle2 className="w-5 h-5 text-[#22C55E] shrink-0" />
+                              <span className="font-extrabold text-xs md:text-sm text-dark-blue">{benefit.title}</span>
                             </div>
                           ))}
                         </div>
@@ -524,7 +516,7 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
 
                   {/* Infinite Marquee Container */}
                   <div className="w-full overflow-hidden relative py-4 before:absolute before:left-0 before:top-0 before:bottom-0 before:w-16 before:bg-gradient-to-r before:from-white before:to-transparent before:z-10 after:absolute after:right-0 after:top-0 before:w-16 after:w-16 after:bg-gradient-to-l after:from-white after:to-transparent after:z-10">
-                    <div className="flex w-max animate-marquee">
+                    <div className="animate-scroll-marquee">
                       {activePartnerBanks.map((name, idx) => (
                         <div key={`bank-1-${idx}`} className="w-48 h-20 bg-white border border-border-color rounded-lg flex items-center justify-center px-6 mx-4 shadow-sm hover:border-primary-blue hover:shadow-premium transition-all duration-300 shrink-0">
                           {bankLogos[name]}
@@ -536,25 +528,6 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                         </div>
                       ))}
                     </div>
-                  </div>
-
-                  {/* Stats Grid */}
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
-                    {[
-                      { label: "Happy Customers", count: 50000, suffix: "+" },
-                      { label: "Banking Partners", count: 15, suffix: "+" },
-                      { label: "Approval Rate", count: 98, suffix: "%" },
-                      { label: "Loan Disbursed", count: 2500, prefix: "₹", suffix: " Cr+" }
-                    ].map((stat, idx) => (
-                      <div key={idx} className="bg-section-bg/50 border border-border-color rounded-card p-5 text-center flex flex-col gap-1">
-                        <span className="text-2xl md:text-3xl font-black text-primary-blue">
-                          {stat.prefix}
-                          <Counter target={stat.count} />
-                          {stat.suffix}
-                        </span>
-                        <span className="text-xs font-semibold text-text-gray">{stat.label}</span>
-                      </div>
-                    ))}
                   </div>
                 </div>
               </section>

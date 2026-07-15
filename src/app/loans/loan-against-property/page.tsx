@@ -5,14 +5,14 @@ import LoanPageTemplate, { ProductConfig } from "@/components/loans/LoanPageTemp
 
 const lapConfig: ProductConfig = {
   loanType: "Loan Against Property",
-  heroDescription: "Unlock the value of your property with our high-value loan against property solutions. Get funding up to ₹25+ Crores for business expansion, education, or medical emergencies at attractive interest rates.",
+  heroDescription: "Your property holds more value than you think. EAZYKREDIT helps you unlock it — with high-value funding up to ₹25+ Crores, competitive interest rates, and a transparent process backed by India's leading lenders.",
   interestRateText: "8.00% p.a.",
   maxRepaymentTenure: "15 Years",
   heroFeatures: [
-    "Interest Rates 8% p.a. onwards",
-    "Loan Amount Up to 85% property value",
-    "Tenure Up to 15 years",
-    "Processing Fees 0.5% - 2%"
+    "Interest rates from 8% p.a.",
+    "Up to 85% of property value funded",
+    "Repayment tenure up to 15 years",
+    "Processing fees 0.5% to 2%"
   ],
   whyChooseUsFeatures: [
     {
@@ -41,10 +41,10 @@ const lapConfig: ProductConfig = {
     }
   ],
   keyFeaturesList: [
-    "Interest Rates : 8% p.a. onwards",
-    "Loan Amounts : up to 85% of the market value of your property (may vary across lenders)",
-    "Tenure : up to 15 years",
-    "Processing Fees : 0.5% – 2% of loan amount (may vary across lenders)"
+    "Interest Rates : From 8% p.a. — lower than most unsecured loan products",
+    "Loan Coverage : Up to 85% of the property's current market value",
+    "Repayment Tenure : Up to 15 years; select lenders extend up to 20 years",
+    "Processing Fees : 0.5% to 2% of the sanctioned loan amount"
   ],
   illustrationImage: "/assets/loans/lap-feature.png",
   eligibilityList: [
@@ -104,11 +104,11 @@ const lapConfig: ProductConfig = {
     "NOC from Society / Builder"
   ],
   timelineSteps: [
-    { title: "Apply Online", desc: "Submit basic personal and income parameters on our secure loan advisor portal." },
-    { title: "Document Verification", desc: "Upload clear digital copies of your KYC, property papers, and bank statements." },
-    { title: "Eligibility Check", desc: "Our banking matching algorithms compare rates from 25+ lenders." },
-    { title: "Loan Approval", desc: "Receive the formal sanction letter containing approved terms from your chosen bank." },
-    { title: "Disbursement", desc: "The loan amount is direct-credited to your bank account." }
+    { title: "Submit Application", desc: "Provide your income and property details on our secure digital portal." },
+    { title: "Upload Documents", desc: "Share KYC, property papers, and bank statements digitally — no branch visit needed." },
+    { title: "Lender Matching", desc: "We compare offers from 25+ banks and NBFCs to find the best rate for your profile." },
+    { title: "Sanction Letter", desc: "Receive the official approval with confirmed loan amount, rate, and tenure." },
+    { title: "Disbursement", desc: "Funds are credited to your account after property verification and legal clearance." }
   ],
   calcMinAmount: 500000,
   calcMaxAmount: 50000000,
@@ -118,9 +118,9 @@ const lapConfig: ProductConfig = {
   calcDefaultTenure: 10,
   calcDefaultRate: 8,
   benefitsGrid: [
-    { title: "No Hidden Charges", desc: "Total clarity across validation processes, administrative fees, and loan metrics." },
-    { title: "Flexible Repayments", desc: "Structured repayment slabs designed comfortably over 1 to 15 years." },
-    { title: "Balance Transfer", desc: "Switch high-interest rate existing property loans to low-rate lenders with zero hassle." }
+    { title: "Zero Hidden Fees", desc: "Every charge is disclosed upfront — no surprises at any stage of the process." },
+    { title: "Flexible Repayment", desc: "Choose a tenure between 1 and 15 years to keep your monthly EMI manageable." },
+    { title: "Balance Transfer", desc: "Move your existing high-rate property loan to a lower-rate lender with ease." }
   ],
   testimonials: [
     {
@@ -132,52 +132,52 @@ const lapConfig: ProductConfig = {
   ],
   faqs: [
     {
-      q: "What is a loan against property?",
-      a: "A loan against property (LAP) is a secured loan where you pledge your residential, commercial, or industrial real estate asset as collateral to secure high-value funding."
+      q: "What is a Loan Against Property?",
+      a: "A Loan Against Property (LAP) is a secured loan where you pledge your residential, commercial, or industrial property as collateral to access high-value funding at competitive interest rates."
     },
     {
-      q: "What property can be considered as collateral for LAP?",
-      a: "Residential houses, apartments, self-occupied or rented commercial premises, vacant plots, and industrial buildings can be placed as collateral, subject to clear title deeds and property valuations."
+      q: "What types of property can be used as collateral for LAP?",
+      a: "Residential houses, apartments, self-occupied or rented commercial premises, vacant plots, and industrial buildings can be pledged, subject to clear title deeds and property valuation."
     },
     {
-      q: "If a property is jointly owned by me or an individual and his/her relative, can we take a loan against this property?",
-      a: "Yes. If a property is jointly owned, all co-owners must be co-applicants on the loan. This combines your income profiles and makes it easier to qualify."
+      q: "Can I apply for LAP on a jointly owned property?",
+      a: "Yes. If the property is jointly owned, all co-owners must be co-applicants on the loan. This also allows you to combine income profiles and qualify for a higher loan amount."
     },
     {
-      q: "I am an NRI. Can I get a Loan Against Property?",
-      a: "Yes. Non-Resident Indians (NRIs) are eligible to apply for a Loan Against Property in India against property assets they own here, subject to RBI regulations."
+      q: "Can NRIs apply for a Loan Against Property?",
+      a: "Yes. Non-Resident Indians are eligible to apply for LAP against property assets they own in India, subject to RBI regulations and lender-specific guidelines."
     },
     {
-      q: "What is the maximum loan I can get against my property?",
-      a: "You can borrow up to ₹25+ Crores, generally representing 50% to 85% of the property's current market valuation, depending on the property type and your income documents."
+      q: "What is the maximum loan amount I can get against my property?",
+      a: "You can borrow up to ₹25+ Crores, typically representing 50% to 85% of the property's current market valuation, depending on property type and your income documents."
     },
     {
-      q: "What are the loan tenure options?",
-      a: "Repayment tenures for a Loan Against Property are flexible and can extend up to 15 years, with some lenders offering up to 20 years."
+      q: "What are the repayment tenure options for LAP?",
+      a: "Repayment tenures are flexible and can extend up to 15 years, with some lenders offering up to 20 years for eligible profiles."
     },
     {
-      q: "Can I get tax benefit on loan against property?",
-      a: "Yes, under Section 24(b) or Section 37(1), you can claim tax deductions if the loan proceeds are utilized for business expansion, buying a second home, or other qualifying investments."
+      q: "Can I claim tax benefits on a Loan Against Property?",
+      a: "Yes. Under Section 24(b) or Section 37(1), you may claim tax deductions if the loan proceeds are used for business expansion, purchasing a second home, or other qualifying investments."
     },
     {
-      q: "Is it important to have my account in the same bank that is disbursing my loan against property?",
-      a: "No. You do not need an existing account with the lender. You can set up standing instructions or ECS mandates on your active savings/current account with any bank."
+      q: "Do I need an account with the disbursing bank?",
+      a: "No. You can set up ECS or NACH mandates on your existing savings or current account with any bank — no prior relationship with the lender is required."
     },
     {
-      q: "In how much time will the loan get disbursed?",
-      a: "Once property verification, technical valuation, and legal title checks are completed successfully, disbursement takes around 7 to 10 working days."
+      q: "How long does disbursement take after approval?",
+      a: "Once property verification, technical valuation, and legal title checks are completed, disbursement typically takes 7 to 10 working days."
     },
     {
-      q: "How is a loan disbursed for an under-construction property?",
-      a: "For under-construction properties, the loan is disbursed in phases (tranches) linked to construction milestones certified by the project engineer."
+      q: "How is LAP disbursed for an under-construction property?",
+      a: "For under-construction properties, the loan is released in phases linked to construction milestones certified by the project engineer."
     },
     {
-      q: "What is the difference between a home loan and a loan against property?",
-      a: "A Home Loan is specifically taken to purchase a new residential property. A Loan Against Property is taken by pledging an existing property you own, and the funds can be used for any personal or business purpose."
+      q: "What is the difference between a Home Loan and a Loan Against Property?",
+      a: "A Home Loan is specifically for purchasing a new residential property. LAP is taken by pledging an existing property you already own, and the funds can be used for any personal or business purpose."
     },
     {
-      q: "Why should I choose LAP from EAZYKREDIT?",
-      a: "EAZYKREDIT compares offers from 25+ top lenders side-by-side. Our dedicated relationship managers assist you with property valuation, legal validation, and document processing, securing the lowest rates with total transparency."
+      q: "Why should I choose LAP through EAZYKREDIT?",
+      a: "EAZYKREDIT compares offers from 25+ top lenders side-by-side. Our relationship managers assist with property valuation, legal checks, and documentation — securing the lowest rates with complete transparency."
     }
   ],
   relatedProducts: [
@@ -186,40 +186,22 @@ const lapConfig: ProductConfig = {
   ],
   blogs: [],
   overviewTitle: "Loan Against Property",
-  overviewHeading: "Unlock the Hidden Value of Your Assets",
+  overviewHeading: "Put Your Property to Work for You",
   overviewParagraphs: [
     {
-      text: "Your property is more than just a valuable asset — it represents years of hard work, stability, and security. With a Loan Against Property from EAZYKREDIT, you can unlock the hidden potential of your property and use its value to fulfill your financial goals. Whether you need funds for business expansion, higher education, medical emergencies, or personal commitments, LAP provides you with substantial loan amounts at competitive interest rates."
+      text: "Your property is one of your most valuable assets — and with a Loan Against Property from EAZYKREDIT, you can leverage its value to meet your most important financial goals. Whether you need capital for business expansion, higher education, a medical emergency, or debt consolidation, LAP gives you access to substantial funding at interest rates far lower than unsecured loans. You retain ownership of your property throughout the loan tenure while unlocking its full financial potential."
     },
     {
-      text: "At EAZYKREDIT, we understand the importance of financial flexibility. That’s why we offer Loan Against Property solutions with attractive interest rates, flexible repayment options, and a smooth approval process. Turn your property into a powerful financial resource and move one step closer to achieving your dreams with confidence."
-    },
-    {
-      heading: "Why Choose EAZYKREDIT for the Loan Against Property?",
-      text: "EAZYKREDIT helps you unlock the true value of your property with a smooth, transparent, and customer-friendly loan process. We partner with leading banks and NBFCs to ensure you get the best interest rates, higher eligibility, and flexible repayment options tailored to your financial goals. Our team understands that every borrower’s requirement is different, and we work closely with you to structure the right solution. With dedicated relationship managers, quick approvals, and complete assistance from application to disbursal, EAZYKREDIT ensures a hassle-free experience. From property evaluation to documentation and final loan sanction, we manage everything efficiently so you can focus on your business or personal financial needs without stress."
+      heading: "Why Choose EAZYKREDIT?",
+      text: "We partner with India's leading banks and NBFCs to ensure you receive the best interest rate, maximum eligibility, and the most flexible repayment structure for your specific situation. Our advisors understand that every borrower's requirement is different — and we work closely with you to structure the right solution. From property evaluation and documentation to legal verification and final disbursement, EAZYKREDIT manages the entire process so you can focus on what matters most."
     }
   ],
   serviceBenefits: [
-    {
-      title: "Competitive Interest Rates",
-      desc: "Since LAP is a secured loan, lenders offer comparatively lower interest rates than personal loans or credit facilities. This helps reduce your overall borrowing cost and makes repayment more affordable over the long term."
-    },
-    {
-      title: "High Loan Amount",
-      desc: "Loan Against Property allows you to avail a higher loan amount compared to unsecured loans because it is backed by your residential or commercial property. Depending on the property value and eligibility, you can secure substantial funding to meet business expansion, education, medical, or personal financial requirements."
-    },
-    {
-      title: "Flexible Repayment Tenure",
-      desc: "One of the biggest advantages of LAP is the long repayment tenure, which can go up to 15–20 years. A longer tenure ensures smaller EMIs, making it easier to manage your monthly cash flow without financial pressure."
-    },
-    {
-      title: "Quick Processing & Approval",
-      desc: "With proper documentation and property papers, Loan Against Property can be processed efficiently. At EAZYKREDIT, we coordinate with lenders to ensure faster verification, smooth legal checks, and quicker sanction of your loan."
-    },
-    {
-      title: "Multipurpose Usage",
-      desc: "The loan amount received through LAP can be used for various purposes such as business expansion, working capital, education, wedding expenses, medical emergencies, or debt consolidation. There are generally no strict end-use restrictions, giving you financial flexibility."
-    }
+    { title: "Competitive Interest Rates", desc: "" },
+    { title: "High Loan Amounts Available", desc: "" },
+    { title: "Flexible Repayment Tenure", desc: "" },
+    { title: "Fast Processing & Approval", desc: "" },
+    { title: "No End-Use Restrictions", desc: "" }
   ],
   interestRatesTable: [
     { name: "Bajaj Finance", isNbfc: true, rate: "8.00% - 18.00%" },
@@ -231,7 +213,7 @@ const lapConfig: ProductConfig = {
     { name: "HDFC Bank", rate: "8.50% - 10.50%" },
     { name: "IDFC FIRST Bank", rate: "9.50% - 11.00%" },
     { name: "Axis Bank", rate: "9.25% - 9.75%" },
-    { name: "Canara Bank", rate: "8.50% - 11.00%" },
+    { name: "Aditya Birla Capital", isNbfc: true, rate: "9.75% - 13.50%" },
     { name: "LIC HFL", isNbfc: true, rate: "9.25% - 11.50%" }
   ]
 };
