@@ -8,7 +8,7 @@ import { CheckCircle2, MapPin, Phone, Mail, Clock } from "lucide-react";
 const loanProducts = [
   {
     title: "Home Loans",
-    desc: "Make Your Dream Home a Reality in Hyderabad",
+    desc: "Make Your Dream Home a Reality",
     slug: "home-loan",
     icon: (
       <svg viewBox="0 0 64 64" className="w-14 h-14">
