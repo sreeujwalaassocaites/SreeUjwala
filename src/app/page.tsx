@@ -138,7 +138,7 @@ export default function Home() {
                     alt={product.title}
                     fill
                     sizes="112px"
-                    className="object-contain group-hover:scale-110 transition-transform duration-300"
+                    className="object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-300"
                   />
                 </div>
                 <h3 className="font-bold text-[#0B4F9F] text-base leading-snug">{product.title}</h3>
