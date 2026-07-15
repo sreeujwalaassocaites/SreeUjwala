@@ -250,9 +250,9 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
   }, [config.loanType]);
 
   // EMI Calculator States
-  const [loanAmount, setLoanAmount] = useState(config.calcDefaultAmount);
-  const [interestRate, setInterestRate] = useState(config.calcDefaultRate);
-  const [tenureYears, setTenureYears] = useState(config.calcDefaultTenure);
+  const [loanAmount, setLoanAmount] = useState<number | "">(config.calcDefaultAmount);
+  const [interestRate, setInterestRate] = useState<number | "">(config.calcDefaultRate);
+  const [tenureYears, setTenureYears] = useState<number | "">(config.calcDefaultTenure);
 
   const [emi, setEmi] = useState(0);
   const [totalInterest, setTotalInterest] = useState(0);
@@ -303,23 +303,37 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
 
   // EMI Calculation Logic
   useEffect(() => {
-    const P = loanAmount;
-    const r = interestRate / 12 / 100;
-    const n = tenureYears * 12;
+    const P = isNaN(Number(loanAmount)) || Number(loanAmount) < 0 ? 0 : Number(loanAmount);
+    const rate = isNaN(Number(interestRate)) || Number(interestRate) < 0 ? 0 : Number(interestRate);
+    const tenure = isNaN(Number(tenureYears)) || Number(tenureYears) <= 0 ? 0 : Number(tenureYears);
 
-    if (r === 0) {
+    const r = rate / 12 / 100;
+    const n = tenure * 12;
+
+    if (P === 0 || n === 0) {
+      setEmi(0);
+      setTotalPayable(0);
+      setTotalInterest(0);
+    } else if (r === 0) {
       const calculatedEmi = P / n;
       setEmi(Math.round(calculatedEmi));
       setTotalPayable(P);
       setTotalInterest(0);
     } else {
       const calculatedEmi = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-      const totalAmt = calculatedEmi * n;
-      const totalInt = totalAmt - P;
+      
+      if (isNaN(calculatedEmi) || !isFinite(calculatedEmi)) {
+        setEmi(0);
+        setTotalPayable(0);
+        setTotalInterest(0);
+      } else {
+        const totalAmt = calculatedEmi * n;
+        const totalInt = totalAmt - P;
 
-      setEmi(Math.round(calculatedEmi));
-      setTotalPayable(Math.round(totalAmt));
-      setTotalInterest(Math.round(totalInt));
+        setEmi(Math.round(calculatedEmi));
+        setTotalPayable(Math.round(totalAmt));
+        setTotalInterest(Math.round(totalInt));
+      }
     }
   }, [loanAmount, interestRate, tenureYears]);
 
@@ -754,10 +768,14 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                             <input
                               type="number"
                               step="0.1"
-                              value={loanAmount / 100000}
+                              value={loanAmount === "" ? "" : loanAmount / 100000}
                               onChange={(e) => {
-                                const val = Number(e.target.value);
-                                setLoanAmount(val * 100000);
+                                const valStr = e.target.value;
+                                if (valStr === "") {
+                                  setLoanAmount("");
+                                } else {
+                                  setLoanAmount(Number(valStr) * 100000);
+                                }
                               }}
                               className="w-16 text-right font-extrabold outline-none border-none p-0 bg-transparent text-primary-blue [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                             />
@@ -769,7 +787,7 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                           min={config.calcMinAmount}
                           max={config.calcMaxAmount}
                           step={50000}
-                          value={loanAmount}
+                          value={loanAmount === "" ? 0 : loanAmount}
                           onChange={(e) => setLoanAmount(Number(e.target.value))}
                           className="w-full h-1.5 bg-border-color rounded-lg appearance-none cursor-pointer accent-primary-blue"
                         />
@@ -787,10 +805,14 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                             <input
                               type="number"
                               step="0.05"
-                              value={interestRate}
+                              value={interestRate === "" ? "" : interestRate}
                               onChange={(e) => {
-                                const val = Number(e.target.value);
-                                setInterestRate(val);
+                                const valStr = e.target.value;
+                                if (valStr === "") {
+                                  setInterestRate("");
+                                } else {
+                                  setInterestRate(Number(valStr));
+                                }
                               }}
                               className="w-14 text-right font-extrabold outline-none border-none p-0 bg-transparent text-primary-blue [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                             />
@@ -802,7 +824,7 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                           min={5}
                           max={20}
                           step={0.05}
-                          value={interestRate}
+                          value={interestRate === "" ? 5 : interestRate}
                           onChange={(e) => setInterestRate(Number(e.target.value))}
                           className="w-full h-1.5 bg-border-color rounded-lg appearance-none cursor-pointer accent-primary-blue"
                         />
@@ -820,10 +842,14 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                             <input
                               type="number"
                               step="1"
-                              value={tenureYears}
+                              value={tenureYears === "" ? "" : tenureYears}
                               onChange={(e) => {
-                                const val = Number(e.target.value);
-                                setTenureYears(val);
+                                const valStr = e.target.value;
+                                if (valStr === "") {
+                                  setTenureYears("");
+                                } else {
+                                  setTenureYears(Number(valStr));
+                                }
                               }}
                               className="w-10 text-right font-extrabold outline-none border-none p-0 bg-transparent text-primary-blue [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                             />
@@ -835,7 +861,7 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                           min={config.calcMinTenure}
                           max={config.calcMaxTenure}
                           step={1}
-                          value={tenureYears}
+                          value={tenureYears === "" ? 0 : tenureYears}
                           onChange={(e) => setTenureYears(Number(e.target.value))}
                           className="w-full h-1.5 bg-border-color rounded-lg appearance-none cursor-pointer accent-primary-blue"
                         />
