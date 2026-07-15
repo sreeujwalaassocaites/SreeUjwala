@@ -41,19 +41,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="flex flex-col w-full bg-section-bg pb-24">
-      {/* Hero */}
-      <section className="bg-gradient-to-r from-dark-blue to-primary-blue text-white py-16">
-        <div className="max-w-7xl mx-auto px-6 text-center flex flex-col gap-4">
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">Contact Us</h1>
-          <div className="flex justify-center items-center gap-2 text-xs md:text-sm font-semibold text-white/70">
-            <Link href="/" className="hover:text-white transition-colors">Home</Link>
-            <span>/</span>
-            <span className="text-white">Contact</span>
-          </div>
-        </div>
-      </section>
-
+    <div className="flex flex-col w-full bg-section-bg pb-24 pt-32">
       {/* Grid Content */}
       <section className="max-w-7xl mx-auto w-full px-6 mt-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
