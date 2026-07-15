@@ -252,7 +252,55 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
   // EMI Calculator States
   const [loanAmount, setLoanAmount] = useState<number | "">(config.calcDefaultAmount);
   const [interestRate, setInterestRate] = useState<number | "">(config.calcDefaultRate);
-  const [tenureYears, setTenureYears] = useState<number | "">(config.calcDefaultTenure);
+  const [tenureMonths, setTenureMonths] = useState<number | "">(config.calcDefaultTenure * 12);
+
+  // Handle manual input changes with clamping limits
+  const handleAmountChange = (valStr: string) => {
+    if (valStr === "") {
+      setLoanAmount("");
+    } else {
+      const valLakhs = Number(valStr);
+      const valRupees = valLakhs * 100000;
+      const clamped = Math.max(0, Math.min(valRupees, config.calcMaxAmount));
+      setLoanAmount(clamped);
+    }
+  };
+
+  const handleRateChange = (valStr: string) => {
+    if (valStr === "") {
+      setInterestRate("");
+    } else {
+      const val = Number(valStr);
+      const clamped = Math.max(0, Math.min(val, 20));
+      setInterestRate(clamped);
+    }
+  };
+
+  const handleYearsChange = (valStr: string) => {
+    const currentMonthsOnly = tenureMonths === "" ? 0 : tenureMonths % 12;
+    if (valStr === "") {
+      setTenureMonths(currentMonthsOnly);
+      return;
+    }
+    const inputYears = Number(valStr);
+    const newTotalMonths = (inputYears * 12) + currentMonthsOnly;
+    const maxMonths = config.calcMaxTenure * 12;
+    const clamped = Math.max(0, Math.min(newTotalMonths, maxMonths));
+    setTenureMonths(clamped);
+  };
+
+  const handleMonthsChange = (valStr: string) => {
+    const currentYearsOnly = tenureMonths === "" ? 0 : Math.floor(tenureMonths / 12);
+    if (valStr === "") {
+      setTenureMonths(currentYearsOnly * 12);
+      return;
+    }
+    const inputMonths = Number(valStr);
+    const newTotalMonths = (currentYearsOnly * 12) + inputMonths;
+    const maxMonths = config.calcMaxTenure * 12;
+    const clamped = Math.max(0, Math.min(newTotalMonths, maxMonths));
+    setTenureMonths(clamped);
+  };
 
   const [emi, setEmi] = useState(0);
   const [totalInterest, setTotalInterest] = useState(0);
@@ -305,10 +353,10 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
   useEffect(() => {
     const P = isNaN(Number(loanAmount)) || Number(loanAmount) < 0 ? 0 : Number(loanAmount);
     const rate = isNaN(Number(interestRate)) || Number(interestRate) < 0 ? 0 : Number(interestRate);
-    const tenure = isNaN(Number(tenureYears)) || Number(tenureYears) <= 0 ? 0 : Number(tenureYears);
+    const tenure = isNaN(Number(tenureMonths)) || Number(tenureMonths) <= 0 ? 0 : Number(tenureMonths);
 
     const r = rate / 12 / 100;
-    const n = tenure * 12;
+    const n = tenure;
 
     if (P === 0 || n === 0) {
       setEmi(0);
@@ -335,7 +383,7 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
         setTotalInterest(Math.round(totalInt));
       }
     }
-  }, [loanAmount, interestRate, tenureYears]);
+  }, [loanAmount, interestRate, tenureMonths]);
 
   // Quick Apply reference
   const topFormRef = useRef<HTMLDivElement>(null);
@@ -769,14 +817,7 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                               type="number"
                               step="0.1"
                               value={loanAmount === "" ? "" : loanAmount / 100000}
-                              onChange={(e) => {
-                                const valStr = e.target.value;
-                                if (valStr === "") {
-                                  setLoanAmount("");
-                                } else {
-                                  setLoanAmount(Number(valStr) * 100000);
-                                }
-                              }}
+                              onChange={(e) => handleAmountChange(e.target.value)}
                               className="w-16 text-right font-extrabold outline-none border-none p-0 bg-transparent text-primary-blue [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                             />
                             <span className="ml-1 text-primary-blue">Lakhs</span>
@@ -811,14 +852,7 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                               type="number"
                               step="0.05"
                               value={interestRate === "" ? "" : interestRate}
-                              onChange={(e) => {
-                                const valStr = e.target.value;
-                                if (valStr === "") {
-                                  setInterestRate("");
-                                } else {
-                                  setInterestRate(Number(valStr));
-                                }
-                              }}
+                              onChange={(e) => handleRateChange(e.target.value)}
                               className="w-14 text-right font-extrabold outline-none border-none p-0 bg-transparent text-primary-blue [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                             />
                             <span className="ml-1 text-primary-blue">%</span>
@@ -844,37 +878,44 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                       <div className="flex flex-col gap-3">
                         <div className="flex justify-between items-center">
                           <span className="text-xs md:text-sm font-bold text-dark-blue">Loan Tenure</span>
-                          <div className="flex items-center bg-white border border-border-color rounded px-3 py-1 text-primary-blue font-extrabold text-sm md:text-base">
-                            <input
-                              type="number"
-                              step="1"
-                              value={tenureYears === "" ? "" : tenureYears}
-                              onChange={(e) => {
-                                const valStr = e.target.value;
-                                if (valStr === "") {
-                                  setTenureYears("");
-                                } else {
-                                  setTenureYears(Number(valStr));
-                                }
-                              }}
-                              className="w-10 text-right font-extrabold outline-none border-none p-0 bg-transparent text-primary-blue [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                            />
-                            <span className="ml-1 text-primary-blue">Years</span>
+                          <div className="flex items-center gap-2">
+                            {/* Years Input */}
+                            <div className="flex items-center bg-white border border-border-color rounded px-2.5 py-1 text-primary-blue font-extrabold text-xs md:text-sm">
+                              <input
+                                type="number"
+                                step="1"
+                                value={tenureMonths === "" ? "" : Math.floor(tenureMonths / 12)}
+                                onChange={(e) => handleYearsChange(e.target.value)}
+                                className="w-8 text-right font-extrabold outline-none border-none p-0 bg-transparent text-primary-blue [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                              />
+                              <span className="ml-1 text-text-gray font-semibold text-[10px]">Yrs</span>
+                            </div>
+                            {/* Months Input */}
+                            <div className="flex items-center bg-white border border-border-color rounded px-2.5 py-1 text-primary-blue font-extrabold text-xs md:text-sm">
+                              <input
+                                type="number"
+                                step="1"
+                                value={tenureMonths === "" ? "" : tenureMonths % 12}
+                                onChange={(e) => handleMonthsChange(e.target.value)}
+                                className="w-8 text-right font-extrabold outline-none border-none p-0 bg-transparent text-primary-blue [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                              />
+                              <span className="ml-1 text-text-gray font-semibold text-[10px]">Mos</span>
+                            </div>
                           </div>
                         </div>
                         <input
                           type="range"
                           min={0}
-                          max={config.calcMaxTenure}
+                          max={config.calcMaxTenure * 12}
                           step={1}
-                          value={tenureYears === "" ? 0 : tenureYears}
-                          onChange={(e) => setTenureYears(Number(e.target.value))}
+                          value={tenureMonths === "" ? 0 : tenureMonths}
+                          onChange={(e) => setTenureMonths(Number(e.target.value))}
                           className="w-full h-1.5 bg-border-color rounded-lg appearance-none cursor-pointer accent-primary-blue"
                         />
                         <div className="flex justify-between text-[10px] text-text-gray font-semibold">
-                          <span>0 Years</span>
-                          <span>{(config.calcMaxTenure / 2).toFixed(1).replace(".0", "")} Years</span>
-                          <span>{config.calcMaxTenure} Years</span>
+                          <span>0 Months</span>
+                          <span>{(config.calcMaxTenure * 12 / 2)} Months ({(config.calcMaxTenure / 2)} Yrs)</span>
+                          <span>{config.calcMaxTenure * 12} Months ({config.calcMaxTenure} Yrs)</span>
                         </div>
                       </div>
                     </div>
