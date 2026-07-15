@@ -71,11 +71,11 @@ export default function About() {
             className="bg-white border border-border-color rounded-card p-8 shadow-premium flex flex-col gap-5"
           >
             <div className="w-12 h-12 bg-primary-blue/8 rounded-lg flex items-center justify-center">
-              <svg viewBox="0 0 24 24" className="w-6 h-6 text-primary-blue fill-current"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" /></svg>
+              <svg viewBox="0 0 24 24" className="w-6 h-6 text-primary-blue fill-current"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" /></svg>
             </div>
-            <h3 className="font-extrabold text-xl text-dark-blue">Our Mission</h3>
+            <h3 className="font-extrabold text-xl text-dark-blue">Our Vision</h3>
             <p className="text-text-gray text-sm leading-relaxed">
-              At EazyKredit, our mission is to simplify the borrowing journey by connecting customers with the most suitable loan products from leading Banks and NBFCs. We are committed to providing transparent advice, quick processing, competitive loan options, and exceptional customer service while building long-term relationships based on trust, integrity, and excellence.
+              To empower individuals and businesses with the right financial solutions, enabling them to achieve their dreams through seamless, ethical, and customer-first lending services
             </p>
           </motion.div>
 
@@ -86,11 +86,11 @@ export default function About() {
             className="bg-white border border-border-color rounded-card p-8 shadow-premium flex flex-col gap-5"
           >
             <div className="w-12 h-12 bg-primary-blue/8 rounded-lg flex items-center justify-center">
-              <svg viewBox="0 0 24 24" className="w-6 h-6 text-primary-blue fill-current"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" /></svg>
+              <svg viewBox="0 0 24 24" className="w-6 h-6 text-primary-blue fill-current"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" /></svg>
             </div>
-            <h3 className="font-extrabold text-xl text-dark-blue">Our Vision</h3>
+            <h3 className="font-extrabold text-xl text-dark-blue">Our Mission</h3>
             <p className="text-text-gray text-sm leading-relaxed">
-              To empower individuals and businesses with the right financial solutions, enabling them to achieve their dreams through seamless, ethical, and customer-first lending services
+              At EazyKredit, our mission is to simplify the borrowing journey by connecting customers with the most suitable loan products from leading Banks and NBFCs. We are committed to providing transparent advice, quick processing, competitive loan options, and exceptional customer service while building long-term relationships based on trust, integrity, and excellence.
             </p>
           </motion.div>
         </div>
