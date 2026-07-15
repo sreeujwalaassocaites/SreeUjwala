@@ -10,7 +10,7 @@ const loanProducts = [
     title: "Home Loans",
     desc: "Make Your Dream Home a Reality",
     slug: "home-loan",
-    image: "/assets/loans/home-loan-feature.png",
+    image: "/assets/loans/HH.png",
   },
   {
     title: "Business Loans",

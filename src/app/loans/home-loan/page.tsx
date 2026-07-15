@@ -48,7 +48,7 @@ const homeLoanConfig: ProductConfig = {
     "Zero Prepayment Penalty : No foreclosure charges on floating-rate home loans per RBI norms",
     "Balance Transfer Facility : Move your existing high-rate home loan to a lower-rate lender seamlessly"
   ],
-  illustrationImage: "/assets/loans/home-loan-feature.png",
+  illustrationImage: "/assets/loans/HH.png",
   eligibilitySalaried: [
     "Employment: Minimum 2 years of continuous work experience with 1 year at current employer.",
     "Income: Net monthly salary of ₹25,000 or above.",
