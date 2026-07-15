@@ -784,7 +784,7 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                         </div>
                         <input
                           type="range"
-                          min={config.calcMinAmount}
+                          min={0}
                           max={config.calcMaxAmount}
                           step={50000}
                           value={loanAmount === "" ? 0 : loanAmount}
@@ -792,8 +792,13 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                           className="w-full h-1.5 bg-border-color rounded-lg appearance-none cursor-pointer accent-primary-blue"
                         />
                         <div className="flex justify-between text-[10px] text-text-gray font-semibold">
-                          <span>₹ {config.calcMinAmount / 100000} Lakhs</span>
-                          <span>₹ {config.calcMaxAmount / 10000000} Crore</span>
+                          <span>₹ 0</span>
+                          <span>₹ {(config.calcMaxAmount / 2 / 100000).toFixed(0)} Lakhs</span>
+                          <span>
+                            {config.calcMaxAmount >= 10000000
+                              ? `₹ ${(config.calcMaxAmount / 10000000).toFixed(1)} Crore`
+                              : `₹ ${config.calcMaxAmount / 100000} Lakhs`}
+                          </span>
                         </div>
                       </div>
 
@@ -821,16 +826,17 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                         </div>
                         <input
                           type="range"
-                          min={5}
+                          min={0}
                           max={20}
                           step={0.05}
-                          value={interestRate === "" ? 5 : interestRate}
+                          value={interestRate === "" ? 0 : interestRate}
                           onChange={(e) => setInterestRate(Number(e.target.value))}
                           className="w-full h-1.5 bg-border-color rounded-lg appearance-none cursor-pointer accent-primary-blue"
                         />
                         <div className="flex justify-between text-[10px] text-text-gray font-semibold">
-                          <span>5.0%</span>
-                          <span>20.0%</span>
+                          <span>0%</span>
+                          <span>10%</span>
+                          <span>20%</span>
                         </div>
                       </div>
 
@@ -858,7 +864,7 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                         </div>
                         <input
                           type="range"
-                          min={config.calcMinTenure}
+                          min={0}
                           max={config.calcMaxTenure}
                           step={1}
                           value={tenureYears === "" ? 0 : tenureYears}
@@ -866,7 +872,8 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                           className="w-full h-1.5 bg-border-color rounded-lg appearance-none cursor-pointer accent-primary-blue"
                         />
                         <div className="flex justify-between text-[10px] text-text-gray font-semibold">
-                          <span>{config.calcMinTenure} Year</span>
+                          <span>0 Years</span>
+                          <span>{(config.calcMaxTenure / 2).toFixed(1).replace(".0", "")} Years</span>
                           <span>{config.calcMaxTenure} Years</span>
                         </div>
                       </div>
