@@ -36,7 +36,7 @@ export default function About() {
       <section className="relative py-24 overflow-hidden">
         {/* Background image */}
         <img
-          src="/about_backgound.png"
+          src="/about.jpeg"
           alt="About background"
           className="absolute inset-0 w-full h-full object-cover object-center"
         />
