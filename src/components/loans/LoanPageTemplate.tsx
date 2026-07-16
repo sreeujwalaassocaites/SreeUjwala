@@ -256,13 +256,13 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
   const [tenureUnit, setTenureUnit] = useState<"years" | "months">("years");
 
   const [amountInput, setAmountInput] = useState<string>(
-    config.calcDefaultAmount === "" ? "" : String(config.calcDefaultAmount / 100000)
+    config.calcDefaultAmount ? config.calcDefaultAmount.toLocaleString("en-IN") : ""
   );
   const [rateInput, setRateInput] = useState<string>(
-    config.calcDefaultRate === "" ? "" : String(config.calcDefaultRate)
+    config.calcDefaultRate ? String(config.calcDefaultRate) : ""
   );
   const [tenureInput, setTenureInput] = useState<string>(
-    config.calcDefaultTenure === "" ? "" : String(config.calcDefaultTenure)
+    config.calcDefaultTenure ? String(config.calcDefaultTenure) : ""
   );
 
   const [emi, setEmi] = useState(0);
@@ -272,7 +272,8 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
   // Keep text inputs synchronized when states change (e.g. from slider)
   useEffect(() => {
     if (loanAmount !== "") {
-      setAmountInput(String(loanAmount / 100000));
+      const isFocused = typeof document !== "undefined" && document.activeElement?.id === "loan-amount-input";
+      setAmountInput(isFocused ? String(loanAmount) : loanAmount.toLocaleString("en-IN"));
     } else {
       setAmountInput("");
     }
@@ -296,43 +297,59 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
 
   // Handle manual input changes with clamping limits
   const handleAmountChange = (valStr: string) => {
-    const cleanVal = valStr.replace(/[^0-9.]/g, "");
+    const cleanVal = valStr.replace(/[^0-9]/g, "");
     setAmountInput(cleanVal);
     
     if (cleanVal === "") {
       setLoanAmount("");
     } else {
-      const valLakhs = Number(cleanVal);
-      if (!isNaN(valLakhs)) {
-        const valRupees = valLakhs * 100000;
-        const clamped = Math.max(0, Math.min(valRupees, config.calcMaxAmount));
-        setLoanAmount(clamped);
-      }
+      const num = Number(cleanVal);
+      setLoanAmount(num);
     }
   };
 
   const handleAmountBlur = () => {
     if (loanAmount !== "") {
-      setAmountInput(String(loanAmount / 100000));
+      const clamped = Math.max(0, Math.min(Number(loanAmount), config.calcMaxAmount));
+      setLoanAmount(clamped);
+      setAmountInput(clamped.toLocaleString("en-IN"));
+    } else {
+      setLoanAmount(0);
+      setAmountInput("0");
+    }
+  };
+
+  const handleAmountFocus = () => {
+    if (loanAmount !== "") {
+      setAmountInput(String(loanAmount));
     }
   };
 
   const handleRateChange = (valStr: string) => {
     const cleanVal = valStr.replace(/[^0-9.]/g, "");
-    setRateInput(cleanVal);
+    const parts = cleanVal.split(".");
+    const formattedVal = parts[0] + (parts.length > 1 ? "." + parts.slice(1).join("") : "");
+    setRateInput(formattedVal);
     
-    if (cleanVal === "") {
+    if (formattedVal === "" || formattedVal === ".") {
       setInterestRate("");
     } else {
-      const val = Number(cleanVal);
-      if (!isNaN(val)) {
-        const clamped = Math.max(0, Math.min(val, 20));
-        setInterestRate(clamped);
-      }
+      setInterestRate(Number(formattedVal));
     }
   };
 
   const handleRateBlur = () => {
+    if (interestRate !== "") {
+      const clamped = Math.max(0, Math.min(Number(interestRate), 20));
+      setInterestRate(clamped);
+      setRateInput(String(clamped));
+    } else {
+      setInterestRate(0);
+      setRateInput("0");
+    }
+  };
+
+  const handleRateFocus = () => {
     if (interestRate !== "") {
       setRateInput(String(interestRate));
     }
@@ -345,16 +362,23 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
     if (cleanVal === "") {
       setTenureValue("");
     } else {
-      const val = Number(cleanVal);
-      if (!isNaN(val)) {
-        const maxLimit = tenureUnit === "years" ? config.calcMaxTenure : config.calcMaxTenure * 12;
-        const clamped = Math.max(0, Math.min(val, maxLimit));
-        setTenureValue(clamped);
-      }
+      setTenureValue(Number(cleanVal));
     }
   };
 
   const handleTenureBlur = () => {
+    if (tenureValue !== "") {
+      const maxLimit = tenureUnit === "years" ? config.calcMaxTenure : config.calcMaxTenure * 12;
+      const clamped = Math.max(0, Math.min(Number(tenureValue), maxLimit));
+      setTenureValue(clamped);
+      setTenureInput(String(clamped));
+    } else {
+      setTenureValue(0);
+      setTenureInput("0");
+    }
+  };
+
+  const handleTenureFocus = () => {
     if (tenureValue !== "") {
       setTenureInput(String(tenureValue));
     }
@@ -398,6 +422,49 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
       }
     }
   }, [loanAmount, interestRate, tenureValue, tenureUnit]);
+
+  // Sticky sub-nav tabs definitions
+  const tabs = [
+    { id: "overview", label: "Overview" },
+    { id: "features", label: "Key Features" },
+    { id: "calculator", label: "Calculator" },
+    { id: "eligibility", label: "Eligibility Criteria" },
+    { id: "documentation", label: "Documentation" },
+    { id: "process", label: "How to Apply" },
+    { id: "faqs", label: "FAQs" }
+  ];
+
+  const tabRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({});
+  const tabContainerRef = useRef<HTMLDivElement>(null);
+
+  // When a tab is clicked, switch view and scroll slightly to center the view
+  const handleTabClick = (id: string) => {
+    setActiveSection(id);
+
+    // Smooth scroll the viewport so that the sticky tab bar sits at the top
+    if (tabContainerRef.current) {
+      const rect = tabContainerRef.current.getBoundingClientRect();
+      const offset = 80; // Offset for main header height
+      const targetY = rect.top + window.scrollY - offset;
+
+      window.scrollTo({
+        top: targetY,
+        behavior: "smooth"
+      });
+    }
+  };
+
+  // Scroll active tab BUTTON into horizontal view only when tab bar is already visible
+  useEffect(() => {
+    const activeBtn = tabRefs.current[activeSection];
+    const container = tabContainerRef.current;
+    if (!activeBtn || !container) return;
+    const rect = container.getBoundingClientRect();
+    // Only scroll the button into view if the tab bar is currently on screen
+    if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+      activeBtn.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    }
+  }, [activeSection]);
 
   // Quick Apply reference
   const topFormRef = useRef<HTMLDivElement>(null);
@@ -827,13 +894,14 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                           <div className="flex items-center bg-white border border-border-color rounded px-3 py-1 text-primary-blue font-extrabold text-sm md:text-base">
                             <span className="mr-1 text-text-gray font-semibold">₹</span>
                             <input
+                              id="loan-amount-input"
                               type="text"
                               value={amountInput}
                               onChange={(e) => handleAmountChange(e.target.value)}
+                              onFocus={handleAmountFocus}
                               onBlur={handleAmountBlur}
-                              className="w-16 text-right font-extrabold outline-none border-none p-0 bg-transparent text-primary-blue focus:ring-0 focus:outline-none"
+                              className="w-28 text-right font-extrabold outline-none border-none p-0 bg-transparent text-primary-blue focus:ring-0 focus:outline-none"
                             />
-                            <span className="ml-1 text-primary-blue">Lakhs</span>
                           </div>
                         </div>
                         <input
@@ -865,6 +933,7 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                               type="text"
                               value={rateInput}
                               onChange={(e) => handleRateChange(e.target.value)}
+                              onFocus={handleRateFocus}
                               onBlur={handleRateBlur}
                               className="w-14 text-right font-extrabold outline-none border-none p-0 bg-transparent text-primary-blue focus:ring-0 focus:outline-none"
                             />
@@ -897,6 +966,7 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                                 type="text"
                                 value={tenureInput}
                                 onChange={(e) => handleTenureChange(e.target.value)}
+                                onFocus={handleTenureFocus}
                                 onBlur={handleTenureBlur}
                                 className="w-12 text-right font-extrabold outline-none border-none p-0 bg-transparent text-primary-blue focus:ring-0 focus:outline-none"
                               />

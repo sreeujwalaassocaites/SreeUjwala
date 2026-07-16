@@ -8,10 +8,19 @@ import { motion, AnimatePresence } from "framer-motion";
 import { AlertCircle, CheckCircle2, RefreshCw } from "lucide-react";
 
 const schema = zod.object({
-  fullName: zod.string().min(3, "Name must be at least 3 characters"),
-  mobileNumber: zod.string().regex(/^[6-9]\d{9}$/, "Enter a valid 10-digit Indian mobile number"),
-  email: zod.string().email("Enter a valid email address"),
-  city: zod.string().min(2, "Enter your city"),
+  fullName: zod.string()
+    .min(3, "Name must be at least 3 characters")
+    .regex(/^[A-Za-z\s]+$/, "Name can only contain letters and spaces")
+    .refine((val) => val.trim().length >= 3, "Name must contain at least 3 non-space characters"),
+  mobileNumber: zod.string()
+    .regex(/^\d{10}$/, "Please enter a valid 10-digit mobile number"),
+  email: zod.string()
+    .trim()
+    .toLowerCase()
+    .email("Enter a valid email address"),
+  city: zod.string()
+    .min(2, "Enter your city")
+    .refine((val) => val.trim().length >= 2, "City name must be valid"),
 });
 
 type QuickFormData = zod.infer<typeof schema>;
@@ -74,7 +83,11 @@ export default function QuickApplyForm({ loanType }: QuickApplyFormProps) {
                 className={`w-full px-3.5 py-2.5 rounded-btn border text-xs text-gray-900 bg-white outline-none transition-all ${
                   errors.fullName ? "border-red-500" : "border-border-color focus:border-primary-blue"
                 }`}
-                {...register("fullName")}
+                {...register("fullName", {
+                  onChange: (e) => {
+                    e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, "");
+                  }
+                })}
               />
               {errors.fullName && (
                 <span className="text-red-500 text-[10px] font-bold flex items-center gap-1">
@@ -92,7 +105,11 @@ export default function QuickApplyForm({ loanType }: QuickApplyFormProps) {
                 className={`w-full px-3.5 py-2.5 rounded-btn border text-xs text-gray-900 bg-white outline-none transition-all ${
                   errors.mobileNumber ? "border-red-500" : "border-border-color focus:border-primary-blue"
                 }`}
-                {...register("mobileNumber")}
+                {...register("mobileNumber", {
+                  onChange: (e) => {
+                    e.target.value = e.target.value.replace(/[^0-9]/g, "").slice(0, 10);
+                  }
+                })}
               />
               {errors.mobileNumber && (
                 <span className="text-red-500 text-[10px] font-bold flex items-center gap-1">
@@ -110,7 +127,11 @@ export default function QuickApplyForm({ loanType }: QuickApplyFormProps) {
                 className={`w-full px-3.5 py-2.5 rounded-btn border text-xs text-gray-900 bg-white outline-none transition-all ${
                   errors.email ? "border-red-500" : "border-border-color focus:border-primary-blue"
                 }`}
-                {...register("email")}
+                {...register("email", {
+                  onChange: (e) => {
+                    e.target.value = e.target.value.trim();
+                  }
+                })}
               />
               {errors.email && (
                 <span className="text-red-500 text-[10px] font-bold flex items-center gap-1">
@@ -128,7 +149,11 @@ export default function QuickApplyForm({ loanType }: QuickApplyFormProps) {
                 className={`w-full px-3.5 py-2.5 rounded-btn border text-xs text-gray-900 bg-white outline-none transition-all ${
                   errors.city ? "border-red-500" : "border-border-color focus:border-primary-blue"
                 }`}
-                {...register("city")}
+                {...register("city", {
+                  onChange: (e) => {
+                    e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, "");
+                  }
+                })}
               />
               {errors.city && (
                 <span className="text-red-500 text-[10px] font-bold flex items-center gap-1">

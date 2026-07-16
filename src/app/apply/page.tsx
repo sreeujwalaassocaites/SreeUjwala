@@ -11,10 +11,19 @@ import { UploadCloud, CheckCircle2, ChevronRight, AlertCircle, RefreshCw } from 
 
 // Zod Validation Schema
 const schema = zod.object({
-  fullName: zod.string().min(3, "Full Name must be at least 3 characters"),
-  mobileNumber: zod.string().regex(/^[6-9]\d{9}$/, "Please enter a valid 10-digit Indian mobile number"),
-  email: zod.string().email("Please enter a valid email address"),
-  city: zod.string().min(2, "Please enter your city"),
+  fullName: zod.string()
+    .min(3, "Full Name must be at least 3 characters")
+    .regex(/^[A-Za-z\s]+$/, "Name can only contain letters and spaces")
+    .refine((val) => val.trim().length >= 3, "Name must contain at least 3 non-space characters"),
+  mobileNumber: zod.string()
+    .regex(/^\d{10}$/, "Please enter a valid 10-digit mobile number"),
+  email: zod.string()
+    .trim()
+    .toLowerCase()
+    .email("Please enter a valid email address"),
+  city: zod.string()
+    .min(2, "Please enter your city")
+    .refine((val) => val.trim().length >= 2, "City name must be valid"),
   employmentType: zod.string().min(1, "Please select employment type"),
   loanType: zod.string().min(1, "Please select a loan type"),
   monthlyIncome: zod.number().min(1000, "Monthly Income must be at least ₹1,000"),
@@ -144,7 +153,11 @@ function ApplyFormContent() {
                       className={`w-full px-4 py-3 rounded-btn border text-sm outline-none transition-all ${
                         errors.fullName ? "border-red-500 focus:ring-4 focus:ring-red-100" : "border-border-color focus:border-primary-blue focus:ring-4 focus:ring-primary-blue/10"
                       }`}
-                      {...register("fullName")}
+                      {...register("fullName", {
+                        onChange: (e) => {
+                          e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, "");
+                        }
+                      })}
                     />
                     {errors.fullName && (
                       <span className="text-red-500 text-xs font-bold flex items-center gap-1">
@@ -162,7 +175,11 @@ function ApplyFormContent() {
                       className={`w-full px-4 py-3 rounded-btn border text-sm outline-none transition-all ${
                         errors.mobileNumber ? "border-red-500 focus:ring-4 focus:ring-red-100" : "border-border-color focus:border-primary-blue focus:ring-4 focus:ring-primary-blue/10"
                       }`}
-                      {...register("mobileNumber")}
+                      {...register("mobileNumber", {
+                        onChange: (e) => {
+                          e.target.value = e.target.value.replace(/[^0-9]/g, "").slice(0, 10);
+                        }
+                      })}
                     />
                     {errors.mobileNumber && (
                       <span className="text-red-500 text-xs font-bold flex items-center gap-1">
@@ -180,7 +197,11 @@ function ApplyFormContent() {
                       className={`w-full px-4 py-3 rounded-btn border text-sm outline-none transition-all ${
                         errors.email ? "border-red-500 focus:ring-4 focus:ring-red-100" : "border-border-color focus:border-primary-blue focus:ring-4 focus:ring-primary-blue/10"
                       }`}
-                      {...register("email")}
+                      {...register("email", {
+                        onChange: (e) => {
+                          e.target.value = e.target.value.trim();
+                        }
+                      })}
                     />
                     {errors.email && (
                       <span className="text-red-500 text-xs font-bold flex items-center gap-1">
@@ -198,7 +219,11 @@ function ApplyFormContent() {
                       className={`w-full px-4 py-3 rounded-btn border text-sm outline-none transition-all ${
                         errors.city ? "border-red-500 focus:ring-4 focus:ring-red-100" : "border-border-color focus:border-primary-blue focus:ring-4 focus:ring-primary-blue/10"
                       }`}
-                      {...register("city")}
+                      {...register("city", {
+                        onChange: (e) => {
+                          e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, "");
+                        }
+                      })}
                     />
                     {errors.city && (
                       <span className="text-red-500 text-xs font-bold flex items-center gap-1">
@@ -283,7 +308,7 @@ function ApplyFormContent() {
 
                 {/* Message */}
                 <div className="flex flex-col gap-2">
-                  <label className="text-sm font-bold text-text-dark">Message / Specific Requirements</label>
+                  <label className="text-sm font-bold text-text-dark">Message / Specific Requirements (Optional)</label>
                   <textarea 
                     rows={4}
                     placeholder="Provide additional details..." 

@@ -9,10 +9,17 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MapPin, Phone, Mail, Clock, AlertCircle, CheckCircle2, RefreshCw } from "lucide-react";
 
 const schema = zod.object({
-  name: zod.string().min(3, "Name must be at least 3 characters"),
-  phone: zod.string().regex(/^[6-9]\d{9}$/, "Please enter a 10-digit mobile number"),
-  email: zod.string().email("Please enter a valid email address"),
-  message: zod.string().min(5, "Message must contain some details")
+  name: zod.string()
+    .min(3, "Name must be at least 3 characters")
+    .regex(/^[A-Za-z\s]+$/, "Name can only contain letters and spaces")
+    .refine((val) => val.trim().length >= 3, "Name must contain at least 3 non-space characters"),
+  phone: zod.string()
+    .regex(/^\d{10}$/, "Please enter a valid 10-digit mobile number"),
+  email: zod.string()
+    .trim()
+    .toLowerCase()
+    .email("Please enter a valid email address"),
+  message: zod.string().optional()
 });
 
 type ContactFormData = zod.infer<typeof schema>;
@@ -28,15 +35,19 @@ export default function Contact() {
   const onSubmit = (data: ContactFormData) => {
     setIsSubmitting(true);
 
-    // Simulating API submit
+    const whatsappBase = "https://wa.me/919885011157";
+    const messagePart = data.message ? `\nMessage: ${data.message}` : "";
+    const waText = `Hello EAZYKREDIT,\n\nI have a contact inquiry:\nName: ${data.name}\nPhone: ${data.phone}\nEmail: ${data.email}${messagePart}\n\nPlease get back to me.`;
+    const fullWaUrl = `${whatsappBase}?text=${encodeURIComponent(waText)}`;
+
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSuccess(true);
       reset();
 
       setTimeout(() => {
-        setIsSuccess(false);
-      }, 5000);
+        window.open(fullWaUrl, "_blank");
+      }, 2500);
     }, 1200);
   };
 
@@ -131,7 +142,11 @@ export default function Contact() {
                         placeholder="Enter full name"
                         className={`w-full px-4 py-3 rounded-btn border text-sm outline-none transition-all ${errors.name ? "border-red-500 focus:ring-4 focus:ring-red-100" : "border-border-color focus:border-primary-blue focus:ring-4 focus:ring-primary-blue/10"
                           }`}
-                        {...register("name")}
+                        {...register("name", {
+                          onChange: (e) => {
+                            e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, "");
+                          }
+                        })}
                       />
                       {errors.name && (
                         <span className="text-red-500 text-xs font-bold flex items-center gap-1">
@@ -148,7 +163,11 @@ export default function Contact() {
                         placeholder="10-digit number"
                         className={`w-full px-4 py-3 rounded-btn border text-sm outline-none transition-all ${errors.phone ? "border-red-500 focus:ring-4 focus:ring-red-100" : "border-border-color focus:border-primary-blue focus:ring-4 focus:ring-primary-blue/10"
                           }`}
-                        {...register("phone")}
+                        {...register("phone", {
+                          onChange: (e) => {
+                            e.target.value = e.target.value.replace(/[^0-9]/g, "").slice(0, 10);
+                          }
+                        })}
                       />
                       {errors.phone && (
                         <span className="text-red-500 text-xs font-bold flex items-center gap-1">
@@ -166,7 +185,11 @@ export default function Contact() {
                       placeholder="name@example.com"
                       className={`w-full px-4 py-3 rounded-btn border text-sm outline-none transition-all ${errors.email ? "border-red-500 focus:ring-4 focus:ring-red-100" : "border-border-color focus:border-primary-blue focus:ring-4 focus:ring-primary-blue/10"
                         }`}
-                      {...register("email")}
+                      {...register("email", {
+                        onChange: (e) => {
+                          e.target.value = e.target.value.trim();
+                        }
+                      })}
                     />
                     {errors.email && (
                       <span className="text-red-500 text-xs font-bold flex items-center gap-1">
@@ -177,19 +200,13 @@ export default function Contact() {
 
                   {/* Message */}
                   <div className="flex flex-col gap-2">
-                    <label className="text-sm font-bold text-text-dark">Your Message *</label>
+                    <label className="text-sm font-bold text-text-dark">Your Message (Optional)</label>
                     <textarea
                       rows={4}
                       placeholder="Write your query details here..."
-                      className={`w-full px-4 py-3 rounded-btn border text-sm outline-none resize-y transition-all ${errors.message ? "border-red-500 focus:ring-4 focus:ring-red-100" : "border-border-color focus:border-primary-blue focus:ring-4 focus:ring-primary-blue/10"
-                        }`}
+                      className="w-full px-4 py-3 rounded-btn border border-border-color text-sm outline-none resize-y transition-all focus:border-primary-blue focus:ring-4 focus:ring-primary-blue/10"
                       {...register("message")}
                     />
-                    {errors.message && (
-                      <span className="text-red-500 text-xs font-bold flex items-center gap-1">
-                        <AlertCircle className="w-3.5 h-3.5" /> {errors.message.message}
-                      </span>
-                    )}
                   </div>
 
                   <button
