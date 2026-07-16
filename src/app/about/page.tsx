@@ -49,12 +49,11 @@ export default function About() {
             viewport={{ once: true }}
             className="max-w-xl bg-white/80 backdrop-blur-sm rounded-2xl p-8 flex flex-col gap-6"
           >
-            <span className="font-extrabold text-xs text-primary-blue uppercase tracking-wider">EAZYKREDIT Advisory</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-dark-blue">Your Trusted Loan Partner Across India</h2>
-            <p className="text-text-gray font-medium leading-relaxed text-sm md:text-base">
+            <h2 className="text-3xl md:text-4xl font-bold text-dark-blue">About Us</h2>
+            <p className="text-text-gray font-medium leading-relaxed text-base md:text-lg">
               EazyKredit is a trusted loan distribution partner dedicated to making financing simple, fast, and transparent. With 15+ years of Banking and NBFC expertise, we help individuals and businesses find the right loan solutions from leading Banks and NBFCs. From consultation to disbursement, our team provides personalized guidance, competitive loan options, and end-to-end support to ensure a smooth borrowing experience.
             </p>
-            <p className="text-text-gray font-medium leading-relaxed text-sm md:text-base">
+            <p className="text-text-gray font-medium leading-relaxed text-base md:text-lg">
               At EazyKredit, we don't just process loans—we help you make the right financial decisions with confidence.
             </p>
           </motion.div>
