@@ -299,7 +299,7 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
   const handleAmountChange = (valStr: string) => {
     const cleanVal = valStr.replace(/[^0-9]/g, "");
     setAmountInput(cleanVal);
-    
+
     if (cleanVal === "") {
       setLoanAmount("");
     } else {
@@ -330,7 +330,7 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
     const parts = cleanVal.split(".");
     const formattedVal = parts[0] + (parts.length > 1 ? "." + parts.slice(1).join("") : "");
     setRateInput(formattedVal);
-    
+
     if (formattedVal === "" || formattedVal === ".") {
       setInterestRate("");
     } else {
@@ -358,7 +358,7 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
   const handleTenureChange = (valStr: string) => {
     const cleanVal = valStr.replace(/[^0-9]/g, "");
     setTenureInput(cleanVal);
-    
+
     if (cleanVal === "") {
       setTenureValue("");
     } else {
@@ -407,7 +407,7 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
       setTotalInterest(0);
     } else {
       const calculatedEmi = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-      
+
       if (isNaN(calculatedEmi) || !isFinite(calculatedEmi)) {
         setEmi(0);
         setTotalPayable(0);
@@ -913,15 +913,6 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                           onChange={(e) => setLoanAmount(Number(e.target.value))}
                           className="w-full h-1.5 bg-border-color rounded-lg appearance-none cursor-pointer accent-primary-blue"
                         />
-                        <div className="flex justify-between text-[10px] text-text-gray font-semibold">
-                          <span>₹ 0</span>
-                          <span>₹ {(config.calcMaxAmount / 2 / 100000).toFixed(0)} Lakhs</span>
-                          <span>
-                            {config.calcMaxAmount >= 10000000
-                              ? `₹ ${(config.calcMaxAmount / 10000000).toFixed(1)} Crore`
-                              : `₹ ${config.calcMaxAmount / 100000} Lakhs`}
-                          </span>
-                        </div>
                       </div>
 
                       {/* Slider 2: Interest Rate */}
@@ -949,11 +940,6 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                           onChange={(e) => setInterestRate(Number(e.target.value))}
                           className="w-full h-1.5 bg-border-color rounded-lg appearance-none cursor-pointer accent-primary-blue"
                         />
-                        <div className="flex justify-between text-[10px] text-text-gray font-semibold">
-                          <span>0%</span>
-                          <span>10%</span>
-                          <span>20%</span>
-                        </div>
                       </div>
 
                       {/* Slider 3: Loan Tenure */}
@@ -1000,20 +986,6 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                           onChange={(e) => setTenureValue(Number(e.target.value))}
                           className="w-full h-1.5 bg-border-color rounded-lg appearance-none cursor-pointer accent-primary-blue"
                         />
-                        <div className="flex justify-between text-[10px] text-text-gray font-semibold">
-                          <span>0</span>
-                          {tenureUnit === "years" ? (
-                            <>
-                              <span>{Math.round(config.calcMaxTenure / 2)} Years</span>
-                              <span>{config.calcMaxTenure} Years</span>
-                            </>
-                          ) : (
-                            <>
-                              <span>{Math.round(config.calcMaxTenure * 12 / 2)} Months</span>
-                              <span>{config.calcMaxTenure * 12} Months</span>
-                            </>
-                          )}
-                        </div>
                       </div>
                     </div>
 
