@@ -184,7 +184,7 @@ export default function Home() {
       <section id="partner-banks" className="py-16 bg-gradient-to-br from-[#0B4F9F] via-[#1565C0] to-[#1E88E5]">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h2 className="text-2xl font-extrabold text-white mb-10 uppercase tracking-wide">
-            OUR PARTNER BANKS.
+            OUR PARTNERED BANKS
           </h2>
           {/* Scrolling marquee strip */}
           <div className="relative overflow-hidden">

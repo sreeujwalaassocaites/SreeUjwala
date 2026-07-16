@@ -829,7 +829,7 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                                       {row.name}
                                     </span>
                                     {row.isNbfc && (
-                                      <span className="bg-[#CE0101]/10 text-[#CE0101] font-bold text-[9px] px-1.5 py-0.5 rounded w-max mt-0.5 uppercase tracking-wide">
+                                      <span className="bg-primary-blue/10 text-primary-blue font-bold text-[9px] px-1.5 py-0.5 rounded w-max mt-0.5 uppercase tracking-wide">
                                         NBFC
                                       </span>
                                     )}
@@ -851,7 +851,7 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                                   </button>
                                   <button
                                     onClick={scrollToForm}
-                                    className="w-full bg-[#CE0101] text-white hover:bg-[#b00101] px-3 py-1.5 rounded-btn text-xs font-bold transition-all shrink-0 cursor-pointer text-center whitespace-nowrap flex items-center justify-center gap-1"
+                                    className="w-full bg-primary-blue text-white hover:bg-dark-blue px-3 py-1.5 rounded-btn text-xs font-bold transition-all shrink-0 cursor-pointer text-center whitespace-nowrap flex items-center justify-center gap-1"
                                   >
                                     Apply Now <ArrowRight className="w-3.5 h-3.5" />
                                   </button>
@@ -1145,8 +1145,8 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start mt-4">
                     {/* Salaried Individuals Column */}
                     <div className="bg-white border border-border-color p-6 md:p-8 rounded-card shadow-premium flex flex-col gap-6 text-left">
-                      <h3 className="font-extrabold text-lg text-[#CE0101] border-b border-border-color pb-3 flex items-center gap-2">
-                        <FileText className="w-5 h-5 text-[#CE0101]" />
+                      <h3 className="font-extrabold text-lg text-primary-blue border-b border-border-color pb-3 flex items-center gap-2">
+                        <FileText className="w-5 h-5 text-primary-blue" />
                         {config.documentsSalariedTitle || "Salaried Individuals"}
                       </h3>
                       <ul className="flex flex-col gap-3">
