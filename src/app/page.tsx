@@ -153,7 +153,7 @@ export default function Home() {
       <section className="py-16 bg-gradient-to-br from-[#e8f0fe] via-[#f0f6ff] to-[#dbeafe]">
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-2xl font-extrabold text-[#0F172A] text-center mb-10 uppercase tracking-wide">
-            WHY CHOOSE US.
+            WHY CHOOSE US
           </h2>
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-[#E2E8F0] p-8 md:p-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
             {/* Left */}
@@ -161,7 +161,7 @@ export default function Home() {
               <h3 className="text-xl md:text-2xl font-extrabold text-[#0F172A] leading-snug mb-4">
                 Banking Expertise.<br />
                 Trusted Advice. Better<br />
-                Financial Decisions.
+                Financial Decisions
               </h3>
               <p className="text-[#64748B] text-sm leading-relaxed">
                 Empowering individuals and businesses with expert financial guidance, trusted banking partnerships, and exceptional customer service.
