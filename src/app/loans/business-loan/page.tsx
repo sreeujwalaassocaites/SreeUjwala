@@ -9,10 +9,10 @@ const businessLoanConfig: ProductConfig = {
   interestRateText: "Dynamic (Market Linked)",
   maxRepaymentTenure: "36 Months",
   heroFeatures: [
-    "Dynamic interest rates based on market profile",
-    "Loan amounts from ₹10 Lakhs to ₹10 Crore",
+    "Competitive Interest Rates Aligned with Market Trends",
+    "Loan amounts starts from ₹10 Lakhs",
     "Repayment tenure up to 36 months (extendable to 5 years)",
-    "Processing fees up to 2% of loan amount"
+    "Minimal processing Fees"
   ],
   whyChooseUsFeatures: [
     {

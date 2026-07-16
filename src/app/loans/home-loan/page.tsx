@@ -9,10 +9,10 @@ const homeLoanConfig: ProductConfig = {
   interestRateText: "Dynamic (Market Linked)",
   maxRepaymentTenure: "30 Years",
   heroFeatures: [
-    "Dynamic interest rates based on market standards",
+    "Competitive Interest Rates Aligned with Market Trends",
     "Up to 90% of property value funded",
     "Repayment tenure up to 30 years",
-    "Processing fees as low as 0.25%"
+    "Minimal processing Fees"
   ],
   whyChooseUsFeatures: [
     {

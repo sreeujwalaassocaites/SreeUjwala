@@ -47,7 +47,7 @@ function Counter({ target, duration = 1.5 }: { target: number; duration?: number
       viewport={{ once: true }}
       onViewportEnter={() => {
         if (!mounted) return;
-        
+
         let start = 0;
         const end = target;
         if (start === end) return;
@@ -76,80 +76,80 @@ function Counter({ target, duration = 1.5 }: { target: number; duration?: number
 // --- Bank Logos Mapping ---
 const bankLogos: { [key: string]: React.ReactNode } = {
   "HDFC BANK": (
-    <img 
-      src="/assets/banks/hdfc.png" 
-      alt="HDFC Bank" 
-      className="max-h-8 max-w-[120px] w-auto h-auto object-contain shrink-0" 
+    <img
+      src="/assets/banks/hdfc.png"
+      alt="HDFC Bank"
+      className="max-h-8 max-w-[120px] w-auto h-auto object-contain shrink-0"
     />
   ),
   "STATE BANK OF INDIA": (
-    <img 
-      src="/assets/banks/sbi.png" 
-      alt="SBI" 
-      className="max-h-8 max-w-[120px] w-auto h-auto object-contain shrink-0" 
+    <img
+      src="/assets/banks/sbi.png"
+      alt="SBI"
+      className="max-h-8 max-w-[120px] w-auto h-auto object-contain shrink-0"
     />
   ),
   "AXIS BANK": (
-    <img 
-      src="/assets/banks/axis.png" 
-      alt="Axis Bank" 
-      className="max-h-8 max-w-[120px] w-auto h-auto object-contain shrink-0" 
+    <img
+      src="/assets/banks/axis.png"
+      alt="Axis Bank"
+      className="max-h-8 max-w-[120px] w-auto h-auto object-contain shrink-0"
     />
   ),
   "ICICI BANK": (
-    <img 
-      src="/assets/banks/icici.png" 
-      alt="ICICI Bank" 
-      className="max-h-8 max-w-[120px] w-auto h-auto object-contain shrink-0" 
+    <img
+      src="/assets/banks/icici.png"
+      alt="ICICI Bank"
+      className="max-h-8 max-w-[120px] w-auto h-auto object-contain shrink-0"
     />
   ),
   "ADITYA BIRLA CAPITAL": (
-    <img 
-      src="/assets/banks/aditya-birla.png" 
-      alt="Aditya Birla Capital" 
-      className="max-h-8 max-w-[120px] w-auto h-auto object-contain shrink-0" 
+    <img
+      src="/assets/banks/aditya-birla.png"
+      alt="Aditya Birla Capital"
+      className="max-h-8 max-w-[120px] w-auto h-auto object-contain shrink-0"
     />
   ),
   "BANK OF BARODA": (
-    <img 
-      src="/assets/banks/bob.png" 
-      alt="Bank of Baroda" 
-      className="max-h-8 max-w-[120px] w-auto h-auto object-contain shrink-0" 
+    <img
+      src="/assets/banks/bob.png"
+      alt="Bank of Baroda"
+      className="max-h-8 max-w-[120px] w-auto h-auto object-contain shrink-0"
     />
   ),
   "IDFC FIRST": (
-    <img 
-      src="/assets/banks/idfc.png" 
-      alt="IDFC FIRST Bank" 
-      className="max-h-8 max-w-[120px] w-auto h-auto object-contain shrink-0" 
+    <img
+      src="/assets/banks/idfc.png"
+      alt="IDFC FIRST Bank"
+      className="max-h-8 max-w-[120px] w-auto h-auto object-contain shrink-0"
     />
   ),
   "LIC HFL": (
-    <img 
-      src="/assets/banks/lic.png" 
-      alt="LIC HFL" 
-      className="max-h-8 max-w-[120px] w-auto h-auto object-contain shrink-0" 
+    <img
+      src="/assets/banks/lic.png"
+      alt="LIC HFL"
+      className="max-h-8 max-w-[120px] w-auto h-auto object-contain shrink-0"
     />
   ),
   "TATA CAPITAL": (
-    <img 
-      src="/assets/banks/tata.png" 
-      alt="Tata Capital" 
-      className="max-h-8 max-w-[120px] w-auto h-auto object-contain shrink-0" 
+    <img
+      src="/assets/banks/tata.png"
+      alt="Tata Capital"
+      className="max-h-8 max-w-[120px] w-auto h-auto object-contain shrink-0"
     />
   ),
   "BAJAJ FINANCE": (
-    <img 
-      src="/assets/banks/bajaj.png" 
-      alt="Bajaj Finance" 
-      className="max-h-8 max-w-[120px] w-auto h-auto object-contain shrink-0" 
+    <img
+      src="/assets/banks/bajaj.png"
+      alt="Bajaj Finance"
+      className="max-h-8 max-w-[120px] w-auto h-auto object-contain shrink-0"
     />
   ),
   "PNB HOUSING": (
-    <img 
-      src="/assets/banks/pnb.png" 
-      alt="PNB Housing" 
-      className="max-h-8 max-w-[120px] w-auto h-auto object-contain shrink-0" 
+    <img
+      src="/assets/banks/pnb.png"
+      alt="PNB Housing"
+      className="max-h-8 max-w-[120px] w-auto h-auto object-contain shrink-0"
     />
   )
 };
@@ -252,137 +252,131 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
   // EMI Calculator States
   const [loanAmount, setLoanAmount] = useState<number | "">(config.calcDefaultAmount);
   const [interestRate, setInterestRate] = useState<number | "">(config.calcDefaultRate);
-  const [tenureMonths, setTenureMonths] = useState<number | "">(config.calcDefaultTenure * 12);
+  const [tenureValue, setTenureValue] = useState<number | "">(config.calcDefaultTenure);
+  const [tenureUnit, setTenureUnit] = useState<"years" | "months">("years");
 
-  const [yearsInput, setYearsInput] = useState<string>(String(config.calcDefaultTenure));
-  const [monthsInput, setMonthsInput] = useState<string>("0");
-
-  // Keep text inputs synchronized when tenureMonths changes (e.g. from slider)
-  useEffect(() => {
-    if (tenureMonths !== "") {
-      setYearsInput(String(Math.floor(tenureMonths / 12)));
-      setMonthsInput(String(tenureMonths % 12));
-    } else {
-      setYearsInput("");
-      setMonthsInput("");
-    }
-  }, [tenureMonths]);
-
-  // Handle manual input changes with clamping limits
-  const handleAmountChange = (valStr: string) => {
-    if (valStr === "") {
-      setLoanAmount("");
-    } else {
-      const valLakhs = Number(valStr);
-      const valRupees = valLakhs * 100000;
-      const clamped = Math.max(0, Math.min(valRupees, config.calcMaxAmount));
-      setLoanAmount(clamped);
-    }
-  };
-
-  const handleRateChange = (valStr: string) => {
-    if (valStr === "") {
-      setInterestRate("");
-    } else {
-      const val = Number(valStr);
-      const clamped = Math.max(0, Math.min(val, 20));
-      setInterestRate(clamped);
-    }
-  };
-
-  const handleYearsChange = (valStr: string) => {
-    setYearsInput(valStr);
-    const inputYears = valStr === "" ? 0 : Number(valStr);
-    const inputMonths = monthsInput === "" ? 0 : Number(monthsInput);
-    const newTotalMonths = (inputYears * 12) + inputMonths;
-    const maxMonths = config.calcMaxTenure * 12;
-    const clamped = Math.max(0, Math.min(newTotalMonths, maxMonths));
-    setTenureMonths(clamped);
-  };
-
-  const handleYearsBlur = () => {
-    if (tenureMonths !== "") {
-      setYearsInput(String(Math.floor(tenureMonths / 12)));
-    }
-  };
-
-  const handleMonthsChange = (valStr: string) => {
-    setMonthsInput(valStr);
-    const inputYears = yearsInput === "" ? 0 : Number(yearsInput);
-    const inputMonths = valStr === "" ? 0 : Number(valStr);
-    const newTotalMonths = (inputYears * 12) + inputMonths;
-    const maxMonths = config.calcMaxTenure * 12;
-    const clamped = Math.max(0, Math.min(newTotalMonths, maxMonths));
-    setTenureMonths(clamped);
-  };
-
-  const handleMonthsBlur = () => {
-    if (tenureMonths !== "") {
-      setMonthsInput(String(tenureMonths % 12));
-    }
-  };
+  const [amountInput, setAmountInput] = useState<string>(
+    config.calcDefaultAmount === "" ? "" : String(config.calcDefaultAmount / 100000)
+  );
+  const [rateInput, setRateInput] = useState<string>(
+    config.calcDefaultRate === "" ? "" : String(config.calcDefaultRate)
+  );
+  const [tenureInput, setTenureInput] = useState<string>(
+    config.calcDefaultTenure === "" ? "" : String(config.calcDefaultTenure)
+  );
 
   const [emi, setEmi] = useState(0);
   const [totalInterest, setTotalInterest] = useState(0);
   const [totalPayable, setTotalPayable] = useState(0);
 
-  // Sticky sub-nav tabs definitions
-  const tabs = [
-    { id: "overview", label: "Overview" },
-    { id: "features", label: "Key Features" },
-    { id: "calculator", label: "Calculator" },
-    { id: "eligibility", label: "Eligibility Criteria" },
-    { id: "documentation", label: "Documentation" },
-    { id: "process", label: "How to Apply" },
-    { id: "faqs", label: "FAQs" }
-  ];
+  // Keep text inputs synchronized when states change (e.g. from slider)
+  useEffect(() => {
+    if (loanAmount !== "") {
+      setAmountInput(String(loanAmount / 100000));
+    } else {
+      setAmountInput("");
+    }
+  }, [loanAmount]);
 
-  const tabRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({});
-  const tabContainerRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (interestRate !== "") {
+      setRateInput(String(interestRate));
+    } else {
+      setRateInput("");
+    }
+  }, [interestRate]);
 
-  // When a tab is clicked, switch view and scroll slightly to center the view
-  const handleTabClick = (id: string) => {
-    setActiveSection(id);
+  useEffect(() => {
+    if (tenureValue !== "") {
+      setTenureInput(String(tenureValue));
+    } else {
+      setTenureInput("");
+    }
+  }, [tenureValue]);
+
+  // Handle manual input changes with clamping limits
+  const handleAmountChange = (valStr: string) => {
+    const cleanVal = valStr.replace(/[^0-9.]/g, "");
+    setAmountInput(cleanVal);
     
-    // Smooth scroll the viewport so that the sticky tab bar sits at the top
-    if (tabContainerRef.current) {
-      const rect = tabContainerRef.current.getBoundingClientRect();
-      const offset = 80; // Offset for main header height
-      const targetY = rect.top + window.scrollY - offset;
-      
-      window.scrollTo({
-        top: targetY,
-        behavior: "smooth"
-      });
+    if (cleanVal === "") {
+      setLoanAmount("");
+    } else {
+      const valLakhs = Number(cleanVal);
+      if (!isNaN(valLakhs)) {
+        const valRupees = valLakhs * 100000;
+        const clamped = Math.max(0, Math.min(valRupees, config.calcMaxAmount));
+        setLoanAmount(clamped);
+      }
     }
   };
 
-  // Scroll active tab BUTTON into horizontal view only when tab bar is already visible
-  useEffect(() => {
-    const activeBtn = tabRefs.current[activeSection];
-    const container = tabContainerRef.current;
-    if (!activeBtn || !container) return;
-    const rect = container.getBoundingClientRect();
-    // Only scroll the button into view if the tab bar is currently on screen
-    if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
-      activeBtn.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+  const handleAmountBlur = () => {
+    if (loanAmount !== "") {
+      setAmountInput(String(loanAmount / 100000));
     }
-  }, [activeSection]);
+  };
+
+  const handleRateChange = (valStr: string) => {
+    const cleanVal = valStr.replace(/[^0-9.]/g, "");
+    setRateInput(cleanVal);
+    
+    if (cleanVal === "") {
+      setInterestRate("");
+    } else {
+      const val = Number(cleanVal);
+      if (!isNaN(val)) {
+        const clamped = Math.max(0, Math.min(val, 20));
+        setInterestRate(clamped);
+      }
+    }
+  };
+
+  const handleRateBlur = () => {
+    if (interestRate !== "") {
+      setRateInput(String(interestRate));
+    }
+  };
+
+  const handleTenureChange = (valStr: string) => {
+    const cleanVal = valStr.replace(/[^0-9]/g, "");
+    setTenureInput(cleanVal);
+    
+    if (cleanVal === "") {
+      setTenureValue("");
+    } else {
+      const val = Number(cleanVal);
+      if (!isNaN(val)) {
+        const maxLimit = tenureUnit === "years" ? config.calcMaxTenure : config.calcMaxTenure * 12;
+        const clamped = Math.max(0, Math.min(val, maxLimit));
+        setTenureValue(clamped);
+      }
+    }
+  };
+
+  const handleTenureBlur = () => {
+    if (tenureValue !== "") {
+      setTenureInput(String(tenureValue));
+    }
+  };
 
   // EMI Calculation Logic
   useEffect(() => {
     const P = isNaN(Number(loanAmount)) || Number(loanAmount) < 0 ? 0 : Number(loanAmount);
     const rate = isNaN(Number(interestRate)) || Number(interestRate) < 0 ? 0 : Number(interestRate);
-    const tenure = isNaN(Number(tenureMonths)) || Number(tenureMonths) <= 0 ? 0 : Number(tenureMonths);
+    const val = isNaN(Number(tenureValue)) || Number(tenureValue) <= 0 ? 0 : Number(tenureValue);
+    const n = tenureUnit === "years" ? val * 12 : val;
 
     const r = rate / 12 / 100;
-    const n = tenure;
 
     if (P === 0 || n === 0) {
       setEmi(0);
       setTotalPayable(0);
       setTotalInterest(0);
-    } else if (r === 0) {
+      return;
+    }
+
+    if (r === 0) {
       const calculatedEmi = P / n;
       setEmi(Math.round(calculatedEmi));
       setTotalPayable(P);
@@ -403,7 +397,7 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
         setTotalInterest(Math.round(totalInt));
       }
     }
-  }, [loanAmount, interestRate, tenureMonths]);
+  }, [loanAmount, interestRate, tenureValue, tenureUnit]);
 
   // Quick Apply reference
   const topFormRef = useRef<HTMLDivElement>(null);
@@ -417,7 +411,7 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
   const getRowLogo = (name: string) => {
     const key = name.toUpperCase().trim();
     if (bankLogos[key]) return bankLogos[key];
-    
+
     // Check specific name variations first
     if (key.includes("PUNJAB") || key.includes("PNB")) {
       return bankLogos["PNB HOUSING"];
@@ -425,7 +419,7 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
     if (key.includes("LIC")) {
       return bankLogos["LIC HFL"];
     }
-    
+
     // Check partial matches (e.g. "HDFC Bank" -> "HDFC BANK")
     for (const bankName of Object.keys(bankLogos)) {
       if (key.includes(bankName) || bankName.includes(key)) {
@@ -486,7 +480,7 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
       </section>
 
       {/* Sticky Horizontal Sub-Navigation Tab Bar Container */}
-      <div 
+      <div
         ref={tabContainerRef}
         className="sticky top-[72px] z-30 bg-white border-y border-border-color shadow-sm w-full"
       >
@@ -501,15 +495,14 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                     tabRefs.current[tab.id] = el;
                   }}
                   onClick={() => handleTabClick(tab.id)}
-                  className={`relative px-4 py-2 text-xs md:text-sm font-extrabold rounded-full transition-all duration-300 cursor-pointer outline-none select-none ${
-                    isActive ? "text-white" : "text-dark-blue hover:text-primary-blue"
-                  }`}
+                  className={`relative px-4 py-2 text-xs md:text-sm font-extrabold rounded-full transition-all duration-300 cursor-pointer outline-none select-none ${isActive ? "text-white" : "text-dark-blue hover:text-[#1E88E5]"
+                    }`}
                 >
                   {/* Sliding blue pill indicator */}
                   {isActive && (
                     <motion.div
                       layoutId="activeTabPill"
-                      className="absolute inset-0 bg-primary-blue rounded-full z-0 shadow-md"
+                      className="absolute inset-0 bg-[#1E88E5] rounded-full z-0 shadow-md"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -680,9 +673,9 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                   {/* Illustration Column */}
                   <div className="lg:col-span-5 flex justify-center">
                     <div className="relative w-full max-w-[400px] aspect-square rounded-card overflow-hidden bg-section-bg/40 border border-border-color p-4 shadow-premium flex items-center justify-center">
-                      <img 
-                        src={config.illustrationImage} 
-                        alt={`${config.loanType} Illustration`} 
+                      <img
+                        src={config.illustrationImage}
+                        alt={`${config.loanType} Illustration`}
                         className="w-full h-full object-contain drop-shadow-md"
                       />
                     </div>
@@ -716,7 +709,7 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                         );
                       })}
                     </div>
-                    <button 
+                    <button
                       onClick={scrollToForm}
                       className="mt-4 bg-gradient-to-r from-dark-blue to-primary-blue text-white font-bold text-xs px-6 py-3 rounded-btn shadow hover:shadow-md transition-all w-fit cursor-pointer flex items-center gap-2"
                     >
@@ -769,7 +762,7 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                                       {row.name}
                                     </span>
                                     {row.isNbfc && (
-                                      <span className="bg-primary-blue/10 text-primary-blue font-bold text-[9px] px-1.5 py-0.5 rounded w-max mt-0.5 uppercase tracking-wide">
+                                      <span className="bg-[#CE0101]/10 text-[#CE0101] font-bold text-[9px] px-1.5 py-0.5 rounded w-max mt-0.5 uppercase tracking-wide">
                                         NBFC
                                       </span>
                                     )}
@@ -791,7 +784,7 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                                   </button>
                                   <button
                                     onClick={scrollToForm}
-                                    className="w-full bg-primary-blue text-white hover:bg-dark-blue px-3 py-1.5 rounded-btn text-xs font-bold transition-all shrink-0 cursor-pointer text-center whitespace-nowrap flex items-center justify-center gap-1"
+                                    className="w-full bg-[#CE0101] text-white hover:bg-[#b00101] px-3 py-1.5 rounded-btn text-xs font-bold transition-all shrink-0 cursor-pointer text-center whitespace-nowrap flex items-center justify-center gap-1"
                                   >
                                     Apply Now <ArrowRight className="w-3.5 h-3.5" />
                                   </button>
@@ -834,11 +827,11 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                           <div className="flex items-center bg-white border border-border-color rounded px-3 py-1 text-primary-blue font-extrabold text-sm md:text-base">
                             <span className="mr-1 text-text-gray font-semibold">₹</span>
                             <input
-                              type="number"
-                              step="0.1"
-                              value={loanAmount === "" ? "" : loanAmount / 100000}
+                              type="text"
+                              value={amountInput}
                               onChange={(e) => handleAmountChange(e.target.value)}
-                              className="w-16 text-right font-extrabold outline-none border-none p-0 bg-transparent text-primary-blue [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                              onBlur={handleAmountBlur}
+                              className="w-16 text-right font-extrabold outline-none border-none p-0 bg-transparent text-primary-blue focus:ring-0 focus:outline-none"
                             />
                             <span className="ml-1 text-primary-blue">Lakhs</span>
                           </div>
@@ -869,11 +862,11 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                           <span className="text-xs md:text-sm font-bold text-dark-blue">Interest Rate (p.a.)</span>
                           <div className="flex items-center bg-white border border-border-color rounded px-3 py-1 text-primary-blue font-extrabold text-sm md:text-base">
                             <input
-                              type="number"
-                              step="0.05"
-                              value={interestRate === "" ? "" : interestRate}
+                              type="text"
+                              value={rateInput}
                               onChange={(e) => handleRateChange(e.target.value)}
-                              className="w-14 text-right font-extrabold outline-none border-none p-0 bg-transparent text-primary-blue [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                              onBlur={handleRateBlur}
+                              className="w-14 text-right font-extrabold outline-none border-none p-0 bg-transparent text-primary-blue focus:ring-0 focus:outline-none"
                             />
                             <span className="ml-1 text-primary-blue">%</span>
                           </div>
@@ -899,45 +892,57 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                         <div className="flex justify-between items-center">
                           <span className="text-xs md:text-sm font-bold text-dark-blue">Loan Tenure</span>
                           <div className="flex items-center gap-2">
-                            {/* Years Input */}
                             <div className="flex items-center bg-white border border-border-color rounded px-2.5 py-1 text-primary-blue font-extrabold text-xs md:text-sm">
                               <input
-                                type="number"
-                                step="1"
-                                value={yearsInput}
-                                onChange={(e) => handleYearsChange(e.target.value)}
-                                onBlur={handleYearsBlur}
-                                className="w-8 text-right font-extrabold outline-none border-none p-0 bg-transparent text-primary-blue [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                type="text"
+                                value={tenureInput}
+                                onChange={(e) => handleTenureChange(e.target.value)}
+                                onBlur={handleTenureBlur}
+                                className="w-12 text-right font-extrabold outline-none border-none p-0 bg-transparent text-primary-blue focus:ring-0 focus:outline-none"
                               />
-                              <span className="ml-1 text-text-gray font-semibold text-[10px]">Yrs</span>
                             </div>
-                            {/* Months Input */}
-                            <div className="flex items-center bg-white border border-border-color rounded px-2.5 py-1 text-primary-blue font-extrabold text-xs md:text-sm">
-                              <input
-                                type="number"
-                                step="1"
-                                value={monthsInput}
-                                onChange={(e) => handleMonthsChange(e.target.value)}
-                                onBlur={handleMonthsBlur}
-                                className="w-8 text-right font-extrabold outline-none border-none p-0 bg-transparent text-primary-blue [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                              />
-                              <span className="ml-1 text-text-gray font-semibold text-[10px]">Mos</span>
-                            </div>
+                            <select
+                              value={tenureUnit}
+                              onChange={(e) => {
+                                const unit = e.target.value as "years" | "months";
+                                setTenureUnit(unit);
+                                if (tenureValue !== "") {
+                                  if (unit === "years") {
+                                    setTenureValue(Math.max(1, Math.round(Number(tenureValue) / 12)));
+                                  } else {
+                                    setTenureValue(Number(tenureValue) * 12);
+                                  }
+                                }
+                              }}
+                              className="bg-white border border-border-color px-2 py-1 rounded text-xs font-bold text-dark-blue focus:outline-none focus:border-primary-blue cursor-pointer"
+                            >
+                              <option value="years">Years</option>
+                              <option value="months">Months</option>
+                            </select>
                           </div>
                         </div>
                         <input
                           type="range"
                           min={0}
-                          max={config.calcMaxTenure * 12}
+                          max={tenureUnit === "years" ? config.calcMaxTenure : config.calcMaxTenure * 12}
                           step={1}
-                          value={tenureMonths === "" ? 0 : tenureMonths}
-                          onChange={(e) => setTenureMonths(Number(e.target.value))}
+                          value={tenureValue === "" ? 0 : tenureValue}
+                          onChange={(e) => setTenureValue(Number(e.target.value))}
                           className="w-full h-1.5 bg-border-color rounded-lg appearance-none cursor-pointer accent-primary-blue"
                         />
                         <div className="flex justify-between text-[10px] text-text-gray font-semibold">
-                          <span>0 Months</span>
-                          <span>{(config.calcMaxTenure * 12 / 2)} Months ({(config.calcMaxTenure / 2)} Yrs)</span>
-                          <span>{config.calcMaxTenure * 12} Months ({config.calcMaxTenure} Yrs)</span>
+                          <span>0</span>
+                          {tenureUnit === "years" ? (
+                            <>
+                              <span>{Math.round(config.calcMaxTenure / 2)} Years</span>
+                              <span>{config.calcMaxTenure} Years</span>
+                            </>
+                          ) : (
+                            <>
+                              <span>{Math.round(config.calcMaxTenure * 12 / 2)} Months</span>
+                              <span>{config.calcMaxTenure * 12} Months</span>
+                            </>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -946,7 +951,7 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                     <div className="lg:col-span-5 bg-gradient-to-br from-dark-blue to-[#0e3b6e] text-white p-8 rounded-card border border-white/5 shadow-premium flex flex-col justify-between h-full gap-8">
                       <div className="flex flex-col gap-6 text-center lg:text-left">
                         <h4 className="font-extrabold text-lg border-b border-white/10 pb-3">Monthly Outflow Summary</h4>
-                        
+
                         {/* EMI Box */}
                         <div className="flex flex-col gap-1 items-center lg:items-start">
                           <span className="text-xs text-white/60 uppercase tracking-wider font-bold">Estimated Monthly EMI</span>
@@ -1095,8 +1100,8 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start mt-4">
                     {/* Salaried Individuals Column */}
                     <div className="bg-white border border-border-color p-6 md:p-8 rounded-card shadow-premium flex flex-col gap-6 text-left">
-                      <h3 className="font-extrabold text-lg text-primary-blue border-b border-border-color pb-3 flex items-center gap-2">
-                        <FileText className="w-5 h-5 text-primary-blue" />
+                      <h3 className="font-extrabold text-lg text-[#CE0101] border-b border-border-color pb-3 flex items-center gap-2">
+                        <FileText className="w-5 h-5 text-[#CE0101]" />
                         {config.documentsSalariedTitle || "Salaried Individuals"}
                       </h3>
                       <ul className="flex flex-col gap-3">

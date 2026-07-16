@@ -9,10 +9,10 @@ const usedCarLoanConfig: ProductConfig = {
   interestRateText: "Dynamic (Market Linked)",
   maxRepaymentTenure: "5 Years",
   heroFeatures: [
-    "Dynamic interest rates based on market trends",
+    "Competitive Interest Rates Aligned with Market Trends",
     "Finance up to 90% of vehicle value",
     "Repayment tenure up to 5 years",
-    "Processing fees from 0.5% to 2%"
+    "Minimal processing Fees"
   ],
   whyChooseUsFeatures: [
     {

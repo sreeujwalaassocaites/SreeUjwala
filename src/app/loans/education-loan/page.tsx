@@ -9,7 +9,7 @@ const educationLoanConfig: ProductConfig = {
   interestRateText: "Dynamic (Market Linked)",
   maxRepaymentTenure: "15 Years",
   heroFeatures: [
-    "Dynamic interest rates linked to market rates",
+    "Competitive Interest Rates Aligned with Market Trends",
     "Loan amount up to ₹1.5 Crore (based on eligibility)",
     "Flexible repayment tenure up to 15 years",
     "Moratorium period during course + 6–12 months"

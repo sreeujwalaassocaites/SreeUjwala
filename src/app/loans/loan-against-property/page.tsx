@@ -9,10 +9,10 @@ const lapConfig: ProductConfig = {
   interestRateText: "Dynamic (Market Linked)",
   maxRepaymentTenure: "15 Years",
   heroFeatures: [
-    "Dynamic interest rates based on market trends",
+    "Competitive Interest Rates Aligned with Market Trends",
     "Up to 85% of property value funded",
     "Repayment tenure up to 15 years",
-    "Processing fees 0.5% to 2%"
+    "Minimal processing Fees"
   ],
   whyChooseUsFeatures: [
     {

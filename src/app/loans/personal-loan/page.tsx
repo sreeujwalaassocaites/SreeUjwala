@@ -9,10 +9,10 @@ const personalLoanConfig: ProductConfig = {
   interestRateText: "Dynamic (Market Linked)",
   maxRepaymentTenure: "5 Years",
   heroFeatures: [
-    "Dynamic interest rates based on market standards",
+    "Competitive Interest Rates Aligned with Market Trends",
     "Loan amounts up to ₹75 Lakhs",
     "Repayment tenure up to 5 years",
-    "Processing fees between 0.5% and 4%"
+    "Minimal processing Fees"
   ],
   whyChooseUsFeatures: [
     {
