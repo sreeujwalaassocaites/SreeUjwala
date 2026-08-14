@@ -9,7 +9,7 @@ export default function About() {
   const coreValues = [
     {
       title: "Transparency",
-      desc: "We declare exact interest rate structures, processing fees, and terms upfront. No hidden commissions or surprises.",
+      desc: "We explain available product information, indicative rates, fees and next steps clearly, while final terms are issued by the lender.",
       icon: <ShieldCheck className="w-6 h-6 text-primary-blue" />
     },
     {
@@ -19,12 +19,12 @@ export default function About() {
     },
     {
       title: "Customer First",
-      desc: "We prioritize your timeline. EAZYKREDIT negotiates directly with bank credit managers to secure approvals on your terms.",
+      desc: "We prioritize timely follow-up, coordinate with the relevant lending teams and keep applicants informed throughout the process.",
       icon: <Users className="w-6 h-6 text-primary-blue" />
     },
     {
       title: "Excellence",
-      desc: "Continuous technological optimization of our credit matching systems to ensure the highest approval rates.",
+      desc: "Continuous improvement of our inquiry and lender-matching process to support more relevant options and clearer follow-up.",
       icon: <Heart className="w-6 h-6 text-primary-blue" />
     }
   ];

@@ -25,7 +25,8 @@ import {
   Mail,
   HelpCircle,
   BookOpen,
-  Building
+  Building,
+  Info,
 } from "lucide-react";
 import QuickApplyForm from "@/components/QuickApplyForm";
 
@@ -546,6 +547,16 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
         </div>
       </section>
 
+      <section className="border-b border-amber-200 bg-amber-50 px-6 py-3">
+        <div className="mx-auto flex max-w-7xl items-start gap-2 text-[11px] leading-relaxed text-amber-900 md:text-xs">
+          <Info className="mt-0.5 h-4 w-4 shrink-0" />
+          <p>
+            Product details, lender names, rates, fees, timelines and calculator results are indicative and may change.
+            Final eligibility, approval and terms are determined only by the lender after verification.
+          </p>
+        </div>
+      </section>
+
       {/* Sticky Horizontal Sub-Navigation Tab Bar Container */}
       <div
         ref={tabContainerRef}
@@ -802,7 +813,7 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
               {config.interestRatesTable && (
                 <section className="max-w-7xl mx-auto w-full px-6 py-16 flex flex-col gap-10">
                   <div className="text-center flex flex-col gap-2">
-                    <span className="text-primary-blue text-xs font-extrabold tracking-widest uppercase">Interest Rates & Charges</span>
+                    <span className="text-primary-blue text-xs font-extrabold tracking-widest uppercase">Indicative Interest Rates</span>
                     <h2 className="text-2xl md:text-3xl font-extrabold text-dark-blue">Lender Rate Comparison</h2>
                   </div>
 
@@ -847,7 +858,7 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                                     onClick={() => handleTabClick("calculator")}
                                     className="w-full border border-primary-blue text-primary-blue hover:bg-primary-blue hover:text-white px-3 py-1.5 rounded-btn text-xs font-bold transition-all shrink-0 cursor-pointer text-center whitespace-nowrap"
                                   >
-                                    Check Your EMI Eligibility
+                                    Calculate EMI
                                   </button>
                                   <button
                                     onClick={scrollToForm}
@@ -863,6 +874,9 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                       </table>
                     </div>
                   </div>
+                  <p className="text-center text-[10px] leading-relaxed text-text-gray md:text-xs">
+                    Rates shown are illustrative and are not a binding offer. Confirm the latest rate, annual percentage rate, fees and key facts statement with the lender.
+                  </p>
                 </section>
               )}
             </motion.div>

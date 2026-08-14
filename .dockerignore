@@ -1,0 +1,12 @@
+.git
+.github
+.next
+out
+node_modules
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+__MACOSX
+SreeUjwala-main.zip

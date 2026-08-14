@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# EAZYKREDIT — Franky Lab Test Build
 
-## Getting Started
+A hardened demonstration build of the uploaded EAZYKREDIT Next.js website for deployment at:
 
-First, run the development server:
+- Test: `https://eazykredit.franky.co.in`
+- Existing production reference: `https://www.eazykredit.in`
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+The visual structure, assets, loan pages and navigation from the supplied project are preserved. The main changes are the inquiry workflow, server-side validation, notification integrations, privacy/security disclosures, a guided loan assistant, and Docker/Portainer deployment files.
+
+## What this build fixes
+
+- Replaces the non-working static-export API route with a separate Python lead API.
+- Makes the Apply, Quick Apply and Contact forms submit to the same secured backend.
+- Stores a short-retention local backup in SQLite.
+- Sends optional owner email, applicant acknowledgment email, Twilio WhatsApp notification and n8n/CRM webhook.
+- Adds server-side validation, origin checks, rate limiting, honeypot protection and optional Cloudflare Turnstile verification.
+- Removes the non-functional public document upload control.
+- Adds Privacy, Terms and Loan/Security Disclaimer pages.
+- Adds a rule-based Loan Assistant that prefills the inquiry form without predicting approval.
+- Adds no-index controls for the Franky Lab demonstration domain.
+- Removes credentials and generated build folders from the distributable source.
+
+## Architecture
+
+```text
+Browser
+  -> Cloudflare Tunnel
+  -> 127.0.0.1:8090
+  -> eazykredit-web (Nginx + static Next.js export)
+       -> /api/*
+       -> eazykredit-api (Python)
+            -> SQLite lead backup
+            -> SMTP email (optional)
+            -> Twilio WhatsApp (optional)
+            -> n8n/CRM webhook (optional)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The API container is not published directly. Only the Nginx frontend is bound to host loopback.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Read these files in order:
 
-## Learn More
+1. `docs/01-PORTAINER-DEPLOYMENT.md`
+2. `docs/02-CLOUDFLARE-TUNNEL.md`
+3. `docs/03-EMAIL-WHATSAPP-AUTOMATION.md`
+4. `docs/04-SECURITY-NOTICE.md`
+5. `docs/05-BUSINESS-CONTENT-CHECKLIST.md`
 
-To learn more about Next.js, take a look at the following resources:
+## Local verification
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+bash scripts/test.sh
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Docker deployment uses `compose.portainer.yml`.
 
-## Deploy on Vercel
+## Export stored leads
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Run from the Docker host:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+bash scripts/export-leads.sh
+```
+
+The command writes a timestamped CSV into the current directory. Treat the CSV as sensitive personal data and delete it when no longer required.
+
+## Important production limitation
+
+This package is suitable for a controlled demonstration and technical acceptance testing. Before using `eazykredit.in` for real customer acquisition, the business owner must verify all lender relationships, rates, testimonials, address details, privacy language, grievance contact, consent wording and data-retention requirements with appropriate legal/compliance support.

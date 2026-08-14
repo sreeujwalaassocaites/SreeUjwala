@@ -5,7 +5,7 @@ import LoanPageTemplate, { ProductConfig } from "@/components/loans/LoanPageTemp
 
 const personalLoanConfig: ProductConfig = {
   loanType: "Personal Loan",
-  heroDescription: "When life demands quick funds, EAZYKREDIT delivers. Get a collateral-free personal loan with zero asset pledge, minimal paperwork, and same-day approval — whether it's a medical emergency, home renovation, wedding, or travel.",
+  heroDescription: "When life demands quick funds, EAZYKREDIT delivers. Get a collateral-free personal loan with zero asset pledge, streamlined paperwork and faster initial assessment — whether it's a medical emergency, home renovation, wedding, or travel.",
   interestRateText: "Dynamic (Market Linked)",
   maxRepaymentTenure: "5 Years",
   heroFeatures: [
@@ -20,7 +20,7 @@ const personalLoanConfig: ProductConfig = {
       desc: "Get initial sanction checks from our partner banking portals within hours of file submission."
     },
     {
-      title: "Lowest Interest Rates",
+      title: "Competitive Rate Options",
       desc: "Rate packages beginning at competitive pricing slabs customized on your credit reports."
     },
     {
@@ -33,7 +33,7 @@ const personalLoanConfig: ProductConfig = {
     },
     {
       title: "Secure Application",
-      desc: "Your data privacy is strictly protected with global bank-grade secure server encryptions."
+      desc: "Inquiry data is handled through secured channels with access limited to authorized personnel."
     },
     {
       title: "Multiple Bank Options",
@@ -84,7 +84,7 @@ const personalLoanConfig: ProductConfig = {
     { title: "Upload Documents", desc: "Share KYC, salary slips, and bank statements digitally — no branch visit needed." },
     { title: "Lender Matching", desc: "We compare offers from 25+ banks and NBFCs to find your best rate and terms." },
     { title: "Sanction Letter", desc: "Receive the official approval with confirmed loan amount, rate, and repayment schedule." },
-    { title: "Disbursement", desc: "Funds are credited directly to your bank account, usually within 24–48 hours." }
+    { title: "Disbursement", desc: "Approved funds are disbursed by the lender according to its verification and processing timeline." }
   ],
   calcMinAmount: 50000,
   calcMaxAmount: 7500000,
@@ -109,7 +109,7 @@ const personalLoanConfig: ProductConfig = {
   faqs: [
     {
       q: "What credit score do I need to qualify for a personal loan?",
-      a: "A CIBIL score of 750 or above is recommended. While some lenders consider lower scores, a score of 750+ ensures immediate approvals and the lowest interest rates."
+      a: "A CIBIL score of 750 or above is recommended. While some lenders consider lower scores, a score of 750+ may improve consideration and pricing, subject to lender policy."
     },
     {
       q: "What is the minimum salary required for obtaining a personal loan?",

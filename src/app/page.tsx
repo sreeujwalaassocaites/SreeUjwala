@@ -164,7 +164,7 @@ export default function Home() {
                 Financial Decisions
               </h3>
               <p className="text-[#64748B] text-sm leading-relaxed">
-                Empowering individuals and businesses with expert financial guidance, trusted banking partnerships, and exceptional customer service.
+                Empowering individuals and businesses with expert financial guidance, access to a range of lending products, and professional customer support.
               </p>
             </div>
             {/* Right */}
@@ -183,9 +183,12 @@ export default function Home() {
       {/* ── PARTNER WITH US ── */}
       <section id="partner-banks" className="py-16 bg-gradient-to-br from-[#0B4F9F] via-[#1565C0] to-[#1E88E5]">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-2xl font-extrabold text-white mb-10 uppercase tracking-wide">
-            OUR PARTNER BANKS
+          <h2 className="text-2xl font-extrabold text-white mb-3 uppercase tracking-wide">
+            BANKS & NBFCS ACROSS THE MARKET
           </h2>
+          <p className="mx-auto mb-8 max-w-3xl text-xs leading-relaxed text-white/80">
+            Logos identify commonly explored lenders. Product availability and any referral relationship must be confirmed for each case.
+          </p>
           {/* Scrolling marquee strip */}
           <div className="relative overflow-hidden">
             <div className="animate-scroll-marquee">
