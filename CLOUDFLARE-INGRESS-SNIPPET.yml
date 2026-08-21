@@ -1,3 +1,0 @@
-# Insert before the final `- service: http_status:404` rule.
-- hostname: eazykredit.franky.co.in
-  service: http://localhost:8090
