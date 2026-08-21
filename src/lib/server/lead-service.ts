@@ -51,7 +51,9 @@ export interface DeliveryResult {
 function normaliseMobile(value: string): string {
   let digits = value.replace(/\D/g, "");
   if (digits.startsWith("91") && digits.length === 12) digits = digits.slice(2);
-  if (!phonePattern.test(digits)) throw new Error("Enter a valid 10-digit Indian mobile number");
+  if (!phonePattern.test(digits)) {
+    throw new Error("Enter a valid 10-digit Indian mobile number");
+  }
   return digits;
 }
 
@@ -65,17 +67,21 @@ function parseAmount(
     if (required) throw new Error("A required amount is missing");
     return null;
   }
+
   const parsed = Number(value);
   if (!Number.isFinite(parsed)) throw new Error("Invalid amount");
+
   const amount = Math.trunc(parsed);
   if (amount < minimum || amount > maximum) {
     throw new Error(`Amount must be between ${minimum} and ${maximum}`);
   }
+
   return amount;
 }
 
 export function validateLeadPayload(input: unknown): ValidatedLead {
   const parsed = rawLeadSchema.safeParse(input);
+
   if (!parsed.success) {
     const issue = parsed.error.issues[0];
     throw new Error(issue?.message || "Invalid form data");
@@ -84,20 +90,41 @@ export function validateLeadPayload(input: unknown): ValidatedLead {
   const data = parsed.data;
   const mobileNumber = normaliseMobile(data.mobileNumber);
   const cityRequired = data.source !== "contact";
-  if (cityRequired && data.city.length < 2) throw new Error("Enter your city");
-  if (data.city && !personNamePattern.test(data.city)) throw new Error("Enter a valid city");
+
+  if (cityRequired && data.city.length < 2) {
+    throw new Error("Enter your city");
+  }
+
+  if (data.city && !personNamePattern.test(data.city)) {
+    throw new Error("Enter a valid city");
+  }
 
   if (data.source === "full-application") {
-    if (!data.loanType || data.loanType === "General Inquiry") throw new Error("Select a loan type");
-    if (!data.employmentType) throw new Error("Select employment type");
+    if (!data.loanType || data.loanType === "General Inquiry") {
+      throw new Error("Select a loan type");
+    }
+
+    if (!data.employmentType) {
+      throw new Error("Select employment type");
+    }
   }
 
   return {
     ...data,
     mobileNumber,
     loanType: data.loanType || "General Inquiry",
-    monthlyIncome: parseAmount(data.monthlyIncome, 1000, 100_000_000, data.source === "full-application"),
-    loanAmount: parseAmount(data.loanAmount, 10_000, 1_000_000_000, data.source === "full-application"),
+    monthlyIncome: parseAmount(
+      data.monthlyIncome,
+      1000,
+      100_000_000,
+      data.source === "full-application",
+    ),
+    loanAmount: parseAmount(
+      data.loanAmount,
+      10_000,
+      1_000_000_000,
+      data.source === "full-application",
+    ),
   };
 }
 
@@ -107,14 +134,26 @@ export function makeLeadId(now = new Date()): string {
 }
 
 export function publicWhatsappUrl(message?: string): string {
-  const number = (process.env.PUBLIC_WHATSAPP || process.env.PUBLIC_PHONE || "+919885011157").replace(/\D/g, "");
+  const number = (
+    process.env.PUBLIC_WHATSAPP ||
+    process.env.PUBLIC_PHONE ||
+    "+919885011157"
+  ).replace(/\D/g, "");
+
   const base = `https://wa.me/${number}`;
   return message ? `${base}?text=${encodeURIComponent(message)}` : base;
 }
 
 export function getClientIp(request: Request): string {
   const forwarded = request.headers.get("x-forwarded-for");
-  return (forwarded?.split(",")[0] || request.headers.get("x-real-ip") || "unknown").trim().slice(0, 64);
+
+  return (
+    forwarded?.split(",")[0] ||
+    request.headers.get("x-real-ip") ||
+    "unknown"
+  )
+    .trim()
+    .slice(0, 64);
 }
 
 export function originAllowed(request: Request): boolean {
@@ -128,13 +167,22 @@ export function originAllowed(request: Request): boolean {
     return false;
   }
 
-  const forwardedHost = (request.headers.get("x-forwarded-host") || request.headers.get("host") || "")
+  const forwardedHost = (
+    request.headers.get("x-forwarded-host") ||
+    request.headers.get("host") ||
+    ""
+  )
     .split(":")[0]
     .toLowerCase();
 
-  if (originHost && forwardedHost && originHost === forwardedHost) return true;
+  if (originHost && forwardedHost && originHost === forwardedHost) {
+    return true;
+  }
 
-  const allowed = (process.env.ALLOWED_HOSTS || "www.eazykredit.in,eazykredit.in")
+  const allowed = (
+    process.env.ALLOWED_HOSTS ||
+    "www.eazykredit.in,eazykredit.in"
+  )
     .split(",")
     .map((value) => value.trim().toLowerCase())
     .filter(Boolean);
@@ -142,24 +190,41 @@ export function originAllowed(request: Request): boolean {
   return allowed.includes(originHost);
 }
 
-export async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
+export async function verifyTurnstile(
+  token: string,
+  ip: string,
+): Promise<boolean> {
   const siteKey = (process.env.TURNSTILE_SITE_KEY || "").trim();
   const secret = (process.env.TURNSTILE_SECRET_KEY || "").trim();
+
   if (!siteKey || !secret) return true;
   if (!token) return false;
 
   const body = new URLSearchParams({ secret, response: token });
-  if (ip && ip !== "unknown") body.set("remoteip", ip);
+
+  if (ip && ip !== "unknown") {
+    body.set("remoteip", ip);
+  }
 
   try {
-    const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body,
-      cache: "no-store",
-      signal: AbortSignal.timeout(8000),
-    });
-    const result = (await response.json()) as { success?: boolean; hostname?: string };
+    const response = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body,
+        cache: "no-store",
+        signal: AbortSignal.timeout(8000),
+      },
+    );
+
+    const result = (await response.json()) as {
+      success?: boolean;
+      hostname?: string;
+    };
+
     return response.ok && result.success === true;
   } catch {
     return false;
@@ -186,19 +251,32 @@ function leadText(leadId: string, data: ValidatedLead): string {
     `Monthly income: ${formatRupees(data.monthlyIncome)}`,
     `Requested amount: ${formatRupees(data.loanAmount)}`,
   ];
-  if (data.message) lines.push("", "Message:", data.message);
-  lines.push("", "Consent to contact: Yes", `Received: ${new Date().toISOString()}`);
+
+  if (data.message) {
+    lines.push("", "Message:", data.message);
+  }
+
+  lines.push(
+    "",
+    "Consent to contact: Yes",
+    `Received: ${new Date().toISOString()}`,
+  );
+
   return lines.join("\n");
 }
 
 function escapeHtml(value: string): string {
-  return value.replace(/[&<>'"]/g, (char) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    "'": "&#39;",
-    '"': "&quot;",
-  })[char] || char);
+  return value.replace(/[&<>'"]/g, (char) => {
+    const replacements: Record<string, string> = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      "'": "&#39;",
+      '"': "&quot;",
+    };
+
+    return replacements[char] || char;
+  });
 }
 
 function leadHtml(leadId: string, data: ValidatedLead): string {
@@ -214,13 +292,32 @@ function leadHtml(leadId: string, data: ValidatedLead): string {
     ["Monthly income", formatRupees(data.monthlyIncome)],
     ["Requested amount", formatRupees(data.loanAmount)],
   ];
+
   const table = rows
-    .map(([label, value]) => `<tr><th style="text-align:left;padding:8px;border-bottom:1px solid #e2e8f0">${escapeHtml(label)}</th><td style="padding:8px;border-bottom:1px solid #e2e8f0">${escapeHtml(value)}</td></tr>`)
+    .map(
+      ([label, value]) =>
+        `<tr>` +
+        `<th style="text-align:left;padding:8px;border-bottom:1px solid #e2e8f0">${escapeHtml(label)}</th>` +
+        `<td style="padding:8px;border-bottom:1px solid #e2e8f0">${escapeHtml(value)}</td>` +
+        `</tr>`,
+    )
     .join("");
+
   const message = data.message
     ? `<h3>Message</h3><p style="white-space:pre-wrap">${escapeHtml(data.message)}</p>`
     : "";
-  return `<div style="font-family:Arial,sans-serif;color:#0f172a;max-width:680px"><h2 style="color:#0b4f9f">New EAZYKREDIT inquiry</h2><table style="width:100%;border-collapse:collapse">${table}</table>${message}<p style="font-size:12px;color:#64748b">The applicant consented to contact by phone, WhatsApp and email. Do not request OTPs, PINs or passwords.</p></div>`;
+
+  return (
+    `<div style="font-family:Arial,sans-serif;color:#0f172a;max-width:680px">` +
+    `<h2 style="color:#0b4f9f">New EAZYKREDIT inquiry</h2>` +
+    `<table style="width:100%;border-collapse:collapse">${table}</table>` +
+    message +
+    `<p style="font-size:12px;color:#64748b">` +
+    `The applicant consented to contact by phone, WhatsApp and email. ` +
+    `Do not request OTPs, PINs or passwords.` +
+    `</p>` +
+    `</div>`
+  );
 }
 
 async function resendEmail(options: {
@@ -232,7 +329,16 @@ async function resendEmail(options: {
 }): Promise<boolean> {
   const apiKey = (process.env.RESEND_API_KEY || "").trim();
   const from = (process.env.EMAIL_FROM || "").trim();
-  if (!apiKey || !from) return false;
+
+  if (!apiKey) {
+    console.error("Resend delivery skipped: RESEND_API_KEY is missing");
+    return false;
+  }
+
+  if (!from) {
+    console.error("Resend delivery skipped: EMAIL_FROM is missing");
+    return false;
+  }
 
   try {
     const response = await fetch("https://api.resend.com/emails", {
@@ -240,6 +346,8 @@ async function resendEmail(options: {
       headers: {
         Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
+        Accept: "application/json",
+        "User-Agent": "eazykredit-vercel/1.0",
       },
       body: JSON.stringify({
         from,
@@ -252,20 +360,45 @@ async function resendEmail(options: {
       cache: "no-store",
       signal: AbortSignal.timeout(10000),
     });
+
+    const responseBody = await response.text();
+
     if (!response.ok) {
-      console.error("Resend delivery failed", response.status);
+      console.error(
+        "Resend delivery failed",
+        response.status,
+        responseBody.slice(0, 1000),
+      );
       return false;
     }
+
+    console.info(
+      "Resend delivery accepted",
+      response.status,
+      responseBody.slice(0, 500),
+    );
+
     return true;
   } catch (error) {
-    console.error("Resend delivery failed", error instanceof Error ? error.message : "unknown error");
+    console.error(
+      "Resend delivery failed",
+      error instanceof Error ? error.message : "unknown error",
+    );
     return false;
   }
 }
 
-export async function sendOwnerEmail(leadId: string, data: ValidatedLead): Promise<boolean> {
+export async function sendOwnerEmail(
+  leadId: string,
+  data: ValidatedLead,
+): Promise<boolean> {
   const recipient = (process.env.LEAD_EMAIL_TO || "").trim();
-  if (!recipient) return false;
+
+  if (!recipient) {
+    console.error("Owner email skipped: LEAD_EMAIL_TO is missing");
+    return false;
+  }
+
   return resendEmail({
     to: recipient,
     subject: `[${leadId}] New ${data.loanType} inquiry`,
@@ -275,9 +408,25 @@ export async function sendOwnerEmail(leadId: string, data: ValidatedLead): Promi
   });
 }
 
-export async function sendApplicantEmail(leadId: string, data: ValidatedLead): Promise<boolean> {
-  if ((process.env.SEND_APPLICANT_ACK || "true").toLowerCase() !== "true") return false;
-  const text = `Hello ${data.fullName},\n\nWe received your inquiry. Your reference is ${leadId}. An EAZYKREDIT representative will contact you during business hours.\n\nPlease do not share OTPs, PINs, passwords, or card details with anyone. Loan approval, rates and terms are determined by the lender.\n\nEAZYKREDIT`;
+export async function sendApplicantEmail(
+  leadId: string,
+  data: ValidatedLead,
+): Promise<boolean> {
+  if (
+    (process.env.SEND_APPLICANT_ACK || "true").toLowerCase() !==
+    "true"
+  ) {
+    return false;
+  }
+
+  const text =
+    `Hello ${data.fullName},\n\n` +
+    `We received your inquiry. Your reference is ${leadId}. ` +
+    `An EAZYKREDIT representative will contact you during business hours.\n\n` +
+    `Please do not share OTPs, PINs, passwords, or card details with anyone. ` +
+    `Loan approval, rates and terms are determined by the lender.\n\n` +
+    `EAZYKREDIT`;
+
   return resendEmail({
     to: data.email,
     subject: `EAZYKREDIT inquiry received — ${leadId}`,
@@ -285,9 +434,13 @@ export async function sendApplicantEmail(leadId: string, data: ValidatedLead): P
   });
 }
 
-export async function sendAutomationWebhook(leadId: string, data: ValidatedLead): Promise<boolean> {
+export async function sendAutomationWebhook(
+  leadId: string,
+  data: ValidatedLead,
+): Promise<boolean> {
   const url = (process.env.AUTOMATION_WEBHOOK_URL || "").trim();
   if (!url) return false;
+
   const token = (process.env.AUTOMATION_WEBHOOK_TOKEN || "").trim();
 
   try {
@@ -295,7 +448,9 @@ export async function sendAutomationWebhook(leadId: string, data: ValidatedLead)
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...(token
+          ? { Authorization: `Bearer ${token}` }
+          : {}),
       },
       body: JSON.stringify({
         leadId,
@@ -315,9 +470,25 @@ export async function sendAutomationWebhook(leadId: string, data: ValidatedLead)
       cache: "no-store",
       signal: AbortSignal.timeout(10000),
     });
-    return response.ok;
+
+    if (!response.ok) {
+      const responseBody = await response.text();
+
+      console.error(
+        "Automation webhook failed",
+        response.status,
+        responseBody.slice(0, 500),
+      );
+
+      return false;
+    }
+
+    return true;
   } catch (error) {
-    console.error("Automation webhook failed", error instanceof Error ? error.message : "unknown error");
+    console.error(
+      "Automation webhook failed",
+      error instanceof Error ? error.message : "unknown error",
+    );
     return false;
   }
 }
