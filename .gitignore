@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local Franky Lab deployment values (never commit)
+FRANKY-TEST-PRIVATE-ENV.txt
+.env.local
+PORTAINER-ENVIRONMENT.txt

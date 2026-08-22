@@ -1,0 +1,34 @@
+name: EAZYKREDIT validation
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+        env:
+          NEXT_PUBLIC_SITE_URL: https://eazykredit.franky.co.in
+          NEXT_PUBLIC_DEPLOYMENT_STAGE: test
+      - run: python -m py_compile backend/server.py backend/export_leads.py backend/test_server.py
+      - run: cd backend && python -m unittest -v test_server.py
+      - name: Check that local secret files are not tracked
+        run: |
+          test ! -f .env.local
+          test ! -f .env

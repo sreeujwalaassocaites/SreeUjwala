@@ -1,226 +1,224 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as zod from "zod";
 import { motion, AnimatePresence } from "framer-motion";
-import { MapPin, Phone, Mail, Clock, AlertCircle, CheckCircle2, RefreshCw } from "lucide-react";
+import {
+  AlertCircle,
+  CheckCircle2,
+  Clock,
+  ExternalLink,
+  Mail,
+  MapPin,
+  Phone,
+  RefreshCw,
+} from "lucide-react";
+import TurnstileWidget from "@/components/TurnstileWidget";
+import { submitLead, type LeadResponse } from "@/lib/lead-client";
+
+const personNamePattern = /^[\p{L}\p{M}][\p{L}\p{M}\s.'-]*$/u;
 
 const schema = zod.object({
-  name: zod.string()
-    .min(3, "Name must be at least 3 characters")
-    .regex(/^[A-Za-z\s]+$/, "Name can only contain letters and spaces")
-    .refine((val) => val.trim().length >= 3, "Name must contain at least 3 non-space characters"),
-  phone: zod.string()
-    .regex(/^\d{10}$/, "Please enter a valid 10-digit mobile number"),
-  email: zod.string()
-    .trim()
-    .toLowerCase()
-    .email("Please enter a valid email address"),
-  message: zod.string().optional()
+  name: zod.string().trim().min(3, "Name must be at least 3 characters").max(100).regex(personNamePattern, "Enter a valid name"),
+  phone: zod.string().regex(/^[6-9]\d{9}$/, "Enter a valid 10-digit Indian mobile number"),
+  email: zod.string().trim().toLowerCase().email("Enter a valid email address").max(254),
+  message: zod.string().max(1500, "Message must be under 1,500 characters").optional(),
+  consent: zod.boolean().refine((value) => value, { message: "Consent is required" }),
+  website: zod.string().optional(),
 });
 
 type ContactFormData = zod.infer<typeof schema>;
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [result, setResult] = useState<LeadResponse | null>(null);
+  const [submitError, setSubmitError] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileResetSignal, setTurnstileResetSignal] = useState(0);
 
-  const { register, handleSubmit, reset, formState: { errors } } = useForm<ContactFormData>({
-    resolver: zodResolver(schema)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(schema),
+    defaultValues: { name: "", phone: "", email: "", message: "", consent: false, website: "" },
   });
 
-  const onSubmit = (data: ContactFormData) => {
+  const handleTokenChange = useCallback((token: string) => {
+    setTurnstileToken(token);
+  }, []);
+
+  const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
-
-    const whatsappBase = "https://wa.me/919885011157";
-    const messagePart = data.message ? `\nMessage: ${data.message}` : "";
-    const waText = `Hello EAZYKREDIT,\n\nI have a contact inquiry:\nName: ${data.name}\nPhone: ${data.phone}\nEmail: ${data.email}${messagePart}\n\nPlease get back to me.`;
-    const fullWaUrl = `${whatsappBase}?text=${encodeURIComponent(waText)}`;
-
-    setTimeout(() => {
+    setSubmitError("");
+    try {
+      const response = await submitLead({
+        source: "contact",
+        fullName: data.name,
+        mobileNumber: data.phone,
+        email: data.email,
+        message: data.message,
+        consent: data.consent,
+        website: data.website,
+        turnstileToken,
+      });
+      setResult(response);
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : "Unable to send your inquiry.");
+      setTurnstileResetSignal((value) => value + 1);
+    } finally {
       setIsSubmitting(false);
-      setIsSuccess(true);
-      reset();
-
-      setTimeout(() => {
-        window.open(fullWaUrl, "_blank");
-      }, 2500);
-    }, 1200);
+    }
   };
 
   return (
-    <div className="flex flex-col w-full bg-section-bg pb-24 pt-24">
-      {/* Grid Content */}
-      <section className="max-w-7xl mx-auto w-full px-6 mt-4">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-
-          {/* Details Column Left */}
-          <div className="lg:col-span-5 flex flex-col gap-8">
-            <div className="bg-white border border-border-color p-8 rounded-card shadow-premium flex flex-col gap-6">
-              <h3 className="font-extrabold text-2xl text-dark-blue">Get In Touch</h3>
-              <p className="text-text-gray text-sm leading-relaxed">
-                Connect with our authorized credit DSA consultants for immediate support.
+    <div className="flex w-full flex-col bg-section-bg pb-24 pt-24">
+      <section className="mx-auto mt-4 w-full max-w-7xl px-6">
+        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12">
+          <div className="flex flex-col gap-8 lg:col-span-5">
+            <div className="flex flex-col gap-6 rounded-card border border-border-color bg-white p-8 shadow-premium">
+              <h1 className="text-2xl font-extrabold text-dark-blue">Get In Touch</h1>
+              <p className="text-sm leading-relaxed text-text-gray">
+                Connect with our credit facilitation team for guidance on the next steps in your loan inquiry.
               </p>
 
               <div className="flex flex-col gap-5">
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 bg-primary-blue/8 rounded-lg flex items-center justify-center shrink-0">
-                    <MapPin className="w-5 h-5 text-primary-blue" />
-                  </div>
-                  <div className="flex flex-col gap-0.5 text-sm">
-                    <h4 className="font-bold text-dark-blue">Office Address</h4>
-                    <a 
-                      href="https://www.google.com/maps?q=17.493736267089844,78.41146850585938&z=17&hl=en" 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="text-text-gray hover:text-primary-blue leading-relaxed font-semibold transition-colors"
-                    >
-                      JNTU Road, Kukatpally, Hyderabad, Telangana - 500085
-                    </a>
-                  </div>
-                </div>
+                <ContactItem icon={<MapPin className="h-5 w-5 text-primary-blue" />} title="Office Address">
+                  <a
+                    href="https://www.google.com/maps?q=17.493736267089844,78.41146850585938&z=17&hl=en"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold leading-relaxed text-text-gray transition-colors hover:text-primary-blue"
+                  >
+                    Plot No 572, 1st Floor, Vivekananda Nagar, Kukatpally, Hyderabad
+                  </a>
+                </ContactItem>
 
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 bg-primary-blue/8 rounded-lg flex items-center justify-center shrink-0">
-                    <Phone className="w-5 h-5 text-primary-blue" />
-                  </div>
-                  <div className="flex flex-col gap-0.5 text-sm">
-                    <h4 className="font-bold text-dark-blue">Phone / WhatsApp</h4>
-                    <a href="tel:+919885011157" className="text-text-gray hover:text-primary-blue font-semibold">
-                      +91 98850 11157
-                    </a>
-                  </div>
-                </div>
+                <ContactItem icon={<Phone className="h-5 w-5 text-primary-blue" />} title="Phone / WhatsApp">
+                  <a href="tel:+919885011157" className="font-semibold text-text-gray hover:text-primary-blue">
+                    +91 98850 11157
+                  </a>
+                </ContactItem>
 
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 bg-primary-blue/8 rounded-lg flex items-center justify-center shrink-0">
-                    <Mail className="w-5 h-5 text-primary-blue" />
-                  </div>
-                  <div className="flex flex-col gap-0.5 text-sm">
-                    <h4 className="font-bold text-dark-blue">Corporate Email</h4>
-                    <a href="mailto:info@eazykredit.in" className="text-text-gray hover:text-primary-blue font-semibold">
-                      info@eazykredit.in
-                    </a>
-                  </div>
-                </div>
+                <ContactItem icon={<Mail className="h-5 w-5 text-primary-blue" />} title="Corporate Email">
+                  <a href="mailto:info@eazykredit.in" className="font-semibold text-text-gray hover:text-primary-blue">
+                    info@eazykredit.in
+                  </a>
+                </ContactItem>
 
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 bg-primary-blue/8 rounded-lg flex items-center justify-center shrink-0">
-                    <Clock className="w-5 h-5 text-primary-blue" />
-                  </div>
-                  <div className="flex flex-col gap-0.5 text-sm">
-                    <h4 className="font-bold text-dark-blue">Business Hours</h4>
-                    <p className="text-text-gray">Monday - Saturday (09:30 AM - 06:30 PM)</p>
-                  </div>
-                </div>
+                <ContactItem icon={<Clock className="h-5 w-5 text-primary-blue" />} title="Business Hours">
+                  <p className="text-text-gray">Monday - Saturday (09:30 AM - 06:00 PM)</p>
+                </ContactItem>
               </div>
             </div>
           </div>
 
-          {/* Form Column Right */}
-          <div className="lg:col-span-7 bg-white p-6 md:p-10 border border-border-color rounded-card shadow-premium">
-            <h3 className="font-extrabold text-2xl text-dark-blue mb-6 border-b border-border-color pb-4">
+          <div className="rounded-card border border-border-color bg-white p-6 shadow-premium md:p-10 lg:col-span-7">
+            <h2 className="mb-6 border-b border-border-color pb-4 text-2xl font-extrabold text-dark-blue">
               Send an Inquiry
-            </h3>
+            </h2>
 
             <AnimatePresence mode="wait">
-              {!isSuccess ? (
+              {!result ? (
                 <motion.form
                   key="form"
                   onSubmit={handleSubmit(onSubmit)}
                   className="flex flex-col gap-5"
+                  noValidate
                 >
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    {/* Name */}
-                    <div className="flex flex-col gap-2">
-                      <label className="text-sm font-bold text-text-dark">Your Name *</label>
+                  <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+                    <Field label="Your Name" error={errors.name?.message}>
                       <input
                         type="text"
+                        autoComplete="name"
                         placeholder="Enter full name"
-                        className={`w-full px-4 py-3 rounded-btn border text-sm outline-none transition-all ${errors.name ? "border-red-500 focus:ring-4 focus:ring-red-100" : "border-border-color focus:border-primary-blue focus:ring-4 focus:ring-primary-blue/10"
-                          }`}
-                        {...register("name", {
-                          onChange: (e) => {
-                            e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, "");
-                          }
-                        })}
+                        className={inputClass(Boolean(errors.name))}
+                        {...register("name")}
                       />
-                      {errors.name && (
-                        <span className="text-red-500 text-xs font-bold flex items-center gap-1">
-                          <AlertCircle className="w-3.5 h-3.5" /> {errors.name.message}
-                        </span>
-                      )}
-                    </div>
+                    </Field>
 
-                    {/* Phone */}
-                    <div className="flex flex-col gap-2">
-                      <label className="text-sm font-bold text-text-dark">Mobile Number *</label>
+                    <Field label="Mobile Number" error={errors.phone?.message}>
                       <input
                         type="tel"
+                        inputMode="numeric"
+                        autoComplete="tel"
                         placeholder="10-digit number"
-                        className={`w-full px-4 py-3 rounded-btn border text-sm outline-none transition-all ${errors.phone ? "border-red-500 focus:ring-4 focus:ring-red-100" : "border-border-color focus:border-primary-blue focus:ring-4 focus:ring-primary-blue/10"
-                          }`}
+                        maxLength={10}
+                        className={inputClass(Boolean(errors.phone))}
                         {...register("phone", {
-                          onChange: (e) => {
-                            e.target.value = e.target.value.replace(/[^0-9]/g, "").slice(0, 10);
-                          }
+                          onChange: (event) => {
+                            event.target.value = event.target.value.replace(/\D/g, "").slice(0, 10);
+                          },
                         })}
                       />
-                      {errors.phone && (
-                        <span className="text-red-500 text-xs font-bold flex items-center gap-1">
-                          <AlertCircle className="w-3.5 h-3.5" /> {errors.phone.message}
-                        </span>
-                      )}
-                    </div>
+                    </Field>
                   </div>
 
-                  {/* Email */}
-                  <div className="flex flex-col gap-2">
-                    <label className="text-sm font-bold text-text-dark">Email Address *</label>
+                  <Field label="Email Address" error={errors.email?.message}>
                     <input
                       type="email"
+                      autoComplete="email"
                       placeholder="name@example.com"
-                      className={`w-full px-4 py-3 rounded-btn border text-sm outline-none transition-all ${errors.email ? "border-red-500 focus:ring-4 focus:ring-red-100" : "border-border-color focus:border-primary-blue focus:ring-4 focus:ring-primary-blue/10"
-                        }`}
-                      {...register("email", {
-                        onChange: (e) => {
-                          e.target.value = e.target.value.trim();
-                        }
-                      })}
+                      className={inputClass(Boolean(errors.email))}
+                      {...register("email")}
                     />
-                    {errors.email && (
-                      <span className="text-red-500 text-xs font-bold flex items-center gap-1">
-                        <AlertCircle className="w-3.5 h-3.5" /> {errors.email.message}
-                      </span>
-                    )}
-                  </div>
+                  </Field>
 
-                  {/* Message */}
-                  <div className="flex flex-col gap-2">
-                    <label className="text-sm font-bold text-text-dark">Your Message (Optional)</label>
+                  <Field label="Your Message (Optional)" error={errors.message?.message} optional>
                     <textarea
                       rows={4}
+                      maxLength={1500}
                       placeholder="Write your query details here..."
-                      className="w-full px-4 py-3 rounded-btn border border-border-color text-sm outline-none resize-y transition-all focus:border-primary-blue focus:ring-4 focus:ring-primary-blue/10"
+                      className={inputClass(Boolean(errors.message)) + " resize-y"}
                       {...register("message")}
                     />
+                  </Field>
+
+                  <div className="absolute -left-[10000px] h-px w-px overflow-hidden" aria-hidden="true">
+                    <label htmlFor="contact-website">Website</label>
+                    <input id="contact-website" tabIndex={-1} autoComplete="off" {...register("website")} />
                   </div>
+
+                  <div>
+                    <label className="flex cursor-pointer items-start gap-3 text-xs leading-relaxed text-slate-700">
+                      <input
+                        type="checkbox"
+                        className="mt-0.5 h-4 w-4 accent-primary-blue"
+                        {...register("consent")}
+                      />
+                      <span>
+                        I consent to EAZYKREDIT contacting me by phone, WhatsApp and email. I have read the{" "}
+                        <Link href="/privacy" className="font-bold text-primary-blue hover:underline">Privacy Policy</Link>.
+                      </span>
+                    </label>
+                    {errors.consent && <ErrorText>{errors.consent.message}</ErrorText>}
+                  </div>
+
+                  <TurnstileWidget onTokenChange={handleTokenChange} resetSignal={turnstileResetSignal} />
+
+                  {submitError && (
+                    <div role="alert" className="flex items-start gap-2 rounded-btn border border-red-200 bg-red-50 p-3 text-xs font-semibold text-red-700">
+                      <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+                      {submitError}
+                    </div>
+                  )}
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="bg-gradient-to-r from-dark-blue to-primary-blue text-white py-3.5 rounded-btn font-bold text-sm shadow hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75"
+                    className="flex cursor-pointer items-center justify-center gap-2 rounded-btn bg-gradient-to-r from-dark-blue to-primary-blue py-3.5 text-sm font-bold text-white shadow transition-all duration-300 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-75"
                   >
                     {isSubmitting ? (
                       <>
-                        <RefreshCw className="w-4 h-4 animate-spin" />
-                        Sending Message...
+                        <RefreshCw className="h-4 w-4 animate-spin" />
+                        Sending Securely...
                       </>
                     ) : (
-                      "Send Message"
+                      "Send Inquiry"
                     )}
                   </button>
                 </motion.form>
@@ -229,24 +227,34 @@ export default function Contact() {
                   key="success"
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="flex flex-col items-center text-center py-8 gap-4"
+                  className="flex flex-col items-center gap-4 py-8 text-center"
                 >
-                  <div className="w-12 h-12 bg-[#22C55E]/10 rounded-full flex items-center justify-center text-success-green">
-                    <CheckCircle2 className="w-8 h-8" />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#22C55E]/10 text-success-green">
+                    <CheckCircle2 className="h-8 w-8" />
                   </div>
                   <div>
-                    <h4 className="font-extrabold text-xl text-dark-blue">Message Sent Successfully!</h4>
-                    <p className="text-text-gray text-xs md:text-sm mt-1">Our advisory desk will contact you via email or phone within 24 business hours.</p>
+                    <h2 className="text-xl font-extrabold text-dark-blue">Inquiry Sent Successfully</h2>
+                    <p className="mt-1 text-xs text-text-gray md:text-sm">
+                      Reference: <strong>{result.referenceId}</strong>. Our advisory desk will contact you during business hours.
+                    </p>
                   </div>
+                  {result.whatsappUrl && (
+                    <a
+                      href={result.whatsappUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-btn bg-[#25D366] px-5 py-3 text-xs font-bold text-white"
+                    >
+                      Continue on WhatsApp <ExternalLink className="h-4 w-4" />
+                    </a>
+                  )}
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
         </div>
 
-        {/* Google Map Panel */}
-        <div className="mt-16 w-full overflow-hidden border border-border-color rounded-card shadow-premium h-[400px]">
-          {/* Google Maps Embed */}
+        <div className="mt-16 h-[400px] w-full overflow-hidden rounded-card border border-border-color shadow-premium">
           <iframe
             src="https://maps.google.com/maps?q=17.493736267089844,78.41146850585938&z=17&output=embed&hl=en"
             width="100%"
@@ -259,6 +267,64 @@ export default function Contact() {
           />
         </div>
       </section>
+    </div>
+  );
+}
+
+function inputClass(hasError: boolean) {
+  return `w-full rounded-btn border bg-white px-4 py-3 text-sm outline-none transition-all ${
+    hasError
+      ? "border-red-500 focus:ring-4 focus:ring-red-100"
+      : "border-border-color focus:border-primary-blue focus:ring-4 focus:ring-primary-blue/10"
+  }`;
+}
+
+function ErrorText({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="mt-1 flex items-center gap-1 text-xs font-bold text-red-500">
+      <AlertCircle className="h-3.5 w-3.5" /> {children}
+    </span>
+  );
+}
+
+function Field({
+  label,
+  error,
+  optional = false,
+  children,
+}: {
+  label: string;
+  error?: string;
+  optional?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex flex-col gap-2">
+      <label className="text-sm font-bold text-text-dark">
+        {label} {!optional && <span aria-hidden="true">*</span>}
+      </label>
+      {children}
+      {error && <ErrorText>{error}</ErrorText>}
+    </div>
+  );
+}
+
+function ContactItem({
+  icon,
+  title,
+  children,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex gap-4">
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-blue/8">{icon}</div>
+      <div className="flex flex-col gap-0.5 text-sm">
+        <h3 className="font-bold text-dark-blue">{title}</h3>
+        {children}
+      </div>
     </div>
   );
 }

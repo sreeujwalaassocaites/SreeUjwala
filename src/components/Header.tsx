@@ -139,7 +139,7 @@ export default function Header() {
             href="/#partner-banks" 
             className={`font-semibold text-sm transition-colors py-2 ${textClass}`}
           >
-            Partner Banks
+            Banks & NBFCs
           </Link>
 
           <Link 
@@ -220,7 +220,7 @@ export default function Header() {
               href="/#partner-banks" 
               className="font-semibold text-base py-1 text-text-dark"
             >
-              Partner Banks
+              Banks & NBFCs
             </Link>
             <Link 
               href="/contact" 

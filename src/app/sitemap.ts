@@ -1,27 +1,29 @@
-import { MetadataRoute } from 'next';
+import { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/site-config";
 
-export const dynamic = 'force-static';
+export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://www.eazykredit.com';
   const routes = [
-    '',
-    '/about',
-    '/calculators',
-    '/contact',
-    '/apply',
-    '/loans/home-loan',
-    '/loans/business-loan',
-    '/loans/personal-loan',
-    '/loans/loan-against-property',
-    '/loans/education-loan',
-    '/loans/used-car-loan',
+    "",
+    "/about",
+    "/contact",
+    "/apply",
+    "/privacy",
+    "/terms",
+    "/disclaimer",
+    "/loans/home-loan",
+    "/loans/business-loan",
+    "/loans/personal-loan",
+    "/loans/loan-against-property",
+    "/loans/education-loan",
+    "/loans/used-car-loan",
   ];
 
   return routes.map((route) => ({
-    url: `${baseUrl}${route}`,
+    url: `${SITE_URL}${route}`,
     lastModified: new Date(),
-    changeFrequency: 'monthly',
-    priority: route === '' ? 1.0 : route.startsWith('/loans') || route === '/apply' ? 0.9 : 0.8,
+    changeFrequency: route === "" ? "weekly" : "monthly",
+    priority: route === "" ? 1 : route.startsWith("/loans") || route === "/apply" ? 0.9 : 0.7,
   }));
 }
