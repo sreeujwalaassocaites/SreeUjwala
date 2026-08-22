@@ -1,5 +1,4 @@
 import { randomBytes } from "node:crypto";
-import nodemailer from "nodemailer";
 import { z } from "zod";
 
 const phonePattern = /^[6-9]\d{9}$/;
@@ -49,6 +48,20 @@ export interface DeliveryResult {
   automation: boolean;
 }
 
+type GraphTokenResponse = {
+  access_token?: string;
+  expires_in?: number;
+  error?: string;
+  error_description?: string;
+};
+
+let graphTokenCache:
+  | {
+      accessToken: string;
+      expiresAt: number;
+    }
+  | undefined;
+
 function normaliseMobile(value: string): string {
   let digits = value.replace(/\D/g, "");
 
@@ -70,18 +83,12 @@ function parseAmount(
   required: boolean,
 ): number | null {
   if (value === undefined || value === "") {
-    if (required) {
-      throw new Error("A required amount is missing");
-    }
-
+    if (required) throw new Error("A required amount is missing");
     return null;
   }
 
   const parsed = Number(value);
-
-  if (!Number.isFinite(parsed)) {
-    throw new Error("Invalid amount");
-  }
+  if (!Number.isFinite(parsed)) throw new Error("Invalid amount");
 
   const amount = Math.trunc(parsed);
 
@@ -214,13 +221,8 @@ export async function verifyTurnstile(
   const siteKey = (process.env.TURNSTILE_SITE_KEY || "").trim();
   const secret = (process.env.TURNSTILE_SECRET_KEY || "").trim();
 
-  if (!siteKey || !secret) {
-    return true;
-  }
-
-  if (!token) {
-    return false;
-  }
+  if (!siteKey || !secret) return true;
+  if (!token) return false;
 
   const body = new URLSearchParams({ secret, response: token });
 
@@ -254,10 +256,7 @@ export async function verifyTurnstile(
 }
 
 function formatRupees(value: number | null): string {
-  if (value === null) {
-    return "Not provided";
-  }
-
+  if (value === null) return "Not provided";
   return `₹${new Intl.NumberFormat("en-IN").format(value)}`;
 }
 
@@ -277,9 +276,7 @@ function leadText(leadId: string, data: ValidatedLead): string {
     `Requested amount: ${formatRupees(data.loanAmount)}`,
   ];
 
-  if (data.message) {
-    lines.push("", "Message:", data.message);
-  }
+  if (data.message) lines.push("", "Message:", data.message);
 
   lines.push(
     "",
@@ -376,91 +373,172 @@ function applicantHtml(leadId: string, data: ValidatedLead): string {
   );
 }
 
-function envBool(value: string | undefined, defaultValue: boolean): boolean {
-  if (value === undefined || value === "") {
-    return defaultValue;
+async function getGraphAccessToken(): Promise<string | null> {
+  if (
+    graphTokenCache &&
+    graphTokenCache.expiresAt > Date.now() + 30_000
+  ) {
+    return graphTokenCache.accessToken;
   }
 
-  return value.toLowerCase() === "true";
-}
+  const tenantId = (process.env.MS_TENANT_ID || "").trim();
+  const clientId = (process.env.MS_CLIENT_ID || "").trim();
+  const clientSecret = (process.env.MS_CLIENT_SECRET || "").trim();
 
-function createMailTransport() {
-  const host = (process.env.SMTP_HOST || "smtp.gmail.com").trim();
-  const port = Number(process.env.SMTP_PORT || "587");
-  const username = (process.env.SMTP_USERNAME || "").trim();
-  const password = (process.env.SMTP_PASSWORD || "").trim();
-
-  const secure = envBool(process.env.SMTP_SSL, port === 465);
-  const startTls = envBool(process.env.SMTP_STARTTLS, port === 587);
-
-  if (!username) {
-    throw new Error("SMTP_USERNAME is missing");
+  if (!tenantId) {
+    console.error("Microsoft Graph token skipped: MS_TENANT_ID is missing");
+    return null;
   }
 
-  if (!password) {
-    throw new Error("SMTP_PASSWORD is missing");
+  if (!clientId) {
+    console.error("Microsoft Graph token skipped: MS_CLIENT_ID is missing");
+    return null;
   }
 
-  if (!Number.isFinite(port) || port <= 0 || port > 65535) {
-    throw new Error("SMTP_PORT is invalid");
+  if (!clientSecret) {
+    console.error("Microsoft Graph token skipped: MS_CLIENT_SECRET is missing");
+    return null;
   }
 
-  return nodemailer.createTransport({
-    host,
-    port,
-    secure,
-    requireTLS: !secure && startTls,
-    auth: {
-      user: username,
-      pass: password,
-    },
-    connectionTimeout: 10_000,
-    greetingTimeout: 10_000,
-    socketTimeout: 15_000,
+  const body = new URLSearchParams({
+    client_id: clientId,
+    client_secret: clientSecret,
+    scope: "https://graph.microsoft.com/.default",
+    grant_type: "client_credentials",
   });
+
+  try {
+    const response = await fetch(
+      `https://login.microsoftonline.com/${encodeURIComponent(tenantId)}/oauth2/v2.0/token`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body,
+        cache: "no-store",
+        signal: AbortSignal.timeout(10_000),
+      },
+    );
+
+    const raw = await response.text();
+
+    if (!response.ok) {
+      console.error(
+        "Microsoft Graph token failed",
+        response.status,
+        raw.slice(0, 1000),
+      );
+      return null;
+    }
+
+    const result = JSON.parse(raw) as GraphTokenResponse;
+
+    if (!result.access_token) {
+      console.error(
+        "Microsoft Graph token failed: access_token missing",
+        raw.slice(0, 1000),
+      );
+      return null;
+    }
+
+    const expiresIn =
+      typeof result.expires_in === "number" ? result.expires_in : 3600;
+
+    graphTokenCache = {
+      accessToken: result.access_token,
+      expiresAt: Date.now() + Math.max(expiresIn - 60, 60) * 1000,
+    };
+
+    return result.access_token;
+  } catch (error) {
+    console.error(
+      "Microsoft Graph token failed",
+      error instanceof Error ? error.message : "unknown error",
+    );
+    return null;
+  }
 }
 
-async function smtpEmail(options: {
+async function graphEmail(options: {
   to: string;
   subject: string;
   text: string;
   html?: string;
   replyTo?: string;
 }): Promise<boolean> {
-  const username = (process.env.SMTP_USERNAME || "").trim();
-  const from =
-    (process.env.SMTP_FROM || "").trim() ||
-    (username ? `EAZYKREDIT <${username}>` : "");
+  const sender = (process.env.MAIL_FROM || "").trim();
 
-  if (!from) {
-    console.error("SMTP delivery skipped: SMTP_FROM is missing");
+  if (!sender) {
+    console.error("Microsoft Graph email skipped: MAIL_FROM is missing");
     return false;
   }
 
+  const accessToken = await getGraphAccessToken();
+  if (!accessToken) return false;
+
+  const message: Record<string, unknown> = {
+    subject: options.subject,
+    body: {
+      contentType: options.html ? "HTML" : "Text",
+      content: options.html || options.text,
+    },
+    toRecipients: [
+      {
+        emailAddress: {
+          address: options.to,
+        },
+      },
+    ],
+  };
+
+  if (options.replyTo) {
+    message.replyTo = [
+      {
+        emailAddress: {
+          address: options.replyTo,
+        },
+      },
+    ];
+  }
+
   try {
-    const transporter = createMailTransport();
-
-    const result = await transporter.sendMail({
-      from,
-      to: options.to,
-      subject: options.subject,
-      text: options.text,
-      ...(options.html ? { html: options.html } : {}),
-      ...(options.replyTo ? { replyTo: options.replyTo } : {}),
-    });
-
-    console.info(
-      "SMTP delivery accepted",
-      result.messageId ? "messageId-present" : "messageId-missing",
+    const response = await fetch(
+      `https://graph.microsoft.com/v1.0/users/${encodeURIComponent(sender)}/sendMail`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message,
+          saveToSentItems: true,
+        }),
+        cache: "no-store",
+        signal: AbortSignal.timeout(15_000),
+      },
     );
 
+    if (!response.ok) {
+      const raw = await response.text();
+
+      console.error(
+        "Microsoft Graph sendMail failed",
+        response.status,
+        raw.slice(0, 1000),
+      );
+
+      return false;
+    }
+
+    console.info("Microsoft Graph sendMail accepted", response.status);
     return true;
   } catch (error) {
     console.error(
-      "SMTP delivery failed",
-      error instanceof Error ? error.message : "unknown SMTP error",
+      "Microsoft Graph sendMail failed",
+      error instanceof Error ? error.message : "unknown error",
     );
-
     return false;
   }
 }
@@ -476,7 +554,7 @@ export async function sendOwnerEmail(
     return false;
   }
 
-  return smtpEmail({
+  return graphEmail({
     to: recipient,
     subject: `[${leadId}] New ${data.loanType} inquiry`,
     text: leadText(leadId, data),
@@ -495,7 +573,7 @@ export async function sendApplicantEmail(
     return false;
   }
 
-  return smtpEmail({
+  return graphEmail({
     to: data.email,
     subject: `EAZYKREDIT inquiry received — ${leadId}`,
     text: applicantText(leadId, data),
@@ -509,9 +587,7 @@ export async function sendAutomationWebhook(
 ): Promise<boolean> {
   const url = (process.env.AUTOMATION_WEBHOOK_URL || "").trim();
 
-  if (!url) {
-    return false;
-  }
+  if (!url) return false;
 
   const token = (process.env.AUTOMATION_WEBHOOK_TOKEN || "").trim();
 
