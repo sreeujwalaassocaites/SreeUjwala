@@ -16,12 +16,6 @@ export default function Footer() {
               Vivekananda Nagar,<br />
               Kukatpally, Hyderabad
             </p>
-            <div className="flex gap-2 rounded-lg border border-white/10 bg-white/5 p-3 text-[10px] leading-relaxed text-[#94A3B8]">
-              <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#1E88E5]" />
-              <span>
-                Loan facilitation only. Final eligibility, pricing and approval are determined by the lender.
-              </span>
-            </div>
           </div>
 
           <div>

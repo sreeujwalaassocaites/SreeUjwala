@@ -54,7 +54,7 @@ export default function About() {
               EazyKredit is a trusted loan distribution partner dedicated to making financing simple, fast, and transparent. With 15+ years of Banking and NBFC expertise, we help individuals and businesses find the right loan solutions from leading Banks and NBFCs. From consultation to disbursement, our team provides personalized guidance, competitive loan options, and end-to-end support to ensure a smooth borrowing experience.
             </p>
             <p className="text-text-gray font-medium leading-relaxed text-base md:text-lg">
-              At EazyKredit, we don't just process loans—we help you make the right financial decisions with confidence.
+              At EazyKredit, we don’t just process loans—we help you make the right financial decisions with confidence.
             </p>
           </motion.div>
         </div>

@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable react-hooks/set-state-in-effect */
+
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -14,65 +16,16 @@ import {
   ChevronRight,
   Star,
   ChevronDown,
-  Percent,
   Building2,
-  DollarSign,
   TrendingDown,
   Monitor,
   Layers,
-  ChevronLeft,
-  Phone,
-  Mail,
   HelpCircle,
   BookOpen,
   Building,
   Info,
 } from "lucide-react";
 import QuickApplyForm from "@/components/QuickApplyForm";
-
-// --- Count-Up Counter Component ---
-function Counter({ target, duration = 1.5 }: { target: number; duration?: number }) {
-  const [count, setCount] = useState(0);
-  const [mounted, setMounted] = useState(false);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
-
-  useEffect(() => {
-    setMounted(true);
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
-  }, []);
-
-  return (
-    <motion.span
-      viewport={{ once: true }}
-      onViewportEnter={() => {
-        if (!mounted) return;
-
-        let start = 0;
-        const end = target;
-        if (start === end) return;
-
-        const totalMiliseconds = duration * 1000;
-        const stepTime = 20;
-        const totalSteps = totalMiliseconds / stepTime;
-        const increment = Math.ceil(end / totalSteps);
-
-        timerRef.current = setInterval(() => {
-          start += increment;
-          if (start >= end) {
-            setCount(end);
-            if (timerRef.current) clearInterval(timerRef.current);
-          } else {
-            setCount(start);
-          }
-        }, stepTime);
-      }}
-    >
-      {count}
-    </motion.span>
-  );
-}
 
 // --- Bank Logos Mapping ---
 const bankLogos: { [key: string]: React.ReactNode } = {
@@ -239,16 +192,15 @@ interface LoanPageTemplateProps {
 }
 
 export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
-  const [activeDocTab, setActiveDocTab] = useState<"salaried" | "self-employed">("salaried");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [activeSection, setActiveSection] = useState("overview");
 
   // Scroll to top and reset tab whenever the loan page changes
+
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-    setActiveSection("overview");
-    setOpenFaq(null);
-  }, [config.loanType]);
+},   [config.loanType]);
+
 
   // EMI Calculator States
   const [loanAmount, setLoanAmount] = useState<number | "">(config.calcDefaultAmount);
@@ -547,16 +499,6 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
         </div>
       </section>
 
-      <section className="border-b border-amber-200 bg-amber-50 px-6 py-3">
-        <div className="mx-auto flex max-w-7xl items-start gap-2 text-[11px] leading-relaxed text-amber-900 md:text-xs">
-          <Info className="mt-0.5 h-4 w-4 shrink-0" />
-          <p>
-            Product details, lender names, rates, fees, timelines and calculator results are indicative and may change.
-            Final eligibility, approval and terms are determined only by the lender after verification.
-          </p>
-        </div>
-      </section>
-
       {/* Sticky Horizontal Sub-Navigation Tab Bar Container */}
       <div
         ref={tabContainerRef}
@@ -664,7 +606,7 @@ export default function LoanPageTemplate({ config }: LoanPageTemplateProps) {
                 <div className="max-w-7xl mx-auto flex flex-col gap-10">
                   <div className="text-center flex flex-col gap-2">
                     <span className="text-primary-blue text-xs font-extrabold tracking-widest uppercase">Trusted Lenders</span>
-                    <h2 className="text-2xl md:text-3xl font-extrabold text-dark-blue">Trusted by India's Leading Banks</h2>
+                    <h2 className="text-2xl md:text-3xl font-extrabold text-dark-blue">Trusted by India’s Leading Banks</h2>
                   </div>
 
                   {/* Infinite Marquee Container */}
