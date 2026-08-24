@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -25,10 +25,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Lint
+      - name: Run lint
         run: npm run lint
 
-      - name: Build
+      - name: Build application
         run: npm run build
         env:
           NEXT_PUBLIC_SITE_URL: https://www.eazykredit.in
@@ -42,8 +42,14 @@ jobs:
       - name: Check that secrets are not committed
         shell: bash
         run: |
-          if git grep -nE 'MS_CLIENT_SECRET=|SMTP_PASSWORD=|RESEND_API_KEY=' -- ':!*.md' ':!*.example'; then
+          if git grep -nE 'MS_CLIENT_SECRET=|SMTP_PASSWORD=|RESEND_API_KEY=' -- \
+            ':!*.md' \
+            ':!*.example' \
+            ':!.github/workflows/ci.yml'; then
             echo "Potential secret found in tracked source files."
             exit 1
           fi
+
+          echo "No obvious committed secrets found."
+
 
