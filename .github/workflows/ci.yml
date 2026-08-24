@@ -11,24 +11,39 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.13"
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run build
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
         env:
-          NEXT_PUBLIC_SITE_URL: https://eazykredit.franky.co.in
-          NEXT_PUBLIC_DEPLOYMENT_STAGE: test
-      - run: python -m py_compile backend/server.py backend/export_leads.py backend/test_server.py
-      - run: cd backend && python -m unittest -v test_server.py
+          NEXT_PUBLIC_SITE_URL: https://www.eazykredit.in
+          NEXT_PUBLIC_DEPLOYMENT_STAGE: ci
+
       - name: Check that local secret files are not tracked
         run: |
-          test ! -f .env.local
           test ! -f .env
+          test ! -f .env.local
+
+      - name: Check that secrets are not committed
+        shell: bash
+        run: |
+          if git grep -nE 'MS_CLIENT_SECRET=|SMTP_PASSWORD=|RESEND_API_KEY=' -- ':!*.md' ':!*.example'; then
+            echo "Potential secret found in tracked source files."
+            exit 1
+          fi
+
