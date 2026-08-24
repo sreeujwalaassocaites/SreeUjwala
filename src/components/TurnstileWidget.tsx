@@ -2,7 +2,6 @@
 
 import Script from "next/script";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { ShieldCheck } from "lucide-react";
 import { getLeadConfig, type PublicLeadConfig } from "@/lib/lead-client";
 
 type TurnstileApi = {
@@ -104,12 +103,7 @@ export default function TurnstileWidget({ onTokenChange, resetSignal = 0 }: Turn
   }
 
   if (!config.turnstileEnabled) {
-    return (
-      <div className="flex items-center gap-2 rounded-btn border border-amber-200 bg-amber-50 px-3 py-2 text-[11px] font-medium text-amber-800">
-        <ShieldCheck className="h-4 w-4 shrink-0" />
-        Test mode: bot verification is not enabled yet.
-      </div>
-    );
+    return null;
   }
 
   return (

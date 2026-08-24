@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   const siteKey = (process.env.TURNSTILE_SITE_KEY || "").trim();
   const secretKey = (process.env.TURNSTILE_SECRET_KEY || "").trim();
-  const publicPhone = process.env.PUBLIC_PHONE || "+919885011157";
+  const publicPhone = (process.env.PUBLIC_PHONE || "").trim();
 
   return NextResponse.json(
     {
